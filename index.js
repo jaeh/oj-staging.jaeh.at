@@ -5,7 +5,7 @@ var express = require('express')
   , favicon = require('serve-favicon')
   , stylus  = require('stylus')
 
-  , public  = path.join(__dirname, 'public')
+  , pub     = path.join(__dirname, 'public')
   , lib     = path.join(__dirname, 'lib')
   , views   = path.join(__dirname, 'views')
 
@@ -17,11 +17,11 @@ var express = require('express')
 app.set('views', views);
 app.set('view engine', 'jade');
 
-app.use( favicon( path.join(public, 'favicon.ico') ) );
+app.use( favicon( path.join(pub, 'favicon.ico') ) );
 
-app.use( stylus.middleware(public) );
+app.use( stylus.middleware(pub) );
 
-app.use( express.static(public) );
+app.use( express.static(pub) );
 
 app.use( router );
 
