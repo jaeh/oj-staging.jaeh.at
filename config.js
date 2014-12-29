@@ -5,6 +5,7 @@ module.exports = {
     ]
   , production: [
       'staging.oliverjiszda.com'
+    , 'oliverjiszda.jaeh.at'
     ]
   , staging: [
       'sstaging.oliverjiszda.com'
