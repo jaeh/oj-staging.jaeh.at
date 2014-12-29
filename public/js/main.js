@@ -93,9 +93,9 @@ function resizeImages() {
 
 function resizeImage(image) {
   if ( image.style ) {
-    var height = window.innerHeight - 80;
+    var height = window.innerHeight - 60;
     if ( document.body.className.indexOf('fullscreen') < 0 ) {
-      height -= 100;
+      height -= 120;
     }
     image.style.maxHeight = height + 'px';
   }
