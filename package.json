@@ -1,6 +1,10 @@
 {
-  "name"   : "oliverjiszda.herokuapp.com",
+  "name": "ol-staging.jaeh.at",
   "version": "0.0.1",
   "private": true,
-  "main"   : "./H.js"
+  "main": "./H.js",
+  "dependencies": {
+    "magic-log": "git://github.com/express-magic/magic-log",
+    "magic-mail": "git://github.com/express-magic/magic-mail"
+  }
 }
