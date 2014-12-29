@@ -4,10 +4,10 @@ module.exports = {
       'oj-staging'
     ]
   , production: [
-      'oliverjiszda.jaeh.at'
+      'staging.oliverjiszda.com'
     ]
   , staging: [
-      'oliverjiszda-staging.jaeh.at'
+      'sstaging.oliverjiszda.com'
     ]
   }
 };
