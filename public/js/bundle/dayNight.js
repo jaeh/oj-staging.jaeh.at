@@ -1,39 +1,42 @@
 'use strict';
-
-var utils = require('./utils');
-
 /*
  * rendering and adds event listeners for the day/night button
 */
-(function addDayNightUi () {
-  var menuContainer = utils.getMenuContainer()
-    , menuUl = document.getElementById('menu').getElementsByTagName('ul')[0]
-    , buttonContainer = document.createElement('li')
-    , button = document.createElement('a')
-    , currentTimeOfDay = localStorage.bodyClass || 'day'
-  ;
-  buttonContainer.id = 'daynight-container';
-  button.setAttribute('data-time', currentTimeOfDay);
+'use strict';
 
-  button.classList.add(currentTimeOfDay === 'day' ? 'day' : 'night');
+var utils = require('./utils');
+(function addDayNightUi () {
+  var menuContainer    = utils.getMenuContainer()
+    , buttonContainer  = document.createElement('li')
+    , button           = document.createElement('a')
+    , timeString       = localStorage.bodyClass
+    , hours            = new Date().getHours()
+    , body             = document.body
+  ;
+  body.classList.remove('day');
+  body.classList.remove('night');
+  if ( ! timeString ) {
+    timeString = ( hours > 19 || hours < 7 ) ? 'night' : 'day';
+  }
+  body.classList.add(timeString);
+  localStorage.bodyClass = timeString;
+
+  buttonContainer.id = 'daynight-container';
+
+  button.classList.add(timeString);
   button.classList.add('icon-lamp');
-  //~ button.innerHTML = currentTimeOfDay === 'day' ? 'night' : 'day';
+  //~ button.innerHTML = timeString;
   buttonContainer.appendChild(button);
   menuContainer.appendChild(buttonContainer);
 
   button.addEventListener('click', function (evt) {
-    var className = button.getAttribute('data-time') || 'night'
-      , newClass = 'day'
+    var oldClass = ( body.className.indexOf('day') >= 0 ) ? 'day' : 'night'
+      , newClass = ( oldClass === 'day' ) ? 'night' : 'day'
     ;
-
-    if ( className === 'day' ) {
-      newClass = 'night';
-    }
-
     localStorage.bodyClass = newClass;
-    //~ evt.target.innerHTML = evt.target.innerHTML.replace(newClass, className);
-    evt.target.setAttribute('data-time', newClass);
-    document.body.className = document.body.className.replace(className, newClass);
+    //~ evt.target.innerHTML = newClass;
+    body.classList.remove(oldClass);
+    body.classList.add(newClass);
   });
 })();
 

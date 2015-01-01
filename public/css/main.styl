@@ -32,8 +32,8 @@ body
   user-select none
 
   #content
-    transition(color 0.5s)
     display inline-block
+    transition(color 0.5s)
 
     &.work,
     &.index
@@ -58,9 +58,11 @@ body
     &.fullscreen
       header.main
         margin -1.5em 0 0
-
-    header.main
-      transition(margin 0.2s)
+        
+    &.work,
+    &.index
+      header.main
+        transition(margin 0.2s)
 
 form
   input, 
