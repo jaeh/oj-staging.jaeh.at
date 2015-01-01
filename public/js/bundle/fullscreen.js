@@ -6,31 +6,33 @@ var utils = require('./utils');
  * rendering and adds event listeners for the fullscreen button
  */
 (function addFullscreenUi() {
-  var menuContainer = utils.getMenuContainer()
-    , elem          = document.body
-    , header        = document.querySelectorAll('header.main')[0]
-  ;
+  var contentEle  = document.getElementById('content');
 
-  elem.requestFullscreen = elem.requestFullscreen 
-                        || elem.msRequestFullscreen
-                        || elem.mozRequestFullScreen
-                        || elem.webkitRequestFullScreen
-                        || false
-  ;
+  function addGUI() {
+    var menuContainer = utils.getMenuContainer()
+      , elem          = document.body
+      , header        = document.querySelectorAll('header.main')[0]
+      , menuUl = document.getElementById('menu').getElementsByTagName('ul')[0]
+      , buttonContainer = document.createElement('li')
+      , button = document.createElement('a')
+    ;
+    buttonContainer.id = 'fullscreen-container';
+    buttonContainer.appendChild(button);
 
-  var menuUl = document.getElementById('menu').getElementsByTagName('ul')[0];
-  var buttonContainer = document.createElement('li');
-  var button = document.createElement('a');
-  buttonContainer.id = 'fullscreen-container';
-  buttonContainer.appendChild(button);
-  
-  header.classList.add('animated');
+    header.classList.add('animated');
 
-  button.id = 'fullscreen';
-  button.classList.add('icon-expand');
-  //~ button.innerHTML = 'fullscreen';
-  button.addEventListener('click', utils.inPageFullscreen);
+    button.id = 'fullscreen';
+    button.classList.add('icon-expand');
+    //~ button.innerHTML = 'fullscreen';
+    button.addEventListener('click', utils.inPageFullscreen);
+    
+    menuContainer.appendChild(buttonContainer);
+  }
 
-  menuContainer.appendChild(buttonContainer);
-  //~ menuUl.appendChild(buttonContainer);
+  if ( contentEle ) {
+    var cN = contentEle.className;
+    if ( cN.indexOf('work') >= 0 || cN.indexOf('index') >= 0 ) {
+      addGUI();
+    }
+  }
 })();
