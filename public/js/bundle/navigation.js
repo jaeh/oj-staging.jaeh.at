@@ -3,10 +3,21 @@
  * add navigation events and html replacement
  */
 /*(function navigation() {
+
   var menu      = document.querySelector('header.main')
     , menuItems = menu.getElementsByTagName('a')
     , contents  = []
   ;
+
+  function httpGet(url) {
+      var xmlHttp = null;
+
+      xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", url, false );
+      xmlHttp.send( null );
+      return xmlHttp.responseText;
+  }
+
 
   for ( var key in menuItems ) {
     if ( menuItems.hasOwnProperty(key) 
