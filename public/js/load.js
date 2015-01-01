@@ -1,4 +1,4 @@
-(function load() {
+(function() {
   'use strict';
   var script = document.createElement('script');
   script.src = '/js/main.js';
