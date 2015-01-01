@@ -24,9 +24,8 @@ html(lang="en")
               li
                 a(href='/contact') contact
 
-      #content
-        block content
-          div empty body content
+      block content
+        div.content empty body content
 
       block scripts
-        script(src='/js/load.js')
+        script#load-js(src='/js/load.js')
