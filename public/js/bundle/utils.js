@@ -2,15 +2,6 @@
 
 var utils = {};
 
-function httpGet(url) {
-    var xmlHttp = null;
-
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url, false );
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
-
 function getImages() {
   var gallery = document.getElementById('gallery-container')
     , images = gallery.getElementsByTagName('img')
@@ -282,15 +273,10 @@ function imageClick(evt) {
 */
 utils.addImageGallery = function addImageGallery() {
   var pathName = document.location.pathname
-    , timeOfDay = localStorage.bodyClass || 'day'
     , imageGallery = document.getElementById('image-gallery')
   ;
-
-  document.body.classList.add(timeOfDay);
-
   if ( imageGallery && imageGallery.innerHTML ) {
     document.location.hash = document.location.hash || '#image-1';
-
     if ( loadFirstImage() ) {
       resizeImages();
     }
