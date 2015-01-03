@@ -18,7 +18,7 @@ function countImages() {
   return images.length;
 }
 
-function loadNextImage() {
+utils.loadNextImage = function loadNextImage() {
   var hashId = getHashId()
     , imageCount = countImages()
   ;
@@ -33,7 +33,7 @@ function loadNextImage() {
   console.log('location.hash', location.hash);
 }
 
-function loadPreviousImage() {
+utils.loadPreviousImage = function loadPreviousImage() {
   var hashId = getHashId();
 
   if ( hashId > 1 ) {
@@ -260,9 +260,9 @@ function imageClick(evt) {
   var x = evt.x || evt.screenX;
   var center = ( evt.target.width / 2 ) + offsetLeft;
   if ( x > center ) {
-    loadNextImage();
+    utils.loadNextImage();
   } else {
-    loadPreviousImage();
+    utils.loadPreviousImage();
   }
 }
 

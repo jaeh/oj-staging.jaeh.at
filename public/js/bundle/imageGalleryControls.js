@@ -13,12 +13,11 @@ var utils = require('./utils');
   buttonRight.classList.add('icon-caret-right');
   buttonLeft.id = 'btn-left';
   buttonLeft.classList.add('icon-caret-left');
+  buttonLeft.addEventListener('click', utils.loadPreviousImage);
+  buttonRight.addEventListener('click', utils.loadNextImage);
   buttonContainer.appendChild(buttonLeft);
   buttonContainer.appendChild(buttonRight);
   menuUl.appendChild(buttonContainer);
-
-  buttonLeft.addEventListener('click', loadPreviousImage);
-  buttonRight.addEventListener('click', loadNextImage);
 
   document.addEventListener('keyup', function (evt) {
     var kC = evt.keyCode;

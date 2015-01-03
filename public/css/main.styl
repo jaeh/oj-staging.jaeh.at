@@ -4,7 +4,6 @@
 @import icomoon
 @import nojs
 
-
 body_font_color = #555
 body_bg_color = #fefefe
 a_color = #7c7c7c
@@ -58,6 +57,12 @@ body
     &.fullscreen
       header.main
         margin -1.5em 0 0
+
+      div#gallery
+        img
+          margin 3% 0 0
+        h2
+          display none
 
     header.main.animated
       transition(margin 0.2s)
@@ -113,7 +118,6 @@ noscript#image-gallery, div#gallery
     box-sizing border-box
     max-width 100%
     width auto
-    transition(max-height 0.3s linear)
 
 #extra-menu-container
   position absolute
@@ -127,14 +131,14 @@ noscript#image-gallery, div#gallery
   li
     z-index 0
     opacity 0
-    transition(opacity 0.5s)
+    transition(opacity 1s)
     position absolute
     width 100%
 
     &.displayed
       z-index 1
       opacity 1
-      transition(opacity 0.5s linear 0.5s)
+      transition(opacity 1.2s linear 0.8s)
       h2
         opacity 1
         user-select initial
@@ -173,23 +177,6 @@ body.night
 
 .error
   color #f00
-
-/*
-#gallery-container:before,
-#gallery-container:after
-  position absolute
-  top 42.5%
-  font-size 2em
-  z-index 1
-
-#gallery-container:before
-  content "\e606"
-  left -4%
-
-#gallery-container:after 
-  content "\e603"
-  right -4%
-*/
 
 body header.main nav#menu li#leftright-container
   width 3em
