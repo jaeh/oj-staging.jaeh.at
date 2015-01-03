@@ -9,6 +9,13 @@ function getImages() {
   return images;
 }
 
+utils.log = function log() {
+  var debug = false;
+  if ( debug != false) {
+    Function.prototype.apply.apply(console.log, [console, arguments]);
+  }
+}
+
 function getHashId() {
    return parseInt(location.hash.replace('#image-', '') );
 }
@@ -22,7 +29,7 @@ utils.loadNextImage = function loadNextImage() {
   var hashId = getHashId()
     , imageCount = countImages()
   ;
-  console.log('hashId', hashId, 'imageCount', imageCount);
+  utils.log('hashId', hashId, 'imageCount', imageCount);
   
   if ( hashId < imageCount ) {
     hashId += 1;
@@ -30,7 +37,7 @@ utils.loadNextImage = function loadNextImage() {
     hashId = 1;
   }
   location.hash = '#image-' + hashId;
-  console.log('location.hash', location.hash);
+  utils.log('location.hash', location.hash);
 }
 
 utils.loadPreviousImage = function loadPreviousImage() {
@@ -139,7 +146,7 @@ function getImagesFromNoscript() {
   if ( imageHTML.indexOf('<img') >= 0 ) {
     imageTags = imageHTML.split('<img');
   }
-  //~ console.log('imageTags', imageTags);
+  //~ utils.log('imageTags', imageTags);
 
   for (var i = 0; i < imageTags.length; i++ ) {
     var img = parseImgTag(imageTags[i]);
@@ -147,7 +154,7 @@ function getImagesFromNoscript() {
       imgs.push( img );
     }
   }
-  //~ console.log('imgs', imgs);
+  //~ utils.log('imgs', imgs);
   return imgs;
 }
 
@@ -157,7 +164,7 @@ function parseImgTag(img) {
     , id = img.split('id="')[1] || ''
   ;
 
-  //~ console.log('img', img);
+  //~ utils.log('img', img);
 
   if ( src ) {
     return {
