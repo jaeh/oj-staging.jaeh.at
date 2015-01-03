@@ -211,11 +211,11 @@ function addImageEle(image, addEvent, images) {
 
   var gallery = addGallery()
     , hashId = getHashId()
-    , imgId = parseInt( imgEle.id.replace('image-', '') )
+    , imgId = parseInt( imgEle.id.replace('image', '') )
   ;
 
   if ( imgId < hashId ) {
-    var imgParent = document.getElementById('image-' + hashId).parentNode;
+    var imgParent = document.getElementById('image' + hashId).parentNode;
     gallery.insertBefore(imgContainer, imgParent);
   } else {
     gallery.appendChild(imgContainer);
@@ -239,7 +239,7 @@ function hashChange() {
 }
 
 function showImage(id) {
-  var image = document.getElementById('image-' + id)
+  var image = document.getElementById('image' + id)
     , shownImages = document.getElementsByClassName('displayed')
   ;
 
