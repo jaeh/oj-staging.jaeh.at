@@ -9,12 +9,12 @@ var utils = require('./utils');
   var contentEle  = document.getElementById('content');
 
   function addGUI() {
-    var menuContainer = utils.getMenuContainer()
-      , elem          = document.body
-      , header        = document.querySelectorAll('header.main')[0]
-      , menuUl = document.getElementById('menu').getElementsByTagName('ul')[0]
-      , buttonContainer = document.createElement('li')
-      , button = document.createElement('a')
+    var body            = document.body
+      //~ , menuContainer   = utils.getMenuContainer()
+      , header          = document.querySelectorAll('header.main')[0]
+      , menuUl          = document.getElementById('menu').getElementsByTagName('ul')[0]
+      , buttonContainer = document.createElement('div')
+      , button          = document.createElement('a')
     ;
     buttonContainer.id = 'fullscreen-container';
     buttonContainer.appendChild(button);
@@ -22,11 +22,14 @@ var utils = require('./utils');
     header.classList.add('animated');
 
     button.id = 'fullscreen';
-    button.classList.add('icon-expand');
+    //~ button.classList.add('icon-expand');
+    button.classList.add('triangle');
+    button.classList.add('up');
     //~ button.innerHTML = 'fullscreen';
     button.addEventListener('click', utils.inPageFullscreen);
     
-    menuContainer.appendChild(buttonContainer);
+    //~ menuContainer.appendChild(buttonContainer);
+    body.appendChild(buttonContainer);
   }
 
   if ( contentEle ) {

@@ -37,6 +37,8 @@ body
     &.work,
     &.index
       line-height 0
+    &.about
+      max-width 900px
 
   &.night
     background-color body_bg_color_night
@@ -85,14 +87,6 @@ header.main
         display inline
         margin 0 0.5em
 
-        &#fullscreen-container
-          bottom 1%
-          left 0
-          margin 0
-          position absolute
-          text-align center
-          width 100%
-
 a
   color a_color
   cursor pointer
@@ -105,7 +99,7 @@ a
 #content
   display inline-block
   max-height 90%
-  min-width 80%
+  min-width 95%
   position relative
   width auto
 
@@ -124,6 +118,7 @@ noscript#image-gallery, div#gallery
   position absolute
   left 1em
   top 1em
+  z-index 1
 
   li
     display inline
@@ -197,30 +192,98 @@ body header.main nav#menu li#leftright-container
 
 @media (max-width: 450px)
   body
-    width 95%
-    font-size 23px
+    font-size 14px
 
+    header.main
+      nav#menu
+        ul
+          li
+            margin 1.2em 1em 0
+
+            &#leftright-container
+              display none
+              margin 1em 0 0
+              font-size 1.2em
+
+
+    #extra-menu-container
+      bottom .5em
+      font-size 1.2em
+      left .5em
+      position fixed
+      top auto
+
+      li
+        display inline-block
+        /*&#daynight-container
+          position fixed
+          bottom 10px
+        */
+
+@media (max-width: 300px)
+  body
     &.js.fullscreen
       header.main
-        margin -6em 0 0
+        margin -9em 0 0
 
     header.main
       nav#menu
         ul
           li
             display block
-            margin 0.5em 0
+            margin 1.2em 0
 
-            &#leftright-container
-              margin 0
-              font-size 1.2em
+.triangle
+  border-color transparent
+  border-style solid 
+  border-width 0.5em
+  height 0
+  width 0
+  &.down
+    border-bottom-width 0
+    border-top-color body_font_color
+  &.left 
+    border-left-width 0
+    border-right-color body_font_color
+  &.right
+    border-left-color body_font_color
+    border-right-width 0
+  &.up
+    border-bottom-color body_font_color
+    border-top-width 0
+    
+body.night
+  .triangle
+    &.down
+      border-top-color body_bg_color
+    &.left 
+      border-right-color body_bg_color
+    &.right
+      border-left-color body_bg_color
+    &.up
+      border-bottom-color body_bg_color
 
+#fullscreen-container
+  left 0.5em
+  position absolute
+  top 0.5em
 
-    #extra-menu-container
-      font-size 1.2em
-      left .5em
-      position fixed
-      top .5em
+  a
+    position absolute
 
-      li
-        display block
+#daynight-container
+  bottom 1.5em
+  left 0.5em
+  position absolute
+  top auto
+  
+  a
+    position absolute
+    background-color body_font_color
+    padding 0.5em
+    border-radius 0.5em
+
+body.night
+  #daynight-container
+    a
+      background-color body_bg_color

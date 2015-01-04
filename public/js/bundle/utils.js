@@ -97,15 +97,18 @@ function resizeImages() {
 
 function resizeImage(image) {
   if ( image.style ) {
-    var height = window.innerHeight - 60;
-    if ( document.body.className.indexOf('fullscreen') < 0 ) {
-      height -= 120;
+    var height = window.innerHeight * 0.75;
+    //if is fullscreen
+    if ( document.body.className.indexOf('fullscreen') >= 0 ) {
+      height = window.innerHeight * 0.87;
     }
     image.style.maxHeight = height + 'px';
+    console.log('height', height);
+    console.log('window.innerHeight', window.innerHeight);
   }
 }
 
-utils.inPageFullscreen = function inPageFullscreen() {
+utils.inPageFullscreen = function inPageFullscreen(evt) {
   var cL = document.body.classList
     , cN = document.body.className
   ;
@@ -115,6 +118,16 @@ utils.inPageFullscreen = function inPageFullscreen() {
     cL.add('fullscreen');
   }
   resizeImages();
+  if ( evt.target ) {
+    var isUp = evt.target.className.indexOf('up') >= 0;
+    if ( isUp ) {
+      evt.target.classList.remove('up');
+      evt.target.classList.add('down');
+    } else {
+      evt.target.classList.remove('down');
+      evt.target.classList.add('up');
+    }
+  }
 }
 
 
