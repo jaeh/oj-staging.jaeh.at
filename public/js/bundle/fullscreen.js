@@ -11,8 +11,8 @@ var utils = require('./utils');
   function addGUI() {
     var body            = document.body
       //~ , menuContainer   = utils.getMenuContainer()
-      , header          = document.querySelectorAll('header.main')[0]
-      , menuUl          = document.getElementById('menu').getElementsByTagName('ul')[0]
+      , header          = document.querySelector('header.main')
+      , menuUl          = document.querySelector('menu ul')
       , buttonContainer = document.createElement('div')
       , button          = document.createElement('a')
     ;
