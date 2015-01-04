@@ -241,15 +241,15 @@ body header.main nav#menu li#leftright-container
   width 0
   &.down
     border-bottom-width 0
-    border-top-color body_font_color
+    border-top-color body_bg_color_night
   &.left 
     border-left-width 0
-    border-right-color body_font_color
+    border-right-color body_bg_color_night
   &.right
-    border-left-color body_font_color
+    border-left-color body_bg_color_night
     border-right-width 0
   &.up
-    border-bottom-color body_font_color
+    border-bottom-color body_bg_color_night
     border-top-width 0
     
 body.night
@@ -279,7 +279,7 @@ body.night
   
   a
     position absolute
-    background-color body_font_color
+    background-color body_bg_color_night
     padding 0.5em
     border-radius 0.5em
 
@@ -287,3 +287,9 @@ body.night
   #daynight-container
     a
       background-color body_bg_color
+
+@media all and (orientation:landscape)
+  header.main
+    display none
+  #fullscreen-container
+    display none
