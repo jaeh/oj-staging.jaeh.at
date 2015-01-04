@@ -9,17 +9,23 @@ var utils = require('./utils');
   var buttonContainer  = document.createElement('div')
     //~ , menuContainer    = utils.getMenuContainer()
     , button           = document.createElement('a')
-    , timeString       = localStorage.bodyClass
+    , timeString       = 'day'
     , hours            = new Date().getHours()
     , body             = document.body
   ;
+  if ( utils.localStorage() ) {
+    timeString = localStorage.bodyClass;
+  }
+
   body.classList.remove('day');
   body.classList.remove('night');
   if ( ! timeString ) {
     timeString = ( hours > 19 || hours < 7 ) ? 'night' : 'day';
   }
   body.classList.add(timeString);
-  localStorage.bodyClass = timeString;
+  if ( utils.localStorage() ) {
+    localStorage.bodyClass = timeString;
+  }
 
   buttonContainer.id = 'daynight-container';
 
@@ -34,7 +40,9 @@ var utils = require('./utils');
     var oldClass = ( body.className.indexOf('day') >= 0 ) ? 'day' : 'night'
       , newClass = ( oldClass === 'day' ) ? 'night' : 'day'
     ;
-    localStorage.bodyClass = newClass;
+    if ( utils.localStorage() ) {
+      localStorage.bodyClass = newClass;
+    }
     //~ evt.target.innerHTML = newClass;
     body.classList.remove(oldClass);
     body.classList.add(newClass);
