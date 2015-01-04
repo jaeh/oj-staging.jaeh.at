@@ -198,7 +198,7 @@ body header.main nav#menu li#leftright-container
       nav#menu
         ul
           li
-            margin 1.2em 1em 0
+            margin 1.2em .3em 0
 
             &#leftright-container
               display none
@@ -288,8 +288,14 @@ body.night
     a
       background-color body_bg_color
 
-@media all and (orientation:landscape)
+@media all and (orientation:landscape) and (max-height: 320px)
   header.main
     display none
   #fullscreen-container
     display none
+
+  #gallery
+    img
+      margin 3% 0 0
+    h2
+      display none
