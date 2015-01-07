@@ -26,13 +26,13 @@ body
   text-align center
   width 100%
   position absolute
-  transition(background-color 0.5s)
-  font-size 14px
+  transition(background-color .5s)
+  font-size 13px
   user-select none
 
   #content
     display inline-block
-    transition(color 0.5s)
+    transition(color .5s)
 
     &.work,
     &.index
@@ -67,12 +67,12 @@ body
           display none
 
     header.main.animated
-      transition(margin 0.2s)
+      transition(margin .2s)
 
 form
   input, 
   textarea
-    transition(0.5s)
+    transition(.5s)
 
 header.main
   left 0
@@ -85,13 +85,13 @@ header.main
     ul
       li
         display inline
-        margin 0 0.5em
+        margin 0 .5em
 
 a
   color a_color
   cursor pointer
   text-decoration none  
-  transition(color 0.5s)
+  transition(color .5s)
 
   &:hover
     color a_color_hover
@@ -112,7 +112,7 @@ noscript#image-gallery, div#gallery
     box-sizing border-box
     max-width 100%
     width auto
-    transition(all 0.5s)
+    transition(all .5s)
 
 #extra-menu-container
   position absolute
@@ -134,7 +134,7 @@ noscript#image-gallery, div#gallery
     &.displayed
       z-index 1
       opacity 1
-      transition(opacity 1.2s linear 0.8s)
+      transition(opacity 1.2s linear .8s)
       h2
         opacity 1
         user-select initial
@@ -144,7 +144,7 @@ noscript#image-gallery, div#gallery
       height 1.2em
       margin 2% 0 0
       font-size .8em
-      letter-spacing 0.08em
+      letter-spacing .08em
       
 
 form
@@ -176,7 +176,7 @@ body.night
 
 body header.main nav#menu li#leftright-container
   width 3em
-  margin 0 0.5em 0 3em
+  margin 0 .5em 0 3em
   display inline-block
   vertical-align middle
 
@@ -236,7 +236,7 @@ body header.main nav#menu li#leftright-container
 .triangle
   border-color transparent
   border-style solid 
-  border-width 0.5em
+  border-width .5em
   height 0
   width 0
   &.down
@@ -263,25 +263,32 @@ body.night
     &.up
       border-bottom-color body_bg_color
 
+#fullscreen-container,
+#daynight-container
+  z-index 1
+
 #fullscreen-container
-  left 0.5em
+  left .5em
   position absolute
-  top 0.5em
+  top .5em
 
   a
     position absolute
 
 #daynight-container
-  bottom 1.5em
-  left 0.5em
+  left .5em
   position absolute
-  top auto
-  
+  top 1.5em
+
+  &.bottom
+    top auto
+    bottom .5em
+
   a
     position absolute
     background-color body_bg_color_night
-    padding 0.5em
-    border-radius 0.5em
+    padding .5em
+    border-radius .5em
 
 body.night
   #daynight-container
@@ -299,3 +306,13 @@ body.night
       margin 3% 0 0
     h2
       display none
+
+@media all and (max-width: 600px) and (min-height: 600px)
+  body
+    header.main
+      margin 13% 0 .5em
+
+@media all and (max-width: 400px) and (min-height: 550px)
+  body
+    header.main
+      margin 25% 0 .5em
