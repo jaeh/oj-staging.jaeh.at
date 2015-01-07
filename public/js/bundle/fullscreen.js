@@ -19,7 +19,9 @@ var utils = require('./utils');
     buttonContainer.id = 'fullscreen-container';
     buttonContainer.appendChild(button);
 
-    header.classList.add('animated');
+    window.setTimeout(function() {
+      header.classList.add('animated');
+    }, 200);
 
     button.id = 'fullscreen';
     //~ button.classList.add('icon-expand');
