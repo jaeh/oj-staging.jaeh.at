@@ -103,8 +103,6 @@ function resizeImage(image) {
       height = window.innerHeight * 0.87;
     }
     image.style.maxHeight = height + 'px';
-    console.log('height', height);
-    console.log('window.innerHeight', window.innerHeight);
   }
 }
 
