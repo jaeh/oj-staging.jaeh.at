@@ -11,21 +11,22 @@ html(lang="en")
 
   block body
     body.nojs
-      header.main
-        block header
-          nav#menu
-            ul
-              li
-                a(href='/about') oliver jiszda
-              li
-                a(href='/') work
-              li
-                a(href='http://jiszda.tumblr.com' target='utopia') news
-              li
-                a(href='/contact') contact
+      #wrapper
+        header.main
+          block header
+            nav#menu
+              ul
+                li
+                  a(href='/about') oliver jiszda
+                li
+                  a(href='/') work
+                li
+                  a(href='http://jiszda.tumblr.com' target='utopia') news
+                li
+                  a(href='/contact') contact
 
-      block content
-        div.content empty body content
+        block content
+          div.content empty body content
 
-      block scripts
-        script#load-js(src='/js/load.js')
+        block scripts
+          script#load-js(src='/js/load.js')
