@@ -37,13 +37,23 @@ body
     &.work,
     &.index
       line-height 0
+
     &.about,
     &.contact
       max-width 900px
       margin 2% 0 0
       width 90%
       min-width inherit
-      
+      text-align left
+
+      img
+        max-width 50%
+        float left
+        margin 0 1em 0 0
+        
+      #daynight-container
+        top .5em
+
       h2
         margin 0 0 1em
 
@@ -159,7 +169,6 @@ form
   input, textarea
     color body_font_color
     background-color darken(body_bg_color, 5%)
-    border 2px solid lighten(body_bg_color_night, 90%)
     border-radius 2px
     display block
     width 100%
