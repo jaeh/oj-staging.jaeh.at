@@ -10,7 +10,7 @@ var utils = require('./utils');
 
   function addGUI() {
     var body            = document.body
-      //~ , menuContainer   = utils.getMenuContainer()
+      , menuContainer   = utils.getMenuContainer()
       , header          = document.querySelector('header.main')
       , menuUl          = document.querySelector('menu ul')
       , buttonContainer = document.createElement('div')
@@ -25,13 +25,14 @@ var utils = require('./utils');
 
     button.id = 'fullscreen';
     //~ button.classList.add('icon-expand');
-    button.classList.add('triangle');
-    button.classList.add('up');
+    //~ button.classList.add('triangle');
+    //~ button.classList.add('up');
     //~ button.innerHTML = 'fullscreen';
     button.addEventListener('click', utils.inPageFullscreen);
     
-    //~ menuContainer.appendChild(buttonContainer);
-    body.appendChild(buttonContainer);
+    menuContainer.appendChild(buttonContainer);
+    //~ body.appendChild(buttonContainer);
+    //~ body.insertBefore(menuContainer, body.firstChild);
   }
 
   if ( contentEle ) {

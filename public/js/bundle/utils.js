@@ -334,7 +334,7 @@ utils.getMenuContainer = function getMenuContainer() {
   if ( ! menuContainer ) {
     menuContainer = document.createElement('ul');
     menuContainer.id = 'extra-menu-container';
-    document.body.appendChild(menuContainer);
+    document.body.insertBefore(menuContainer, document.body.firstChild);
   }
   return menuContainer;
 }

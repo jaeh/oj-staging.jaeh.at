@@ -75,7 +75,7 @@ body
   &.js
     &.fullscreen
       header.main
-        margin -1.5em 0 0
+        margin -3.5em 0 0
 
       div#gallery
         img
@@ -131,15 +131,6 @@ noscript#image-gallery, div#gallery
     max-width 100%
     width auto
     transition(all .5s)
-
-#extra-menu-container
-  position absolute
-  left 1em
-  top 1em
-  z-index 1
-
-  li
-    display inline
 
 #gallery-container
   li
@@ -278,37 +269,65 @@ body.night
     &.up
       border-bottom-color body_bg_color
 
+
+#extra-menu-container
+  position relative
+  display block
+  z-index 2
+  text-align center
+  width 100%
+  margin .5em 0
+
+  li
+    display inline
+
 #fullscreen-container,
 #daynight-container
   z-index 1
-
-#fullscreen-container
-  left .5em
-  position absolute
-  top .5em
+  display inline
+  margin 0 .3em 0
 
   a
-    position absolute
+    background-image url("/img/dots.png")
+    border-radius 100%
+    display inline-block
+    height 17px
+    width 17px
 
 #daynight-container
-  left .5em
-  position absolute
-  top 1.5em
 
   &.bottom
     top auto
     bottom .5em
 
   a
-    position absolute
-    background-color body_bg_color_night
-    padding .5em
-    border-radius .5em
+    background-position-x 38px
+
+    &:hover
+      background-position-x 57px
+
+#fullscreen-container
+  a
+    background-position-x 0
+
+    &:hover
+      background-position 19px
 
 body.night
   #daynight-container
     a
-      background-color body_bg_color
+      background-position-x 57px
+
+      &:hover
+        background-position-x 38px
+        
+      
+  #fullscreen-container
+    a
+      background-position-x 57px
+
+      &:hover
+        background-position 38px
 
 @media all and (orientation:landscape) and (max-height: 320px)
   header.main
