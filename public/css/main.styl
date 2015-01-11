@@ -3,6 +3,7 @@
 @import font
 @import icomoon
 @import nojs
+@import extraMenu
 
 body_font_color = #222
 body_bg_color = #fefefe
@@ -211,21 +212,6 @@ body header.main nav#menu li#leftright-container
               margin 1em 0 0
               font-size 1.2em
 
-
-    #extra-menu-container
-      bottom .5em
-      font-size 1.2em
-      left .5em
-      position fixed
-      top auto
-
-      li
-        display inline-block
-        /*&#daynight-container
-          position fixed
-          bottom 10px
-        */
-
 @media (max-width: 300px)
   body
     &.js.fullscreen
@@ -269,65 +255,6 @@ body.night
     &.up
       border-bottom-color body_bg_color
 
-
-#extra-menu-container
-  position relative
-  display block
-  z-index 2
-  text-align center
-  width 100%
-  margin .5em 0
-
-  li
-    display inline
-
-#fullscreen-container,
-#daynight-container
-  z-index 1
-  display inline
-  margin 0 .3em 0
-
-  a
-    background-image url("/img/dots.png")
-    border-radius 100%
-    display inline-block
-    height 17px
-    width 17px
-
-#daynight-container
-
-  &.bottom
-    top auto
-    bottom .5em
-
-  a
-    background-position-x 38px
-
-    &:hover
-      background-position-x 57px
-
-#fullscreen-container
-  a
-    background-position-x 0
-
-    &:hover
-      background-position 19px
-
-body.night
-  #daynight-container
-    a
-      background-position-x 57px
-
-      &:hover
-        background-position-x 38px
-        
-      
-  #fullscreen-container
-    a
-      background-position-x 57px
-
-      &:hover
-        background-position 38px
 
 @media all and (orientation:landscape) and (max-height: 320px)
   header.main
