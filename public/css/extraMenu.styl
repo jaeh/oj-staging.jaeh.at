@@ -1,71 +1,50 @@
 #extra-menu-container
-  position relative
+  bottom .5em
   display block
-  z-index 2
+  height 1.5em
+  margin 0.5em 0 0
+  position absolute
   text-align center
+  top auto
   width 100%
-  margin .5em 0
+  z-index 2
 
-  li
-    display inline
 
-#fullscreen-container,
-#daynight-container
-  z-index 1
-  display inline
-  margin 0 .3em 0
-
-  a
-    background-image url("/img/dots.png")
-    border-radius 100%
+.btn-container
+  &.fullscreen,
+  &.daynight,
+  &.gallery-left,
+  &.gallery-right
     display inline-block
-    height 17px
-    width 17px
+    height 100%
+    margin 0 .3em 0
+    max-width 100px
+    width 18%
+    z-index 1
 
-#daynight-container
+    a
+      background-color body_bg_color_night
+      display block
+      height 100%
+      width 100%
+      border 1px solid #707070
+      color body_font_color_night
+      transition(.5s)
 
-  &.bottom
-    top auto
-    bottom .5em
-
-  a
-    background-position-x 38px
-
-    &:hover
-      background-position-x 57px
-
-#fullscreen-container
-  a
-    background-position-x 0
-
-    &:hover
-      background-position 19px
+      &:hover
+        background-color body_bg_color
+        color body_font_color
 
 body.night
-  #daynight-container
-    a
-      background-position-x 57px
+  .btn-container
+    &.fullscreen,
+    &.daynight,
+    &.gallery-left,
+    &.gallery-right
+      a
+        background-color body_bg_color
+        color body_font_color
 
-      &:hover
-        background-position-x 38px
-        
-      
-  #fullscreen-container
-    a
-      background-position-x 57px
-
-      &:hover
-        background-position 38px
-
-
-@media (max-width: 450px)
-  body
-    #extra-menu-container
-      bottom .5em
-      font-size 1.2em
-      left .5em
-      position fixed
-      top auto
-
-      li
-        display inline-block
+        &:hover
+          background-color body_bg_color_night
+          color body_font_color_night

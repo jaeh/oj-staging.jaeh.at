@@ -6,7 +6,7 @@
 
 var utils = require('./utils');
 (function addDayNightUi () {
-  var buttonContainer  = document.createElement('div')
+  var buttonContainer  = document.createElement('li')
     , menuContainer    = utils.getMenuContainer()
     , button           = document.createElement('a')
     , timeString       = 'day'
@@ -27,11 +27,12 @@ var utils = require('./utils');
     localStorage.bodyClass = timeString;
   }
 
-  buttonContainer.id = 'daynight-container';
+  buttonContainer.classList.add('daynight');;
+  buttonContainer.classList.add('btn-container');
+  buttonContainer.classList.add(timeString);
 
-  button.classList.add(timeString);
   //~ button.classList.add('icon-lamp');
-  //~ button.innerHTML = timeString;
+  button.innerHTML = timeString;
   buttonContainer.appendChild(button);
   menuContainer.appendChild(buttonContainer);
   //~ body.appendChild(buttonContainer);
@@ -44,7 +45,7 @@ var utils = require('./utils');
     if ( utils.localStorage() ) {
       localStorage.bodyClass = newClass;
     }
-    //~ evt.target.innerHTML = newClass;
+    evt.target.innerHTML = newClass;
     body.classList.remove(oldClass);
     body.classList.add(newClass);
   });
