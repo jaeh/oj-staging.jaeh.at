@@ -144,6 +144,7 @@ utils.inPageFullscreen = function inPageFullscreen(evt) {
     cL.remove('fullscreen');
   } else {
     cL.add('fullscreen');
+    evt.target.innerHTML = 'contract';
   }
   //wait to allow the window to rerender
   setTimeout(resizeImages, 250)

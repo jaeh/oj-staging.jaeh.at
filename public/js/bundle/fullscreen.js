@@ -27,7 +27,7 @@ function addGUI() {
   //~ button.classList.add('icon-expand');
   //~ button.classList.add('triangle');
   //~ button.classList.add('up');
-  button.innerHTML = 'fullscreen';
+  button.innerHTML = 'expand';
   button.addEventListener('click', utils.inPageFullscreen);
   
   buttonContainer.appendChild(button);
