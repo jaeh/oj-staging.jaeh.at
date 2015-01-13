@@ -119,7 +119,7 @@ function resizeImage(image) {
       , extraMenuHeight = outerHeight('#extra-menu-container')
       , h2              = document.querySelector('#gallery-container li h2')
       , h2Height        = outerHeight('#gallery-container li h2')
-      , subHeight       = window.innerHeight - headerHeight - 30
+      , subHeight       = window.innerHeight - headerHeight - 55
       , innerSubHeight  = subHeight - h2Height
       , isLandscape     = (window.innerWidth > window.innerHeight)
     ;
@@ -147,9 +147,10 @@ utils.inPageFullscreen = function inPageFullscreen(evt) {
   ;
   if ( cN.indexOf('fullscreen') >= 0 ) {
     cL.remove('fullscreen');
+    evt.target.innerHTML = 'expand';
   } else {
     cL.add('fullscreen');
-    evt.target.innerHTML = 'contract';
+    evt.target.innerHTML = 'menu';
   }
   //wait to allow the window to rerender
   setTimeout(resizeImages, 250)
@@ -370,9 +371,12 @@ utils.getMenuContainer = function getMenuContainer() {
     , wrapper       = document.getElementById('wrapper')
   ;
   if ( ! menuContainer ) {
-    menuContainer = document.createElement('ul');
+    menuContainer = document.createElement('div');
+    var menuUl = document.createElement('ul');
+    menuContainer.appendChild(menuUl);
     menuContainer.id = 'extra-menu-container';
     //~ document.body.insertBefore(menuContainer, document.body.firstChild);
+
     wrapper.appendChild(menuContainer);
   }
   return menuContainer;

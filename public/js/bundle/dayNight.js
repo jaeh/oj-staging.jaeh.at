@@ -8,6 +8,7 @@ var utils = require('./utils');
 (function addDayNightUi () {
   var buttonContainer  = document.createElement('li')
     , menuContainer    = utils.getMenuContainer()
+    , menuUl           = menuContainer.querySelector('ul')
     , button           = document.createElement('a')
     , timeString       = 'day'
     , hours            = new Date().getHours()
@@ -34,7 +35,7 @@ var utils = require('./utils');
   //~ button.classList.add('icon-lamp');
   button.innerHTML = timeString;
   buttonContainer.appendChild(button);
-  menuContainer.appendChild(buttonContainer);
+  menuUl.appendChild(buttonContainer);
   //~ body.appendChild(buttonContainer);
   //~ body.insertBefore(buttonContainer, body.firstChild);
 

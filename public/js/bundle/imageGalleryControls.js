@@ -2,8 +2,9 @@
 
 var utils = require('./utils');
 
-(function addImageGalleryControls() {
+function addGUI() {
   var extraMenu       = utils.getMenuContainer()
+    , menuUl          = extraMenu.querySelector('ul')
     , buttonRightCont = document.createElement('li')
     , buttonLeftCont  = document.createElement('li')
     , buttonRight     = document.createElement('a')
@@ -17,8 +18,8 @@ var utils = require('./utils');
   buttonRight.addEventListener('click', utils.loadNextImage);
   buttonRightCont.appendChild(buttonRight);
   buttonLeftCont.appendChild(buttonLeft);
-  extraMenu.appendChild(buttonLeftCont);
-  extraMenu.appendChild(buttonRightCont);
+  menuUl.appendChild(buttonLeftCont);
+  menuUl.appendChild(buttonRightCont);
 
   document.addEventListener('keyup', function (evt) {
     var kC = evt.keyCode;
@@ -28,4 +29,17 @@ var utils = require('./utils');
       utils.loadNextImage();
     }
   });
+}
+
+(function addImageGalleryControls() {
+  (function addImageGalleryUi() {
+    var contentEle  = document.getElementById('content');
+    if ( contentEle ) {
+      var cN = contentEle.className;
+      //only load gui on work/index page
+      if ( cN.indexOf('work') >= 0 || cN.indexOf('index') >= 0) {
+        addGUI();
+      }
+    }
+  })();
 })();

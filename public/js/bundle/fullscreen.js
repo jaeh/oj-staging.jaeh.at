@@ -9,14 +9,13 @@ var utils = require('./utils');
 function addGUI() {
   var body            = document.body
     , menuContainer   = utils.getMenuContainer()
+    , menuUl          = menuContainer.querySelector('ul')
     , header          = document.querySelector('header.main')
-    , menuUl          = document.querySelector('menu ul')
     , buttonContainer = document.createElement('li')
     , button          = document.createElement('a')
   ;
   buttonContainer.classList.add('fullscreen');
   buttonContainer.classList.add('btn-container');
-
 
   //delay to prevent animation on load
   window.setTimeout(function() {
@@ -31,7 +30,7 @@ function addGUI() {
   button.addEventListener('click', utils.inPageFullscreen);
   
   buttonContainer.appendChild(button);
-  menuContainer.appendChild(buttonContainer);
+  menuUl.appendChild(buttonContainer);
   //~ body.insertBefore(buttonContainer, body.firstChild);
 }
 
