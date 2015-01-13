@@ -119,22 +119,23 @@ function resizeImage(image) {
       , extraMenuHeight = outerHeight('#extra-menu-container')
       , h2              = document.querySelector('#gallery-container li h2')
       , h2Height        = outerHeight('#gallery-container li h2')
-      , subHeight       = window.innerHeight - headerHeight - 55
-      , innerSubHeight  = subHeight - h2Height
+      , subHeight       = window.innerHeight - headerHeight - 35
+      , innerSubHeight  = subHeight - h2Height - 20
       , isLandscape     = (window.innerWidth > window.innerHeight)
+      , isFullscreen    = document.body.className.indexOf('fullscreen') >= 0 
     ;
 
     //if is landscape mode and resolution is small
     if( isLandscape && window.innerHeight <= 350) {
-      subHeight = window.innerHeight - 50;
+      subHeight = window.innerHeight - 20;
       innerSubHeight = subHeight;
     //if is not fullscreen
-    } else if ( document.body.className.indexOf('fullscreen') < 0 ) {
-      subHeight -= extraMenuHeight;
-      innerSubHeight -= extraMenuHeight;
-    } else {
+    } else if ( isFullscreen ) {
       subHeight = window.innerHeight - 85;
       innerSubHeight = subHeight;
+    } else {      
+      subHeight -= extraMenuHeight;
+      innerSubHeight -= extraMenuHeight;
     }
     image.parentNode.parentNode.style.height = subHeight + 'px';
     image.style.maxHeight = innerSubHeight + 'px';

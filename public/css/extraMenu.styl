@@ -1,8 +1,10 @@
 button_bg_color = #333
+button_font_color = #888
 button_bg_color_night = #eee
+button_font_color_night = #aaa
 
 #extra-menu-container
-  bottom 10px
+  bottom 15px
   display block
   position absolute
   width 100%
@@ -18,12 +20,12 @@ button_bg_color_night = #eee
   float left
   height 100%
   margin 0 3px 0
-  width 60px
+  width 70px
   z-index 1
 
   a
     background-color button_bg_color_night
-    color body_font_color_night
+    color button_font_color_night
     display block
     font-size 0.7em
     height 100%
@@ -34,7 +36,7 @@ button_bg_color_night = #eee
 
     &:hover
       background-color button_bg_color
-      color body_font_color_night
+      color button_font_color
 
 body.night
   .btn-container
@@ -44,8 +46,8 @@ body.night
     &.gallery-right
       a
         background-color button_bg_color
-        color body_font_color_night
+        color button_font_color
 
         &:hover
           background-color button_bg_color_night
-          color body_font_color_night
+          color button_font_color_night
