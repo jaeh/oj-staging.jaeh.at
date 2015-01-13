@@ -121,10 +121,15 @@ function resizeImage(image) {
       , h2Height        = outerHeight('#gallery-container li h2')
       , subHeight       = window.innerHeight - headerHeight - 30
       , innerSubHeight  = subHeight - h2Height
+      , isLandscape     = (window.innerWidth > window.innerHeight)
     ;
 
+    //if is landscape mode and resolution is small
+    if( isLandscape && window.innerHeight <= 350) {
+      subHeight = window.innerHeight - 50;
+      innerSubHeight = subHeight;
     //if is not fullscreen
-    if ( document.body.className.indexOf('fullscreen') < 0 ) {
+    } else if ( document.body.className.indexOf('fullscreen') < 0 ) {
       subHeight -= extraMenuHeight;
       innerSubHeight -= extraMenuHeight;
     } else {

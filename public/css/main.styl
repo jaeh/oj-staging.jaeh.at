@@ -36,7 +36,7 @@ body
   user-select none
 
   #content
-    display inline-block
+    display block
     transition(color .5s)
 
     &.work,
@@ -212,7 +212,7 @@ body.night
             margin 1.2em 0
 
 
-@media all and (orientation:landscape) and (max-height: 320px)
+@media all and (orientation:landscape) and (max-height: 350px)
   header.main
     display none
   #extra-menu-container
@@ -220,7 +220,8 @@ body.night
 
   #gallery
     img
-      margin 3% 0 0
+      margin 25px
+
     h2
       display none
 
