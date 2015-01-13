@@ -1,39 +1,37 @@
 #extra-menu-container
   bottom .5em
   display block
-  height 1.5em
-  margin 0.5em 0 0
   position absolute
-  text-align center
-  top auto
   width 100%
   z-index 2
 
 
 .btn-container
-  &.fullscreen,
-  &.daynight,
-  &.gallery-left,
-  &.gallery-right
-    display inline-block
+  display inline-block
+  height 100%
+  margin 0 .3em 0
+  max-width 100px
+  width 18%
+  z-index 1
+
+  a
+    background-color body_bg_color_night
+    border 1px solid #707070
+    color body_font_color_night
+    display block
     height 100%
-    margin 0 .3em 0
-    max-width 100px
-    width 18%
-    z-index 1
+    margin 0
+    padding .3em 0 .4em
+    transition(.5s)
+    width 100%
 
-    a
-      background-color body_bg_color_night
-      display block
-      height 100%
-      width 100%
-      border 1px solid #707070
-      color body_font_color_night
-      transition(0.5s)
+    &.icon
+      position relative
+      top 1px
 
-      &:hover
-        background-color body_bg_color
-        color body_font_color
+    &:hover
+      background-color body_bg_color
+      color body_font_color
 
 body.night
   .btn-container
