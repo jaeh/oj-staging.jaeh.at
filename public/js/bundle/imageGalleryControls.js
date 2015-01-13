@@ -11,14 +11,14 @@ var utils = require('./utils');
   ;
   buttonLeftCont.className = 'gallery-left btn-container';
   buttonRightCont.className = 'gallery-right btn-container';
-  buttonRight.className = 'btn gallery-right icon-caret-right';
-  buttonLeft.className = 'btn gallery-left icon-caret-left';
+  buttonRight.className = 'btn gallery-right icon-caret-right icon';
+  buttonLeft.className = 'btn gallery-left icon-caret-left icon';
   buttonLeft.addEventListener('click', utils.loadPreviousImage);
   buttonRight.addEventListener('click', utils.loadNextImage);
-  buttonRightCont.appendChild(buttonLeft);
-  buttonLeftCont.appendChild(buttonRight);
-  extraMenu.appendChild(buttonRightCont);
+  buttonRightCont.appendChild(buttonRight);
+  buttonLeftCont.appendChild(buttonLeft);
   extraMenu.appendChild(buttonLeftCont);
+  extraMenu.appendChild(buttonRightCont);
 
   document.addEventListener('keyup', function (evt) {
     var kC = evt.keyCode;
