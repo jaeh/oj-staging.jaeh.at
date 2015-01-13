@@ -46,7 +46,7 @@ body
     &.about,
     &.contact
       max-width 900px
-      margin 2% 0 0
+      margin 2em 0 0
       width 90%
       min-width inherit
       text-align left
@@ -78,10 +78,15 @@ body
     &.fullscreen
       header.main
         margin -3.5em 0 0
+        position absolute
 
       div#gallery
+        margin 1em 0 0
+        height 100%
+        
         img
-          margin 3% 0 0
+          height 100%
+          margin-top 25px
         h2
           display none
 
@@ -97,7 +102,8 @@ form
 header.main
   left 0
   width 100%
-  margin 3% 0 1.5%
+  margin 2em 0 1.5em
+  position relative
 
   nav#menu
     width 100%
@@ -132,7 +138,9 @@ noscript#image-gallery, div#gallery
     box-sizing border-box
     max-width 100%
     width auto
+/*
     transition(all .5s)
+*/
 
 #gallery-container
   li
@@ -146,7 +154,7 @@ noscript#image-gallery, div#gallery
 
     &.displayed
       opacity 1
-      transition(opacity 1.2s linear .8s)
+      /* transition(opacity 1.2s linear .8s) */
       z-index 1
       h2
         opacity 1
@@ -188,23 +196,6 @@ body.night
 .error
   color #f00
 
-body header.main nav#menu li#leftright-container
-  width 3em
-  margin 0 .5em 0 3em
-  display inline-block
-  vertical-align middle
-
-  #btn-left, 
-  #btn-right
-    color lighten(a_color, 30%)
-    &:hover
-      color darken(a_color, 70%)
-
-  #btn-left
-    float left
-  #btn-right
-    float right
-
 
 @media (max-width: 300px)
   body
@@ -235,21 +226,3 @@ body header.main nav#menu li#leftright-container
 @media (max-width: 450px)
   body
     font-size 14px
-
-    header.main
-      nav#menu
-        ul
-          li
-            margin 1.2em .3em 0
-
-
-@media all and (max-width: 400px) and (min-height: 550px)
-  body
-    header.main
-      margin 25% 0 .5em
-
-@media all and (max-width: 600px) and (min-height: 600px)
-  body
-    header.main
-      margin 13% 0 .5em
-

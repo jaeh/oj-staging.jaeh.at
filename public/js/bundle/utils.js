@@ -95,17 +95,44 @@ function resizeImages() {
   }
 }
 
+/*
+ * Gets the outer Height of divs, including margin
+ */
+function outerHeight(el) {
+  // Get the DOM Node if you pass in a string
+  el = (typeof el === 'string') ? document.querySelector(el) : el; 
+
+  var styles = window.getComputedStyle(el);
+  var margin = parseFloat(styles['marginTop']) +
+               parseFloat(styles['marginBottom']);
+
+  return Math.ceil(el.offsetHeight + margin);
+}
+
 function resizeImage(image) {
   if ( image.style ) {
-    var height = window.innerHeight * 0.8;
-    var mheight = window.innerHeight * 0.85;
-    //if is fullscreen
-    if ( document.body.className.indexOf('fullscreen') >= 0 ) {
-      height = window.innerHeight * 0.9;
-      mheight = window.innerHeight * 0.95;
+    var height          = window.innerHeight * 0.8
+      , mheight         = window.innerHeight * 0.85
+      , headerMain      = document.querySelector('header.main')
+      , headerHeight    = outerHeight('header.main')
+      , extraMenu       = document.getElementById('extra-menu-container')
+      , extraMenuHeight = outerHeight('#extra-menu-container')
+      , h2              = document.querySelector('#gallery-container li h2')
+      , h2Height        = outerHeight('#gallery-container li h2')
+      , subHeight       = window.innerHeight - headerHeight - 30
+      , innerSubHeight  = subHeight - h2Height
+    ;
+
+    //if is not fullscreen
+    if ( document.body.className.indexOf('fullscreen') < 0 ) {
+      subHeight -= extraMenuHeight;
+      innerSubHeight -= extraMenuHeight;
+    } else {
+      subHeight = window.innerHeight - 85;
+      innerSubHeight = subHeight;
     }
-    image.parentNode.parentNode.style.height = mheight + 'px';
-    image.style.maxHeight = height + 'px';
+    image.parentNode.parentNode.style.height = subHeight + 'px';
+    image.style.maxHeight = innerSubHeight + 'px';
   }
 }
 
@@ -118,17 +145,19 @@ utils.inPageFullscreen = function inPageFullscreen(evt) {
   } else {
     cL.add('fullscreen');
   }
-  resizeImages();
-  if ( evt.target ) {
-    var isUp = evt.target.className.indexOf('up') >= 0;
-    if ( isUp ) {
-      evt.target.classList.remove('up');
-      evt.target.classList.add('down');
-    } else {
-      evt.target.classList.remove('down');
-      evt.target.classList.add('up');
-    }
-  }
+  //wait to allow the window to rerender
+  setTimeout(resizeImages, 250)
+
+  //~ if ( evt.target ) {
+    //~ var isUp = evt.target.className.indexOf('up') >= 0;
+    //~ if ( isUp ) {
+      //~ evt.target.classList.remove('up');
+      //~ evt.target.classList.add('down');
+    //~ } else {
+      //~ evt.target.classList.remove('down');
+      //~ evt.target.classList.add('up');
+    //~ }
+  //~ }
 }
 
 
@@ -239,7 +268,6 @@ function addImageEle(image, addEvent, images) {
 
   if ( imgId < hashId ) {
     var imgParent = document.getElementById('image' + hashId).parentNode.parentNode;
-    console.log('imgParent', imgParent);
     gallery.insertBefore(imgCont, imgParent);
   } else {
     gallery.appendChild(imgCont);
