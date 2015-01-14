@@ -119,13 +119,14 @@ function resizeImage(image) {
       , h2              = document.querySelector('#gallery-container li h2')
       , h2Height        = outerHeight('#gallery-container li h2')
       , subHeight       = window.innerHeight - headerHeight - 35
-      , innerSubHeight  = subHeight - h2Height - 60
+      , innerSubHeight  = subHeight - h2Height - 30
       , isLandscape     = (window.innerWidth > window.innerHeight)
       , isFullscreen    = document.body.className.indexOf('fullscreen') >= 0 
     ;
 
     //if is landscape mode and resolution is small
     if( isLandscape && window.innerHeight <= 350) {
+      //catch portrait mode fotos and change max height for them
       subHeight = window.innerHeight - 20;
       innerSubHeight = subHeight;
     //if is not fullscreen
