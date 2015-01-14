@@ -37,7 +37,6 @@ utils.loadNextImage = function loadNextImage() {
     hashId = 1;
   }
   location.hash = '#image-' + hashId;
-  utils.log('location.hash', location.hash);
 }
 
 utils.loadPreviousImage = function loadPreviousImage() {
@@ -120,7 +119,7 @@ function resizeImage(image) {
       , h2              = document.querySelector('#gallery-container li h2')
       , h2Height        = outerHeight('#gallery-container li h2')
       , subHeight       = window.innerHeight - headerHeight - 35
-      , innerSubHeight  = subHeight - h2Height - 20
+      , innerSubHeight  = subHeight - h2Height - 60
       , isLandscape     = (window.innerWidth > window.innerHeight)
       , isFullscreen    = document.body.className.indexOf('fullscreen') >= 0 
     ;

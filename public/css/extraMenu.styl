@@ -1,10 +1,10 @@
 button_bg_color = #333
-button_font_color = #888
+button_font_color = #666
 button_bg_color_night = #eee
 button_font_color_night = #aaa
 
 #extra-menu-container
-  bottom 15px
+  bottom 25px
   display block
   position absolute
   width 100%
@@ -30,7 +30,7 @@ button_font_color_night = #aaa
     font-size 0.7em
     height 100%
     margin 0
-    padding .3em 0 .5em
+    padding .6em 0
     transition(.5s)
     width 100%
 
@@ -40,14 +40,10 @@ button_font_color_night = #aaa
 
 body.night
   .btn-container
-    &.fullscreen,
-    &.daynight,
-    &.gallery-left,
-    &.gallery-right
-      a
-        background-color button_bg_color
-        color button_font_color
+    a
+      background-color button_bg_color
+      color button_font_color
 
-        &:hover
-          background-color button_bg_color_night
-          color button_font_color_night
+      &:hover
+        background-color button_bg_color_night
+        color button_font_color_night
