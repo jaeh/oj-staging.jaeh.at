@@ -8,6 +8,7 @@ html(lang="en")
 
     meta(property='og:title' content='Oliver Jiszda Photography')
     meta(name='description' property='og:description' content='Oliver Jiszda Photography')
+    block head
 
   block body
     body.nojs
@@ -28,5 +29,5 @@ html(lang="en")
         block content
           div.content empty body content
 
+        script#load-js(src='/js/load.js')
         block scripts
-          script#load-js(src='/js/load.js')

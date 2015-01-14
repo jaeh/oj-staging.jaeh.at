@@ -16,7 +16,7 @@ utils.log = function log() {
   }
 }
 
-function getHashId() {
+utils.getHashId = function getHashId() {
    return parseInt(location.hash.replace('#image-', '') );
 }
 
@@ -26,7 +26,7 @@ function countImages() {
 }
 
 utils.loadNextImage = function loadNextImage() {
-  var hashId = getHashId()
+  var hashId = utils.getHashId()
     , imageCount = countImages()
   ;
   utils.log('hashId', hashId, 'imageCount', imageCount);
@@ -40,7 +40,7 @@ utils.loadNextImage = function loadNextImage() {
 }
 
 utils.loadPreviousImage = function loadPreviousImage() {
-  var hashId = getHashId();
+  var hashId = utils.getHashId();
 
   if ( hashId > 1 ) {
     hashId -= 1;
@@ -79,16 +79,16 @@ function realFullscreen() {
   }
 }
 
-function resizeImages() {
+utils.resizeImages = function resizeImages() {
   var imageGallery = document.getElementById('image-gallery');
   //make sure the gallery exists and has content
   if (imageGallery && imageGallery.innerHTML ) {
-    var gallery = addGallery();
+    var gallery = utils.addGallery();
     var images = gallery.getElementsByTagName('img');
 
     for ( var k in images ) {
       if ( images.hasOwnProperty(k) ) {
-        resizeImage(images[k]);
+        utils.resizeImage(images[k]);
       }
     }
   }
@@ -108,7 +108,7 @@ function outerHeight(el) {
   return Math.ceil(el.offsetHeight + margin);
 }
 
-function resizeImage(image) {
+utils.resizeImage = function resizeImage(image) {
   if ( image.style ) {
     var height          = window.innerHeight * 0.8
       , mheight         = window.innerHeight * 0.85
@@ -154,7 +154,7 @@ utils.inPageFullscreen = function inPageFullscreen(evt) {
     evt.target.innerHTML = 'menu';
   }
   //wait to allow the window to rerender
-  setTimeout(resizeImages, 250)
+  setTimeout(utils.resizeImages, 250)
 
   //~ if ( evt.target ) {
     //~ var isUp = evt.target.className.indexOf('up') >= 0;
@@ -169,7 +169,7 @@ utils.inPageFullscreen = function inPageFullscreen(evt) {
 }
 
 
-function addGallery() {
+utils.addGallery = function addGallery() {
   if ( document.getElementById('gallery-container') ) {
     return document.getElementById('gallery-container');
   }
@@ -186,185 +186,6 @@ function addGallery() {
 
   contentEle.appendChild(galleryEle);
   return galleryContainerEle;
-}
-
-function getImagesFromNoscript() {
-  var imageGalleryEle = document.getElementById('image-gallery')
-    , imageHTML = imageGalleryEle.innerHTML
-    , imageTags = imageHTML.split('&lt;img')
-    , imgs = []
-  ;
-  if ( imageHTML.indexOf('<img') >= 0 ) {
-    imageTags = imageHTML.split('<img');
-  }
-  //~ utils.log('imageTags', imageTags);
-
-  for (var i = 0; i < imageTags.length; i++ ) {
-    var img = parseImgTag(imageTags[i]);
-    if ( img ) {
-      imgs.push( img );
-    }
-  }
-  //~ utils.log('imgs', imgs);
-  return imgs;
-}
-
-function parseImgTag(img) {
-  var src = img.split('src="')[1] || ''
-    , title = img.split('title="')[1] || ''
-    , id = img.split('id="')[1] || ''
-  ;
-
-  //~ utils.log('img', img);
-
-  if ( src ) {
-    return {
-        id    : id.split('"')[0]
-      , src: src.split('"')[0]
-      , title : title.split('"')[0]
-    };
-  }
-  return false;
-}
-
-function loadImages(images) {
-  images.forEach(function (image) {
-    addImageEle(image);
-  });
-}
-
-function loadFirstImage() {
-  var hashId = getHashId()
-    , images = getImagesFromNoscript()
-    , image = images[hashId-1]
-  ;
-
-  if ( image ) {
-    var galleryEle = addGallery();
-    delete images[hashId-1];
-    return addImageEle(image, true, images);
-  } else {
-    return false;
-  }
-}
-
-function addImageEle(image, addEvent, images) {
-  var imgCont    = document.createElement('li')
-    , imgEleCont = document.createElement('div')
-    , imgEle     = document.createElement('img')
-    , imgTitle   = document.createElement('h2')
-  ;
-
-  if ( ! image ) {
-    return false;
-  }
-
-  imgEle.id = image.id;
-  imgEle.src = image.src;
-  imgEle.title = image.title;
-
-  imgTitle.innerHTML = image.title;
-  imgEleCont.appendChild(imgEle);
-
-  imgCont.appendChild(imgEleCont);
-  imgCont.appendChild(imgTitle);
-
-  var gallery = addGallery()
-    , hashId = getHashId()
-    , imgId = parseInt( imgEle.id.replace('image', '') )
-  ;
-
-  if ( imgId < hashId ) {
-    var imgParent = document.getElementById('image' + hashId).parentNode.parentNode;
-    gallery.insertBefore(imgCont, imgParent);
-  } else {
-    gallery.appendChild(imgCont);
-  }
-
-  imgEle.addEventListener('click', imageClick, false);
-  resizeImage(imgEle);
-
-  if ( addEvent && images ) {
-    imgEle.addEventListener('load', function () {
-      imgEle.parentNode.parentNode.className = 'displayed';
-      loadImages(images);
-    });
-  }
-
-  return imgCont;
-}
-
-function hashChange() {
-  showImage(location.hash.replace('#image-', ''));
-}
-
-function showImage(id) {
-  var image = document.getElementById('image' + id)
-    , shownImages = document.getElementsByClassName('displayed')
-  ;
-
-  if (image) {
-    for ( var k in shownImages ) {
-      if ( shownImages.hasOwnProperty(k) ) {
-        if ( typeof shownImages[k].className !== 'undefined' ) {
-          shownImages[k].className = '';
-        }
-      }
-    }
-    image.parentNode.parentNode.className = 'displayed';
-  }
-}
-
-function imageClick(evt) {
-  var offsetLeft = evt.target.offsetLeft;
-  var x = evt.x || evt.screenX;
-  var center = ( evt.target.width / 2 ) + offsetLeft;
-  if ( x > center ) {
-    utils.loadNextImage();
-  } else {
-    utils.loadPreviousImage();
-  }
-}
-
-/*
- * renders the image gallery
- * 
-*/
-utils.addImageGallery = function addImageGallery() {
-  var pathName = document.location.pathname
-    , imageGallery = document.getElementById('image-gallery')
-  ;
-  if ( imageGallery && imageGallery.innerHTML ) {
-    document.location.hash = document.location.hash || '#image-1';
-    if ( loadFirstImage() ) {
-      resizeImages();
-    }
-  }
-
-  window.addEventListener( 'resize', resizeImages );
-
-  document.addEventListener('webkitfullscreenchange', fullscreenChange);
-  document.addEventListener('mozfullscreenchange', fullscreenChange);
-  document.addEventListener('fullscreenchange', fullscreenChange);
-  document.addEventListener('MSFullscreenChange', fullscreenChange);
-
-  function fullscreenChange() {
-    var d = document
-      , isFullscreen = d.fullscreen
-                      || d.mozFullScreen
-                      || d.webkitIsFullScreen
-                      || d.msFullscreenElement
-                      || false
-    ;
-
-    if ( ! isFullscreen ) {
-      var fullscreenEle = document.getElementById('fullscreen');
-      fullscreenEle.classList.add('icon-enlarge');
-      fullscreenEle.classList.remove('icon-contract');
-    }
-  }
-
-  window.addEventListener('hashchange', hashChange, false);
 }
 
 utils.getMenuContainer = function getMenuContainer() {
@@ -391,6 +212,42 @@ utils.localStorage = function () {
   } catch(e) {
       return false;
   }
+}
+
+utils.each = utils.forEach = function (arrOrObj, func, callback) {
+  var hasCallback = ( typeof callback === 'function' );
+
+  if ( typeof arrOrObj === 'array' ) {
+    for ( var i = 0; i < arrOrObj.length; i++ ) {
+      func(arrOrObj[i], i);
+      if ( hasCallback && i === ( arrOrObj.length - 1 ) ) {
+        callback();
+      }
+    }
+  } else if ( typeof arrOrObj === 'object' ) {
+    var numOfItems = 0
+      , currentItem = 0
+    for ( var cKey in arrOrObj ) {
+      if ( arrOrObj.hasOwnProperty(cKey) ) {
+        numOfItems++;
+      }
+    }
+    for ( var key in arrOrObj ) {
+      if ( arrOrObj.hasOwnProperty(key) ) {
+        func(arrOrObj[key], key);
+        if ( hasCallback && numOfItems === currentItem ) {
+          callback();
+        }
+      }
+    }
+  } else {
+    log.error('magic-utils', 'each called without array or object:', arrOrObj);
+  }
+}
+
+utils.disableEvent = function (evt) {
+  evt.preventDefault();
+  return false;
 }
 
 

@@ -1,39 +1,55 @@
 'use strict';
+
+var utils = require('./utils')
+  , Hammer = require('./vendor/hammer.js')
+;
+
 /*
  * phone swipe functionality
  */
-(function phoneSwipe() {
-  document.addEventListener('touchstart', function touchstart(evt) {
-    var touches = evt.originalEvent.touches;
+ 
+module.exports = function addHammer(target) {
+  //~ console.log('target', target);
+  var hammertime            = new Hammer(target)
+    , swipeOffset           = 150
+    , clickOffsetFromCenter = 30
+  ;
+  
+  target.addEventListener('dragstart', utils.disableEvent);
+  target.addEventListener('dragstop', utils.disableEvent);
 
-    if (touches && touches.length) {
-      var touchStartPosition = {
-          x: touches[0].pageX
-        , y: touches[0].pageY
-      };
-      evt.preventDefault();
-      document.addEventListener('touchmove', function touchmove(evt) {
-        var touchEndPosition = { 
-            x: touches[0].pageX 
-          , y: touches[0].pageY
-        };
+  hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+  hammertime.on('tap', function (evt) {
+    var x = evt.center.x;
 
-        if ( touchEndPosition.x > touchStartPosition.x + 50 ) {
-          loadNextImage();
-        } else if ( touchEndPosition.x < touchStartPosition.x - 50 ) {
-          loadPreviousImage();
-        } else if ( touchEndPosition.y > touchStartPosition.y + 50 ) {
-          loadNextImage();
-        } else if ( touchEndPosition.y < touchStartPosition.y - 50 ) {
-          loadPreviousImage();
-        }
-
-        evt.preventDefault();
-        document.addEventListener('touchend', function touchend(evt) {
-          evt.target.removeEventListener('touchmove');
-          evt.preventDefault();
-        } );
-      });
+    //~ console.log('center', evt.center);
+    if ( x < window.innerWidth / 2 - clickOffsetFromCenter ) {
+      utils.loadPreviousImage();
+    } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
+      utils.loadNextImage();
     }
   });
-});
+  
+  hammertime.on('swipe', function (evt) {
+    //~ console.log(evt);
+    var deltaX = evt.deltaX
+      , deltaY = evt.deltaY
+    //~ console.log('delta y/x', deltaY, '/', deltaX);
+    if ( deltaY > swipeOffset ) {
+      //~ console.log('swipe down');
+      utils.loadNextImage();
+    } else if ( deltaY < - swipeOffset ) {
+      //~ console.log('swipe up');
+      utils.loadPreviousImage();
+    }
+
+    if ( deltaX > swipeOffset ) {
+      //~ console.log('swiperight');
+      utils.loadNextImage();
+    } else if ( deltaX < - swipeOffset ) {
+      //~ console.log('swipeleft');
+      utils.loadPreviousImage();
+    }
+    
+  });
+}

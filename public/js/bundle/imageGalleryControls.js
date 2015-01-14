@@ -1,6 +1,8 @@
 'use strict';
 
-var utils = require('./utils');
+var utils = require('./utils')
+  , swipe = require('./swipe');
+;
 
 function addGUI() {
   var extraMenu       = utils.getMenuContainer()
