@@ -11,7 +11,7 @@ var utils = require('./utils')
 module.exports = function addHammer(target) {
   //~ console.log('target', target);
   var hammertime            = new Hammer(target)
-    , swipeOffset           = 150
+    , swipeOffset           = 50
     , clickOffsetFromCenter = 30
   ;
   
@@ -19,6 +19,7 @@ module.exports = function addHammer(target) {
   target.addEventListener('dragstop', utils.disableEvent);
 
   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
   hammertime.on('tap', function (evt) {
     var x = evt.center.x;
 
@@ -31,9 +32,9 @@ module.exports = function addHammer(target) {
   });
   
   hammertime.on('swipe', function (evt) {
-    //~ console.log(evt);
     var deltaX = evt.deltaX
       , deltaY = evt.deltaY
+    ;
     //~ console.log('delta y/x', deltaY, '/', deltaX);
     if ( deltaY > swipeOffset ) {
       //~ console.log('swipe down');
