@@ -3,10 +3,10 @@ body_bg_color = #fefefe
 a_color = #444
 a_color_hover = #111
 
-body_font_color_night = #777
-body_bg_color_night = #222
-a_color_night = #666
-a_color_hover_night = #fefefe
+body_font_color_dark = #777
+body_bg_color_dark = #222
+a_color_dark = #666
+a_color_hover_dark = #fefefe
 
 @import mixins
 @import reset
@@ -58,15 +58,15 @@ body
       h2
         margin 0 0 1em
 
-  &.night
-    background-color body_bg_color_night
-    color body_font_color_night
+  &.dark
+    background-color body_bg_color_dark
+    color body_font_color_dark
 
     a
-      color a_color_night
+      color a_color_dark
 
       &:hover
-        color a_color_hover_night
+        color a_color_hover_dark
     
     #btn-left, #btn-right
       color darken(a_color, 30%)
@@ -183,11 +183,11 @@ form
   textarea
     height 150px
 
-body.night
+body.dark
   form
     input, textarea
-      color body_font_color_night
-      background-color lighten(body_bg_color_night, 5%)
+      color body_font_color_dark
+      background-color lighten(body_bg_color_dark, 5%)
 
 .error
   color #f00

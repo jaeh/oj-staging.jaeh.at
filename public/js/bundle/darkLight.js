@@ -1,16 +1,17 @@
 'use strict';
 /*
- * rendering and adds event listeners for the day/night button
+ * rendering and adds event listeners for the dark/light button
 */
 'use strict';
 
 var utils = require('./utils');
-(function addDayNightUi () {
+(function addDarkLightUi () {
   var buttonContainer  = document.createElement('li')
     , menuContainer    = utils.getMenuContainer()
     , menuUl           = menuContainer.querySelector('ul')
     , button           = document.createElement('a')
-    , timeString       = 'day'
+    , timeString       = 'dark'
+    , timeText         = 'light'
     , hours            = new Date().getHours()
     , body             = document.body
   ;
@@ -18,35 +19,37 @@ var utils = require('./utils');
     timeString = localStorage.bodyClass;
   }
 
-  body.classList.remove('day');
-  body.classList.remove('night');
+  body.classList.remove('dark');
+  body.classList.remove('light');
   if ( ! timeString ) {
-    timeString = ( hours > 19 || hours < 7 ) ? 'night' : 'day';
+    timeString = ( hours > 19 || hours < 7 ) ? 'light' : 'dark';
+    timeText   = ( hours <= 19 || hours >= 7 ) ? 'light' : 'dark';
   }
   body.classList.add(timeString);
   if ( utils.localStorage() ) {
     localStorage.bodyClass = timeString;
   }
 
-  buttonContainer.classList.add('daynight');;
+  buttonContainer.classList.add('darklight');;
   buttonContainer.classList.add('btn-container');
   buttonContainer.classList.add(timeString);
 
   //~ button.classList.add('icon-lamp');
-  button.innerHTML = timeString;
+  button.innerHTML = timeText;
   buttonContainer.appendChild(button);
   menuUl.appendChild(buttonContainer);
   //~ body.appendChild(buttonContainer);
   //~ body.insertBefore(buttonContainer, body.firstChild);
 
   button.addEventListener('click', function (evt) {
-    var oldClass = ( body.className.indexOf('day') >= 0 ) ? 'day' : 'night'
-      , newClass = ( oldClass === 'day' ) ? 'night' : 'day'
+    var oldClass = ( body.className.indexOf('dark') >= 0 ) ? 'dark' : 'light'
+      , newClass = ( oldClass === 'dark' ) ? 'light' : 'dark'
     ;
     if ( utils.localStorage() ) {
       localStorage.bodyClass = newClass;
     }
-    evt.target.innerHTML = newClass;
+    console.log(oldClass, newClass);
+    evt.target.innerHTML = oldClass;
     body.classList.remove(oldClass);
     body.classList.add(newClass);
   });

@@ -46,10 +46,10 @@ module.exports = function addHammer(target) {
 
     if ( deltaX > swipeOffset ) {
       //~ console.log('swiperight');
-      utils.loadNextImage();
-    } else if ( deltaX < - swipeOffset ) {
-      //~ console.log('swipeleft');
       utils.loadPreviousImage();
+    } else if ( deltaX < - swipeOffset ) {
+      utils.loadNextImage();
+      //~ console.log('swipeleft');
     }
     
   });

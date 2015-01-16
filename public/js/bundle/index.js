@@ -5,7 +5,7 @@ var utils = require('./utils')
 ;
 
 require('./fullscreen');
-require('./dayNight');
+require('./darkLight');
 require('./imageGalleryControls');
 
 //tell the body that we have javascript support as early as possible
