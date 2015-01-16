@@ -1,8 +1,15 @@
 button_bg_color = #f7f7f7
-button_font_color = #aaa
-button_bg_color_dark = #333
-button_font_color_dark = #666
+button_bg_color_hover = #777
 
+button_font_color = #aaa
+button_font_color_hover = #eee
+
+button_bg_color_dark = #333
+button_bg_color_dark_hover = #777
+button_font_color_dark = #666
+button_font_color_dark_hover = #fff
+
+button_bg_color_small = #eee
 
 #extra-menu-container
   bottom 25px
@@ -36,8 +43,8 @@ button_font_color_dark = #666
     width 100%
 
     &:hover
-      background-color button_bg_color_dark
-      color button_font_color_dark
+      background-color button_bg_color_dark_hover
+      color button_font_color_dark_hover
 
 body.dark
   .btn-container
@@ -46,8 +53,8 @@ body.dark
       color button_font_color_dark
 
       &:hover
-        background-color button_bg_color
-        color button_font_color
+        background-color button_bg_color_dark_hover
+        color button_font_color_dark_hover
 
 
 @media (max-width: 350px)
@@ -55,3 +62,4 @@ body.dark
     .btn-container
       a 
         font-size .9em
+        background-color button_bg_color_small
