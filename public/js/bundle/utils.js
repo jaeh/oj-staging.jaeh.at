@@ -129,6 +129,9 @@ utils.resizeImage = function resizeImage(image) {
       //catch portrait mode fotos and change max height for them
       subHeight = window.innerHeight - 20;
       innerSubHeight = subHeight;
+    } else if ( window.innerHeight < 580 && window.innerWidth <= 350 ) {
+      subHeight -= extraMenuHeight + 30;
+      innerSubHeight -= extraMenuHeight + 30;
     //if is not fullscreen
     } else if ( isFullscreen ) {
       subHeight = window.innerHeight - 85;
