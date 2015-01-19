@@ -26,7 +26,7 @@ function addGUI() {
   //~ button.classList.add('icon-expand');
   //~ button.classList.add('triangle');
   //~ button.classList.add('up');
-  button.innerHTML = 'expand';
+  button.innerHTML = 'zoom';
   button.addEventListener('click', utils.inPageFullscreen);
   
   buttonContainer.appendChild(button);
