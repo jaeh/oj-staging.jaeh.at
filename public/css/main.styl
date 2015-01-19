@@ -71,7 +71,6 @@ body
 
       &:hover
         color a_color_hover_dark
-    
 
   &.js
     &.fullscreen
@@ -112,9 +111,12 @@ header.main
       li
         display inline
         margin 0 1em
-        
-        a.active
-          text-decoration underline
+
+        a
+          &:hover
+            text-decoration underline
+          &.active
+            text-decoration underline
 
 a
   color a_color
@@ -175,6 +177,7 @@ noscript#image-gallery, div#gallery
 form
   max-width 800px
   margin 0 auto
+
   input, textarea
     color body_font_color
     background-color darken(body_bg_color, 5%)
@@ -184,6 +187,13 @@ form
     margin 1em 0
     padding 1em
     box-sizing border-box
+    
+    &[type="submit"]
+      color #aaa
+      cursor pointer
+
+      &:hover
+        text-decoration underline
 
   textarea
     height 150px
@@ -194,6 +204,8 @@ body.dark
       color body_font_color_dark
       background-color lighten(body_bg_color_dark, 5%)
 
+      &[type="submit"]
+        color #aaa
 .error
   color #f00
 
