@@ -35,7 +35,7 @@ var utils = require('./utils');
   buttonContainer.classList.add(timeString);
 
   //~ button.classList.add('icon-lamp');
-  button.innerHTML = timeText;
+  button.innerHTML = 'background';
   buttonContainer.appendChild(button);
   menuUl.appendChild(buttonContainer);
   //~ body.appendChild(buttonContainer);
@@ -49,7 +49,7 @@ var utils = require('./utils');
       localStorage.bodyClass = newClass;
     }
     console.log(oldClass, newClass);
-    evt.target.innerHTML = oldClass;
+    //~ evt.target.innerHTML = oldClass;
     body.classList.remove(oldClass);
     body.classList.add(newClass);
   });
