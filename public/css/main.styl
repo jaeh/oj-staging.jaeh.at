@@ -143,9 +143,12 @@ noscript#image-gallery, div#gallery
     box-sizing border-box
     max-width 90%
     width auto
-/*
-    transition(all .5s)
-*/
+    
+    &.cursor-right
+      cursor url(/img/cursor-right.png), auto;
+    &.cursor-left
+      cursor url(/img/cursor-left.png), auto;
+      
 
 #gallery-container
   li

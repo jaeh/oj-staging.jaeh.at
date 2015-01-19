@@ -108,6 +108,20 @@ function outerHeight(el) {
   return Math.ceil(el.offsetHeight + margin);
 }
 
+/*
+ * Gets the outer Height of divs, including margin
+ */
+function outerWidth(el) {
+  // Get the DOM Node if you pass in a string
+  el = (typeof el === 'string') ? document.querySelector(el) : el; 
+
+  var styles = window.getComputedStyle(el);
+  var margin = parseFloat(styles['marginLeft']) +
+               parseFloat(styles['marginRight']);
+
+  return Math.ceil(el.offsetWidth + margin);
+}
+
 utils.resizeImage = function resizeImage(image) {
   if ( image.style ) {
     var height          = window.innerHeight * 0.8
@@ -256,4 +270,6 @@ utils.disableEvent = function (evt) {
 }
 
 
+utils.outerHeight = outerHeight;
+utils.outerWidth = outerWidth;
 module.exports = utils;
