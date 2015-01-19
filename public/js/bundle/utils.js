@@ -153,7 +153,7 @@ utils.inPageFullscreen = function inPageFullscreen(evt) {
   ;
   if ( cN.indexOf('fullscreen') >= 0 ) {
     cL.remove('fullscreen');
-    evt.target.innerHTML = 'expand';
+    evt.target.innerHTML = 'zoom';
   } else {
     cL.add('fullscreen');
     evt.target.innerHTML = 'menu';
