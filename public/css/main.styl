@@ -31,7 +31,7 @@ body
   width 100%
   position absolute
   transition(background-color .5s)
-  font-size 12px
+  font-size 13px
   user-select none
 
   #content
@@ -42,9 +42,13 @@ body
     &.index
       line-height 0
 
+    &.about
+      max-width 900px
+    &.contact
+      max-width 600px
+
     &.about,
     &.contact
-      max-width 900px
       margin 2em auto 0
       width 90%
       min-width inherit
@@ -92,6 +96,7 @@ form
   textarea
     transition(.5s)
     border 0 none
+    -webkit-appearance none
 
 header.main
   left 0
@@ -105,7 +110,10 @@ header.main
     ul
       li
         display inline
-        margin 0 .5em
+        margin 0 1em
+        
+        a.active
+          text-decoration underline
 
 a
   color a_color
@@ -155,7 +163,7 @@ noscript#image-gallery, div#gallery
         opacity 1
         user-select initial
     h2
-      font-size .7em
+      font-size .8em
       height 1.2em
       letter-spacing .02em
       margin 22px 0 0
