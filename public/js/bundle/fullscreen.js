@@ -6,6 +6,20 @@ var utils = require('./utils');
  * rendering and adds event listeners for the fullscreen button
  */
 
+
+function inPageFullscreen(evt) {
+  var cL = document.body.classList
+    , cN = document.body.className
+  ;
+  if ( cN.indexOf('fullscreen') >= 0 ) {
+    cL.remove('fullscreen');
+    evt.target.innerHTML = 'zoom';
+  } else {
+    cL.add('fullscreen');
+    evt.target.innerHTML = 'menu';
+  }
+}
+
 function addGUI() {
   var body            = document.body
     , menuContainer   = utils.getMenuContainer()
@@ -23,15 +37,11 @@ function addGUI() {
   }, 200);
 
   button.className = 'btn fullscreen';
-  //~ button.classList.add('icon-expand');
-  //~ button.classList.add('triangle');
-  //~ button.classList.add('up');
   button.innerHTML = 'zoom';
-  button.addEventListener('click', utils.inPageFullscreen);
-  
+  button.addEventListener('click', inPageFullscreen);
+
   buttonContainer.appendChild(button);
   menuUl.appendChild(buttonContainer);
-  //~ body.insertBefore(buttonContainer, body.firstChild);
 }
 
 (function addFullscreenUi() {

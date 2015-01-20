@@ -161,33 +161,6 @@ utils.resizeImage = function resizeImage(image) {
   }
 }
 
-utils.inPageFullscreen = function inPageFullscreen(evt) {
-  var cL = document.body.classList
-    , cN = document.body.className
-  ;
-  if ( cN.indexOf('fullscreen') >= 0 ) {
-    cL.remove('fullscreen');
-    evt.target.innerHTML = 'zoom';
-  } else {
-    cL.add('fullscreen');
-    evt.target.innerHTML = 'menu';
-  }
-  //wait to allow the window to rerender
-  setTimeout(utils.resizeImages, 250)
-
-  //~ if ( evt.target ) {
-    //~ var isUp = evt.target.className.indexOf('up') >= 0;
-    //~ if ( isUp ) {
-      //~ evt.target.classList.remove('up');
-      //~ evt.target.classList.add('down');
-    //~ } else {
-      //~ evt.target.classList.remove('down');
-      //~ evt.target.classList.add('up');
-    //~ }
-  //~ }
-}
-
-
 utils.addGallery = function addGallery() {
   if ( document.getElementById('gallery-container') ) {
     return document.getElementById('gallery-container');
