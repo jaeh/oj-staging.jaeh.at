@@ -109,28 +109,31 @@ function addImageEle(image, addEvent, images) {
   imgCont.appendChild(imgEleCont);
   imgCont.appendChild(imgTitle);
   swipe(imgCont);
-    //~ utils.log('img', img);
 
-  imgEle.addEventListener('mouseover', function (evt) {
-    imgEle.addEventListener('mousemove', function (mEvt) {
-      var imageWidth = utils.outerWidth(imgEle);
-      if ( mEvt.offsetX > imageWidth / 2 ) {
-        imgEle.classList.add('cursor-right');
-        imgEle.classList.remove('cursor-left');
-        
+  //~ imgCont.addEventListener('mouseover', function (evt) {
+    imgCont.addEventListener('mousemove', function (mEvt) {
+      var imageWidth = utils.outerWidth(imgCont)
+        , target  = mEvt.target || mEvt.srcElement
+        , rect    = target.getBoundingClientRect()
+        , offsetX = mEvt.clientX - rect.left
+      ;
+      console.log('offsetX', offsetX, rect.left);
+
+      if ( offsetX > (imageWidth - rect.left - rect.left) / 2 ) {
+        imgCont.classList.add('cursor-right');
+        imgCont.classList.remove('cursor-left');
       } else {
-        imgEle.classList.add('cursor-left');
-        imgEle.classList.remove('cursor-right');
+        imgCont.classList.add('cursor-left');
+        imgCont.classList.remove('cursor-right');
       }
     });
-  });
+  //~ });
 
-  imgEle.addEventListener('mouseout', function (evt) {
-    imgEle.removeEventListener('mousemove');
-    imgEle.classList.remove('cursor-right');
-    imgEle.classList.remove('cursor-left');
+  imgCont.addEventListener('mouseout', function (evt) {
+    //~ imgCont.removeEventListener('mousemove');
+    imgCont.classList.remove('cursor-right');
+    imgCont.classList.remove('cursor-left');
   });
-
 
   var gallery = utils.addGallery()
     , hashId = utils.getHashId()
