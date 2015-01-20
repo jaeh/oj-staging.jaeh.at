@@ -12,12 +12,9 @@ function slideshow() {
   var isRunning = (document.body.className.indexOf('slideshow') >= 0);
 
   if ( isRunning ) {
-    console.log('stopslideshow');
     document.body.classList.remove('slideshow');
-    console.log(interval);
     clearInterval(interval);
   } else {
-    console.log('startSlideShow');
     interval = setInterval(utils.loadNextImage, 3000);
     document.body.classList.add('slideshow');
   }
