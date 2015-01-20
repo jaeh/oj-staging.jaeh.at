@@ -8,14 +8,18 @@ var utils    = require('./utils')
  * rendering and adds event listeners for the slideshow button
  */
 
-function slideshow() {
-  var isRunning = (document.body.className.indexOf('slideshow') >= 0);
+function slideshow(evt) {
+  var isRunning = (document.body.className.indexOf('slideshow') >= 0)
+    , target    = evt.target
+  ;
 
   if ( isRunning ) {
     document.body.classList.remove('slideshow');
+    target.innerHTML = 'slideshow';
     clearInterval(interval);
   } else {
     interval = setInterval(utils.loadNextImage, 3000);
+    target.innerHTML = 'stop';
     document.body.classList.add('slideshow');
   }
 }
