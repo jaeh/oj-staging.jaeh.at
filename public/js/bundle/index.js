@@ -6,6 +6,7 @@ var utils = require('./utils')
 
 require('./fullscreen');
 require('./darkLight');
+require('./slideshow');
 require('./imageGalleryControls');
 
 //tell the body that we have javascript support as early as possible
