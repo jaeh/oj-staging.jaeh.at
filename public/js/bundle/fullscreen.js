@@ -18,6 +18,7 @@ function inPageFullscreen(evt) {
     cL.add('fullscreen');
     evt.target.innerHTML = 'menu';
   }
+  utils.resizeImages();
 }
 
 function addGUI() {
