@@ -22,8 +22,7 @@ function inPageFullscreen(evt) {
 }
 
 function addGUI() {
-  var body            = document.body
-    , menuContainer   = utils.getMenuContainer()
+  var menuContainer   = utils.getMenuContainer()
     , menuUl          = menuContainer.querySelector('ul')
     , header          = document.querySelector('header.main')
     , buttonContainer = document.createElement('li')
