@@ -5,7 +5,7 @@ var utils    = require('./utils')
 ;
 
 /*
- * rendering and adds event listeners for the fullscreen button
+ * rendering and adds event listeners for the slideshow button
  */
 
 function slideshow() {
