@@ -28,7 +28,7 @@ button_bg_color_small = #eee
   float left
   height 100%
   margin 0 3px 0
-  width 70px
+  width 60px
   z-index 1
 
   a
@@ -60,9 +60,22 @@ body.dark
         color button_font_color_dark_hover
 
 
-@media (max-width: 350px)
+@media (max-width: 400px)
   body
     .btn-container
       a 
         font-size .9em
         background-color button_bg_color_small
+
+        &.icon
+          font-size 1.1em
+          padding 0.43em 0
+        &:hover
+          color button_font_color
+          background-color button_bg_color
+
+    &.dark
+      .btn-container
+        a:hover
+          background-color button_bg_color_dark
+          color button_font_color_dark
