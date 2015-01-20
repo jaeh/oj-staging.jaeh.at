@@ -144,10 +144,7 @@ noscript#image-gallery, div#gallery
     width auto
     transition(all .5s ease-out)
 
-    &.cursor-right
-      cursor url(/img/cursor-right.png), auto;
-    &.cursor-left
-      cursor url(/img/cursor-left.png), auto;
+    
       
 
 #gallery-container
@@ -160,10 +157,15 @@ noscript#image-gallery, div#gallery
     width 100%
     z-index 0
 
+    &.cursor-right
+      cursor url(/img/cursor-right.png), auto;
+    &.cursor-left
+      cursor url(/img/cursor-left.png), auto;
+
     &.displayed
       opacity 1
-      /* transition(opacity 1.2s linear .8s) */
       z-index 1
+      /* transition(opacity 1.2s linear .8s) */
 
       h2
         opacity 1
@@ -214,7 +216,7 @@ body.dark
 .error
   color #f00
 
-@media (max-width: 350px)
+@media (max-width: 400px)
   #extra-menu-container
     .btn-container.fullscreen
       display none
@@ -222,7 +224,7 @@ body.dark
     margin 22px 0
 
 
-@media all and (orientation:landscape) and (max-height: 350px)
+@media all and (orientation:landscape) and (max-height: 400px)
   header.main
     display none
   #extra-menu-container
