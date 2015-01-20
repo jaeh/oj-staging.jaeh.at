@@ -17,14 +17,17 @@ var utils = require('./utils');
   ;
   if ( utils.localStorage() ) {
     timeString = localStorage.bodyClass;
+    
   }
 
   body.classList.remove('dark');
   body.classList.remove('light');
   if ( ! timeString ) {
     timeString = ( hours > 19 || hours < 7 ) ? 'light' : 'dark';
-    timeText   = ( hours <= 19 || hours >= 7 ) ? 'light' : 'dark';
   }
+  
+  timeText = ( timeString === 'light' ) ? 'dark' : 'light';
+
   body.classList.add(timeString);
   if ( utils.localStorage() ) {
     localStorage.bodyClass = timeString;
@@ -48,7 +51,6 @@ var utils = require('./utils');
     if ( utils.localStorage() ) {
       localStorage.bodyClass = newClass;
     }
-    console.log(oldClass, newClass);
     evt.target.innerHTML = oldClass;
     body.classList.remove(oldClass);
     body.classList.add(newClass);
