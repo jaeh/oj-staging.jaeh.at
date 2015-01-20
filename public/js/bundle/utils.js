@@ -101,6 +101,9 @@ function outerHeight(el) {
   // Get the DOM Node if you pass in a string
   el = (typeof el === 'string') ? document.querySelector(el) : el; 
 
+  if ( ! el ) {
+    return false;
+  }
   var styles = window.getComputedStyle(el);
   var margin = parseFloat(styles['marginTop']) +
                parseFloat(styles['marginBottom']);
@@ -115,6 +118,9 @@ function outerWidth(el) {
   // Get the DOM Node if you pass in a string
   el = (typeof el === 'string') ? document.querySelector(el) : el; 
 
+  if ( ! el ) {
+    return false;
+  }
   var styles = window.getComputedStyle(el);
   var margin = parseFloat(styles['marginLeft']) +
                parseFloat(styles['marginRight']);
