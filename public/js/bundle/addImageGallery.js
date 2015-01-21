@@ -117,7 +117,6 @@ function addImageEle(image, addEvent, images) {
         , rect    = target.getBoundingClientRect()
         , offsetX = mEvt.clientX - rect.left
       ;
-      console.log('offsetX', offsetX, rect.left);
 
       if ( offsetX > (imageWidth - rect.left - rect.left) / 2 ) {
         imgCont.classList.add('cursor-right');
