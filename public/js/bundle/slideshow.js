@@ -15,7 +15,7 @@ function slideshow(evt) {
 
   if ( isRunning ) {
     document.body.classList.remove('slideshow');
-    target.innerHTML = 'slideshow';
+    target.innerHTML = 'slide';
     clearInterval(interval);
   } else {
     interval = setInterval(utils.loadNextImage, 3000);
@@ -34,7 +34,7 @@ function addGUI() {
   buttonContainer.classList.add('btn-container');
 
   button.className = 'btn slideshow';
-  button.innerHTML = 'slideshow';
+  button.innerHTML = 'slide';
   button.addEventListener('click', slideshow);
 
   buttonContainer.appendChild(button);
