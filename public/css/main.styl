@@ -8,8 +8,9 @@ body_bg_color_dark = #222
 a_color_dark = #666
 a_color_hover_dark = #fefefe
 
-@import mixins
-@import reset
+/* nib gives us reset.css */
+global-reset()
+/*@import reset*/
 @import icomoon
 @import font
 @import nojs
@@ -30,7 +31,7 @@ body
   text-align center
   width 100%
   position absolute
-  transition(background-color .5s)
+  transition background-color .5s
   font-size 13px
   user-select none
 
@@ -55,13 +56,12 @@ body
         
         img
           margin-top -50px
-          transition(all .5s ease-out)
           
         h2
           opacity 0
   #content
     display block
-    transition(color .5s)
+    transition color .5s
 
     &.work,
     &.index
@@ -91,7 +91,7 @@ body
 form
   input, 
   textarea
-    transition(.5s)
+    transition .5s
     border 0 none
     -webkit-appearance none
     font-size 1em
@@ -101,7 +101,7 @@ header.main
   margin 33px 0 33px
   position relative
   width 100%
-  transition(opacity 0.5s)
+  transition opacity 0.5s
 
   nav#menu
     width 100%
@@ -121,7 +121,7 @@ a
   color a_color
   cursor pointer
   text-decoration none  
-  transition(color .5s)
+  transition color .5s
 
   &:hover
     color a_color_hover
@@ -142,10 +142,7 @@ noscript#image-gallery, div#gallery
     box-sizing border-box
     max-width 90%
     width auto
-    transition(all .5s ease-out)
-
-    
-      
+    transition max-height .5s, max-width .5s, margin .5s
 
 #gallery-container
   li
@@ -153,7 +150,7 @@ noscript#image-gallery, div#gallery
     opacity 0
     position absolute
     top 0
-    transition(opacity 1s)
+    transition opacity 1s
     width 100%
     z-index 0
 
@@ -165,7 +162,7 @@ noscript#image-gallery, div#gallery
     &.displayed
       opacity 1
       z-index 1
-      /* transition(opacity 1.2s linear .8s) */
+      /* transition opacity 1.2s linear .8s */
 
       h2
         opacity 1
@@ -179,7 +176,7 @@ noscript#image-gallery, div#gallery
       opacity 0
       position relative
       width 100%
-      transition(opacity .5s)
+      transition opacity .5s
 
 form
   max-width 800px
@@ -230,14 +227,6 @@ body.dark
   #extra-menu-container
     display none
 
-  #gallery
-    img
-      margin 10px
-    
+  #gallery    
     h2
       display none
-  
-  body.js.fullscreen
-    #gallery 
-      img
-        margin-top 25px
