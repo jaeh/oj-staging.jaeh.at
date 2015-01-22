@@ -80,6 +80,7 @@ function realFullscreen() {
 }
 
 utils.resizeImages = function resizeImages() {
+  console.log('resizeimages');
   var imageGallery = document.getElementById('image-gallery');
   //make sure the gallery exists and has content
   if (imageGallery && imageGallery.innerHTML ) {
@@ -146,7 +147,9 @@ utils.resizeImage = function (image) {
       , imageHeight  = w.innerHeight
     ;
 
-    if ( d.body.className.indexOf('fullscreen') === -1 ) {
+    if ( w.innerHeight < 400 && isLandscape ) {
+      imageHeight = window.innerHeight - 20;
+    } else if ( d.body.className.indexOf('fullscreen') === -1 ) {
       //~ console.log('is not fullscreen');
       imageHeight -= height2Sub;
     } else {
@@ -155,26 +158,50 @@ utils.resizeImage = function (image) {
       imageHeight -= ( footerHeight + 33 );
     }
 
-    if ( w.innerHeight > 1400 ) {
-      if ( isLandscape ) {
+    //~ console.log('w.innerHeight', w.innerHeight);
+    //~ console.log('w.innerWidth', w.innerWidth);
+
+    image.style.width = 'auto';
+    image.style.height = 'auto';
+
+    if ( w.innerHeight > 1400 || w.innerWidth > 1400 ) {
+      if ( (w.innerWidth - w.innerHeight) > 300 ) {
         image.style.height = imageHeight + 'px';
       } else {
-        image.style.height = 'auto';
+        image.style.width = imageWidth + 'px';
       }
+      image.style.maxHeight = 'inherit';
+      image.style.maxWidth = 'inherit';
+    } else if ( w.innerHeight < 400 && isLandscape ) {
+      image.style.maxHeight = 'inherit';
+      image.style.maxWidth = imageWidth + 'px';
+      image.style.height = imageHeight + 'px';
+      image.style.width = 'auto';
     } else {
       image.style.maxHeight = imageHeight + 'px';
-      image.style.height = 'auto';
-    }
-    if ( w.innerWidth > 1400 ) {
-      if ( ! isLandscape ) {
-        image.style.width = imageWidth + 'px';
-      } else {
-        image.style.width = 'auto';
-      }
-    } else {
       image.style.maxWidth = imageWidth + 'px';
-      image.style.width = 'auto';
     }
+
+    //~ if ( w.innerHeight > 1400 ) {
+      //~ if ( isLandscape ) {
+        //~ image.style.height = imageHeight + 'px';
+      //~ } else {
+        //~ image.style.height = 'auto';
+      //~ }
+    //~ } else {
+      //~ image.style.maxHeight = imageHeight + 'px';
+      //~ image.style.height = 'auto';
+    //~ }
+    //~ if ( w.innerWidth > 1400 ) {
+      //~ if ( ! isLandscape ) {
+        //~ image.style.width = imageWidth + 'px';
+      //~ } else {
+        //~ image.style.width = 'auto';
+      //~ }
+    //~ } else {
+      //~ image.style.maxWidth = imageWidth + 'px';
+      //~ image.style.width = 'auto';
+    //~ }
   }
 }
 
