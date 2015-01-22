@@ -150,8 +150,8 @@ utils.resizeImage = function (image) {
       //~ console.log('is not fullscreen');
       imageHeight -= height2Sub;
     } else {
-      console.log('footerHeight', footerHeight);
       //only footer is shown in fullscreen
+      //33px is the real top margin of the image, no easy way to calculate
       imageHeight -= ( footerHeight + 33 );
     }
 
