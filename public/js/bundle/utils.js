@@ -145,13 +145,14 @@ utils.resizeImage = function (image) {
       , isLandscape  = w.innerWidth > w.innerHeight
       , imageHeight  = w.innerHeight
     ;
-    
+
     if ( d.body.className.indexOf('fullscreen') === -1 ) {
       //~ console.log('is not fullscreen');
       imageHeight -= height2Sub;
     } else {
+      console.log('footerHeight', footerHeight);
       //only footer is shown in fullscreen
-      imageHeight -= footerHeight;
+      imageHeight -= ( footerHeight + 33 );
     }
 
     if ( w.innerHeight > 1400 ) {
