@@ -86,6 +86,10 @@ utils.resizeImages = function resizeImages() {
     var gallery = utils.addGallery();
     var images = gallery.getElementsByTagName('img');
 
+    if ( window.innerWidth > 1400 || window.innerHeight > 1400 ) {
+      document.body.classList.add('zoomed');
+    }
+
     for ( var k in images ) {
       if ( images.hasOwnProperty(k) ) {
         utils.resizeImage(images[k]);
@@ -128,42 +132,31 @@ function outerWidth(el) {
   return Math.ceil(el.offsetWidth + margin);
 }
 
-utils.resizeImage = function resizeImage(image) {
+utils.resizeImage = function (image) {
   if ( image.style ) {
-    var height          = window.innerHeight * 0.8
-      , mheight         = window.innerHeight * 0.85
-      , headerMain      = document.querySelector('header.main')
-      , headerHeight    = outerHeight('header.main')
-      , extraMenu       = document.getElementById('extra-menu-container')
-      , extraMenuHeight = outerHeight('#extra-menu-container')
-      , h2              = document.querySelector('#gallery-container li h2')
-      , h2Height        = outerHeight('#gallery-container li h2')
-      , subHeight       = window.innerHeight - headerHeight - 35
-      , innerSubHeight  = subHeight - h2Height - 30
-      , isLandscape     = (window.innerWidth > window.innerHeight)
-      , isFullscreen    = document.body.className.indexOf('fullscreen') >= 0 
+    var w = window
+      , d = document
+      , headerHeight = outerHeight('header.main')
+      , footerHeight = outerHeight('#extra-menu-container')
+      , h2Height     = outerHeight('#gallery-container li h2')
+      , height2Sub   = headerHeight + footerHeight + h2Height
+      , imageHeight  = w.innerHeight - height2Sub
+      , imageWidth   = w.innerWidth * 0.9
+      , isLandscape = w.innerWidth > w.innerHeight
     ;
-
-    //if is landscape mode and resolution is small
-    if( isLandscape && window.innerHeight <= 350) {
-      //catch portrait mode fotos and change max height for them
-      subHeight = window.innerHeight - 20;
-      innerSubHeight = subHeight;
-    } else if ( ! isFullscreen && window.innerHeight < 580 && window.innerWidth <= 350 ) {
-      subHeight -= extraMenuHeight;
-      innerSubHeight -= extraMenuHeight;
-      subHeight += 30;
-      innerSubHeight += 30;
-    //if is not fullscreen
-    } else if ( isFullscreen ) {
-      subHeight = window.innerHeight - 85;
-      innerSubHeight = subHeight;
-    } else {      
-      subHeight -= extraMenuHeight;
-      innerSubHeight -= extraMenuHeight;
+    
+    if ( w.innerHeight > 1400 && isLandscape) {
+      image.style.height = imageHeight + 'px';
+    } else {
+      image.style.maxHeight = imageHeight + 'px';
+      image.style.height = 'auto';
     }
-    image.parentNode.parentNode.style.height = subHeight + 'px';
-    image.style.maxHeight = innerSubHeight + 'px';
+    if ( w.innerWidth > 1400 && ! isLandscape ) {
+      image.style.width = imageWidth + 'px';
+    } else {
+      image.style.maxWidth = imageWidth + 'px';
+      image.style.width = 'auto';
+    }
   }
 }
 
