@@ -12,8 +12,9 @@ button_font_color_dark_hover = #fff
 button_bg_color_small = #eee
 
 #extra-menu-container
-  bottom 15px
+  bottom 0
   display block
+  margin 15px 0
   position absolute
   width 100%
   z-index 2
@@ -23,6 +24,10 @@ button_bg_color_small = #eee
     margin 0 auto
     position relative
     display inline-block
+
+body.zoomed
+  #extra-menu-container
+    margin 40px 0
 
 .btn-container
   float left
