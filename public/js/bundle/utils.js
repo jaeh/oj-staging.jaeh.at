@@ -140,19 +140,36 @@ utils.resizeImage = function (image) {
       , footerHeight = outerHeight('#extra-menu-container')
       , h2Height     = outerHeight('#gallery-container li h2')
       , height2Sub   = headerHeight + footerHeight + h2Height
-      , imageHeight  = w.innerHeight - height2Sub
+      , isFullscreen = ( d.body.className.indexOf('fullscreen') > -1 )
       , imageWidth   = w.innerWidth * 0.9
-      , isLandscape = w.innerWidth > w.innerHeight
+      , isLandscape  = w.innerWidth > w.innerHeight
+      , imageHeight  = w.innerHeight
     ;
     
-    if ( w.innerHeight > 1400 && isLandscape) {
-      image.style.height = imageHeight + 'px';
+    if ( d.body.className.indexOf('fullscreen') === -1 ) {
+      //~ console.log('is not fullscreen');
+      imageHeight -= height2Sub;
+    } else {
+      //only footer is shown in fullscreen
+      imageHeight -= footerHeight;
+    }
+
+    if ( w.innerHeight > 1400 ) {
+      if ( isLandscape ) {
+        image.style.height = imageHeight + 'px';
+      } else {
+        image.style.height = 'auto';
+      }
     } else {
       image.style.maxHeight = imageHeight + 'px';
       image.style.height = 'auto';
     }
-    if ( w.innerWidth > 1400 && ! isLandscape ) {
-      image.style.width = imageWidth + 'px';
+    if ( w.innerWidth > 1400 ) {
+      if ( ! isLandscape ) {
+        image.style.width = imageWidth + 'px';
+      } else {
+        image.style.width = 'auto';
+      }
     } else {
       image.style.maxWidth = imageWidth + 'px';
       image.style.width = 'auto';
