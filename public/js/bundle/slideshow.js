@@ -11,17 +11,28 @@ var utils    = require('./utils')
 function slideshow(evt) {
   var isRunning = (document.body.className.indexOf('slideshow') >= 0)
     , target    = evt.target
+    , zoombutton = document.querySelector('.btn.fullscreen')
   ;
 
   if ( isRunning ) {
     document.body.classList.remove('slideshow');
+    document.body.classList.remove('fullscreen');
     target.innerHTML = 'slide';
+    if ( zoombutton ) {
+      zoombutton.innerHTML = 'zoom';
+    }
     clearInterval(interval);
   } else {
+    setTimeout(utils.loadNextImage, 1000);
     interval = setInterval(utils.loadNextImage, 3000);
     target.innerHTML = 'stop';
     document.body.classList.add('slideshow');
+    document.body.classList.add('fullscreen');
+    if ( zoombutton ) {
+      zoombutton.innerHTML = 'menu';
+    }
   }
+  utils.resizeImages();
 }
 function addGUI() {
   var d               = document
