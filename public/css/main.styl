@@ -227,6 +227,15 @@ body.dark
   #extra-menu-container
     display none
 
-  #gallery    
+  div#gallery
     h2
       display none
+      
+    img
+      transition initial
+      margin 17px 0
+
+@media all and (orientation: portrait) and (max-width 400px)
+  div#gallery
+    img
+      transition initial

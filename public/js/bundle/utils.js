@@ -80,7 +80,6 @@ function realFullscreen() {
 }
 
 utils.resizeImages = function resizeImages() {
-  console.log('resizeimages');
   var imageGallery = document.getElementById('image-gallery');
   //make sure the gallery exists and has content
   if (imageGallery && imageGallery.innerHTML ) {
@@ -148,7 +147,7 @@ utils.resizeImage = function (image) {
     ;
 
     if ( w.innerHeight < 400 && isLandscape ) {
-      imageHeight = window.innerHeight - 20;
+      imageHeight = window.innerHeight - 33;
     } else if ( d.body.className.indexOf('fullscreen') === -1 ) {
       //~ console.log('is not fullscreen');
       imageHeight -= height2Sub;
