@@ -1,14 +1,13 @@
 module.exports = {
   hosts: {
     development: [
-      'oj-staging'
+      'minotme-staging'
     ]
   , production: [
-      'staging.oliverjiszda.com'
-    , 'oliverjiszda.jaeh.at'
+      'staging.minotme.com'
     ]
   , staging: [
-      'sstaging.oliverjiszda.com'
+      'sstaging.minotme.com'
     ]
   }
 };
