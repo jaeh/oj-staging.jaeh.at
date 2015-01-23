@@ -31,11 +31,6 @@ function addGUI() {
   buttonContainer.classList.add('fullscreen');
   buttonContainer.classList.add('btn-container');
 
-  //delay to prevent animation on load
-  window.setTimeout(function() {
-    header.classList.add('animated');
-  }, 200);
-
   button.className = 'btn fullscreen';
   button.innerHTML = 'zoom';
   button.addEventListener('click', inPageFullscreen);
