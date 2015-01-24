@@ -159,8 +159,6 @@ noscript#single
   img
     max-width 90%
     width auto
-    transition max-height .5s, max-width .5s, margin .5s
-
 #gallery-container
   li
     left 0
@@ -171,19 +169,8 @@ noscript#single
     width 100%
     z-index 0
 
-    &.cursor-right
-      cursor url(/img/cursor-right.png), auto;
-    &.cursor-left
-      cursor url(/img/cursor-left.png), auto;
-
-    &.displayed
-      opacity 1
-      z-index 1
-      /* transition opacity 1.2s linear .8s */
-
-      h2
-        opacity 1
-        user-select initial
+    img
+      transition max-height .5s, max-width .5s, margin .5s
 
     h2
       font-size .8em
@@ -194,6 +181,19 @@ noscript#single
       position relative
       width 100%
       transition opacity .5s
+
+    &.displayed
+      opacity 1
+      z-index 1
+
+      h2
+        opacity 1
+        user-select initial
+
+    &.cursor-right
+      cursor url(/img/cursor-right.png), auto;
+    &.cursor-left
+      cursor url(/img/cursor-left.png), auto;
 
 form
   max-width 800px
@@ -239,6 +239,12 @@ body.dark
 
 
 @media all and (orientation:landscape) and (max-height: 400px)
+  body.animated
+    #gallery-container
+      li
+        img
+          transition initial
+
   header.main
     display none
   #extra-menu-container
@@ -247,25 +253,27 @@ body.dark
   #gallery
     h2
       display none
-      
     img
-      transition initial
       margin 17px 0
+
   body.fullscreen
     #gallery
       img
         margin 17px 0
 
 @media all and (orientation: portrait) and (max-width 400px)
-  #gallery
-    img
-      transition initial
+  body.animated
+    #gallery-container
+      li
+        img
+          transition initial
 
 @media all and (min-width 1400px), all and (min-height 1400px)
   body.animated
-    #gallery
-      img
-        transition height .5s, width .5s, max-height .5s, max-width .5s, opacity .5s, margin .5s
+    #gallery-container
+      li
+        img
+          transition height .5s, width .5s, max-height .5s, max-width .5s, opacity .5s, margin .5s
 
 @media all and (min-width 1600px)
   body
