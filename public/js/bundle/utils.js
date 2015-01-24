@@ -8,35 +8,6 @@ function log() {
   }
 }
 
-function realFullscreen() {
-  var d = document
-    , elem = d.body
-    , isFullscreen = d.fullscreen
-                  || d.mozFullScreen
-                  || d.webkitIsFullScreen
-                  || d.msFullscreenElement
-                  || false
-  ;
-
-  document.cancelFullscreen = d.cancelFullScreen
-                           || d.exitFullscreen
-                           || d.mozCancelFullScreen
-                           || d.webkitCancelFullScreen
-                           || d.msExitFullscreen
-                           || false
-  ;
-
-  if ( ! isFullscreen ) {
-    elem.requestFullscreen();
-    button.classList.add('icon-compress');
-    button.classList.remove('icon-expand');
-  } else {
-    document.cancelFullscreen();
-    button.classList.add('icon-expand');
-    button.classList.remove('icon-compress');
-  }
-}
-
 function resizeImages() {
   var gallery = addGallery();
   var images = gallery.getElementsByTagName('img');
