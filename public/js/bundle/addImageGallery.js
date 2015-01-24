@@ -23,11 +23,8 @@ function addImageGallery() {
       , height       = window.innerHeight - (menuHeight + headerHeight)
       , width        = utils.outerWidth(contentDiv) * .9
     ;
-    console.log('width', width, 'height', height);
-    
-    galleryDiv.id = 'imageGallery';
 
-    console.log('imageList', imageList);
+    galleryDiv.id = 'imageGallery';
 
     utils.each(imageList, function (image, key) {
       var liEle = document.createElement('li')
