@@ -1,7 +1,7 @@
 'use strict';
 
-var utils = require('./utils')
-  , swipe = require('./swipe');
+var utils       = require('./utils')
+  , imageLoader = require('./imageLoader')
 ;
 
 function addGUI() {
@@ -16,8 +16,8 @@ function addGUI() {
   buttonRightCont.className = 'gallery-right btn-container';
   buttonRight.className = 'btn gallery-right icon-caret-right icon';
   buttonLeft.className = 'btn gallery-left icon-caret-left icon';
-  buttonLeft.addEventListener('click', utils.loadPreviousImage);
-  buttonRight.addEventListener('click', utils.loadNextImage);
+  buttonLeft.addEventListener('click', imageLoader.loadPreviousImage);
+  buttonRight.addEventListener('click', imageLoader.loadNextImage);
   buttonRightCont.appendChild(buttonRight);
   buttonLeftCont.appendChild(buttonLeft);
   menuUl.appendChild(buttonLeftCont);
@@ -26,9 +26,9 @@ function addGUI() {
   document.addEventListener('keyup', function (evt) {
     var kC = evt.keyCode;
     if ( kC === 37 || kC === 38 ) { //left or up arrow keyboard keys
-      utils.loadPreviousImage();
+      imageLoader.loadPreviousImage();
     } else if ( kC === 39 || kC === 40 ) { //right or down arrow 
-      utils.loadNextImage();
+      imageLoader.loadNextImage();
     }
   });
 }

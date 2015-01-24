@@ -14,6 +14,7 @@ global-reset()
 @import icomoon
 @import font
 @import nojs
+@import gallery
 @import extraMenu
 /*
 @import triangle
@@ -31,9 +32,16 @@ body
   text-align center
   width 100%
   position absolute
-  transition background-color .5s
   font-size 13px
   user-select none
+  
+  &.animated
+    transition background-color .5s
+    #extra-menu-container
+      transition background-color .5s
+
+  #extra-menu-container
+    background-color body_bg_color
 
   &.dark
     background-color body_bg_color_dark
@@ -44,6 +52,9 @@ body
 
       &:hover
         color a_color_hover_dark
+
+    #extra-menu-container
+      background-color body_bg_color_dark
 
   &.js
     &.fullscreen
@@ -59,6 +70,9 @@ body
           
         h2
           opacity 0
+  &.page-gallery
+    overflow-y scroll
+
   #content
     display block
     transition color .5s
@@ -133,13 +147,12 @@ a
   position relative
   width auto
 
-noscript#image-gallery, #gallery
+noscript#single
   display inline-block
   max-height 85%
   width 100%
 
   img
-    box-sizing border-box
     max-width 90%
     width auto
     transition max-height .5s, max-width .5s, margin .5s

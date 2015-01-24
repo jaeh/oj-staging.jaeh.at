@@ -1,53 +1,11 @@
 'use strict';
 
-var utils = {};
 
-function getImages() {
-  var gallery = document.getElementById('gallery-container')
-    , images = gallery.getElementsByTagName('img')
-  ;
-  return images;
-}
-
-utils.log = function log() {
+function log() {
   var debug = false;
   if ( debug != false) {
     Function.prototype.apply.apply(console.log, [console, arguments]);
   }
-}
-
-utils.getHashId = function getHashId() {
-   return parseInt(location.hash.replace('#image-', '') );
-}
-
-function countImages() {
-  var images = getImages();
-  return images.length;
-}
-
-utils.loadNextImage = function loadNextImage() {
-  var hashId = utils.getHashId()
-    , imageCount = countImages()
-  ;
-  utils.log('hashId', hashId, 'imageCount', imageCount);
-  
-  if ( hashId < imageCount ) {
-    hashId += 1;
-  } else {
-    hashId = 1;
-  }
-  location.hash = '#image-' + hashId;
-}
-
-utils.loadPreviousImage = function loadPreviousImage() {
-  var hashId = utils.getHashId();
-
-  if ( hashId > 1 ) {
-    hashId -= 1;
-  } else {
-    hashId = countImages();
-  }
-  location.hash = '#image-' + hashId;
 }
 
 function realFullscreen() {
@@ -79,20 +37,16 @@ function realFullscreen() {
   }
 }
 
-utils.resizeImages = function resizeImages() {
-  var imageGallery = document.getElementById('image-gallery');
+function resizeImages() {
+  var imageGallery = document.querySelector('noscript#single');
   //make sure the gallery exists and has content
   if (imageGallery && imageGallery.innerHTML ) {
-    var gallery = utils.addGallery();
+    var gallery = addGallery();
     var images = gallery.getElementsByTagName('img');
-
-    if ( window.innerWidth > 1400 || window.innerHeight > 1400 ) {
-      document.body.classList.add('zoomed');
-    }
 
     for ( var k in images ) {
       if ( images.hasOwnProperty(k) ) {
-        utils.resizeImage(images[k]);
+        resizeImage(images[k]);
       }
     }
   }
@@ -132,7 +86,7 @@ function outerWidth(el) {
   return Math.ceil(el.offsetWidth + margin);
 }
 
-utils.resizeImage = function (image) {
+function resizeImage (image) {
   if ( image.style ) {
     var w = window
       , d = document
@@ -180,34 +134,12 @@ utils.resizeImage = function (image) {
       image.style.maxHeight = imageHeight + 'px';
       image.style.maxWidth = imageWidth + 'px';
     }
-
-    //~ if ( w.innerHeight > 1400 ) {
-      //~ if ( isLandscape ) {
-        //~ image.style.height = imageHeight + 'px';
-      //~ } else {
-        //~ image.style.height = 'auto';
-      //~ }
-    //~ } else {
-      //~ image.style.maxHeight = imageHeight + 'px';
-      //~ image.style.height = 'auto';
-    //~ }
-    //~ if ( w.innerWidth > 1400 ) {
-      //~ if ( ! isLandscape ) {
-        //~ image.style.width = imageWidth + 'px';
-      //~ } else {
-        //~ image.style.width = 'auto';
-      //~ }
-    //~ } else {
-      //~ image.style.maxWidth = imageWidth + 'px';
-      //~ image.style.width = 'auto';
-    //~ }
   }
 }
 
-utils.addGallery = function addGallery() {
-  if ( document.getElementById('gallery-container') ) {
-    return document.getElementById('gallery-container');
-  }
+function addGallery() {
+  var galleryContainer = document.getElementById('gallery-container');
+  if ( galleryContainer ) { return galleryContainer; }
 
   var contentEle = document.getElementById('content')
     , galleryEle = document.createElement('div')
@@ -223,7 +155,7 @@ utils.addGallery = function addGallery() {
   return galleryContainerEle;
 }
 
-utils.getMenuContainer = function getMenuContainer() {
+function getMenuContainer() {
   var menuContainer = document.getElementById('extra-menu-container')
     , wrapper       = document.getElementById('wrapper')
   ;
@@ -239,7 +171,8 @@ utils.getMenuContainer = function getMenuContainer() {
   return menuContainer;
 }
 
-utils.localStorage = function () {
+
+function testLocalstorage () {
   try {
       localStorage.setItem('itemtest235', 'mod');
       localStorage.removeItem('itemtest235');
@@ -249,7 +182,7 @@ utils.localStorage = function () {
   }
 }
 
-utils.each = utils.forEach = function (arrOrObj, func, callback) {
+function each(arrOrObj, func, callback) {
   var hasCallback = ( typeof callback === 'function' );
 
   if ( typeof arrOrObj === 'array' ) {
@@ -280,12 +213,45 @@ utils.each = utils.forEach = function (arrOrObj, func, callback) {
   }
 }
 
-utils.disableEvent = function (evt) {
+function disableEvent (evt) {
   evt.preventDefault();
   return false;
 }
 
+ 
+function hashChange() {
+  showImage(location.hash.replace('#image-', ''));
+}
 
-utils.outerHeight = outerHeight;
-utils.outerWidth = outerWidth;
-module.exports = utils;
+function showImage(id) {
+  var image = document.getElementById('image' + id)
+    , shownImages = document.getElementsByClassName('displayed')
+  ;
+
+  if (image) {
+    for ( var k in shownImages ) {
+      if ( shownImages.hasOwnProperty(k) ) {
+        if ( typeof shownImages[k].className !== 'undefined' ) {
+          shownImages[k].className = '';
+        }
+      }
+    }
+    image.parentNode.parentNode.className = 'displayed';
+  }
+}
+
+
+module.exports = {
+    resizeImage           : resizeImage
+  , addGallery            : addGallery 
+  , getMenuContainer      : getMenuContainer
+  , localStorage          : testLocalstorage
+  , disableEvent          : disableEvent
+  , resizeImages          : resizeImages
+  , log                   : log
+  , hashChange            : hashChange
+  , outerHeight           : outerHeight
+  , outerWidth            : outerWidth
+  , each                  : each
+  , forEach               : each
+};
