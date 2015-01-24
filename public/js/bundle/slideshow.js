@@ -1,7 +1,8 @@
 'use strict';
 
-var utils    = require('./utils')
-  , interval = false
+var utils       = require('./utils')
+  , imageLoader = require('./imageLoader')
+  , interval    = false
 ;
 
 /*
@@ -23,9 +24,9 @@ function slideshow(evt) {
     //~ }
     clearInterval(interval);
   } else {
-    //~ setTimeout(utils.loadNextImage, 1000);
-    utils.loadNextImage();
-    interval = setInterval(utils.loadNextImage, 3000);
+    //~ setTimeout(imageLoader.loadNextImage, 1000);
+    imageLoader.loadNextImage();
+    interval = setInterval(imageLoader.loadNextImage, 3000);
     target.innerHTML = 'stop';
     document.body.classList.add('slideshow');
     //~ document.body.classList.add('fullscreen');

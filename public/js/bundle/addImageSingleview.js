@@ -1,6 +1,7 @@
 'use strict';
 
-var utils = require('./utils')
+var utils       = require('./utils')
+  , imageLoader = require('./imageLoader')
 ;
 
 /*
@@ -9,18 +10,16 @@ var utils = require('./utils')
 */
 function addImageGallery() {
   var pathName = document.location.pathname
-    , imageGallery = document.querySelector('noscript#gallery')
+    , imageGallery = document.querySelector('noscript#single')
   ;
   if ( imageGallery && imageGallery.innerHTML ) {
     document.location.hash = document.location.hash || '#image-1';
-    if ( utils.loadFirstImage() ) {
+    if ( imageLoader.loadFirstImage() ) {
       utils.resizeImages();
     }
     window.addEventListener( 'resize', utils.resizeImages );
     window.addEventListener('hashchange', utils.hashChange, false);
   }
 }
-
-
 
 module.exports = addImageGallery;
