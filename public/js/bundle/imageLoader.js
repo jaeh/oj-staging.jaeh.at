@@ -10,9 +10,9 @@ function loadImages(images) {
   });
 }
 
-function loadFirstImage() {
+function loadFirstImage(selector) {
   var hashId = getHashId()
-    , images = getImagesFromNoscript('noscript#single')
+    , images = getImagesFromNoscript(selector)
     , image = images[hashId-1]
   ;
 
@@ -155,6 +155,7 @@ for (var i = 0; i < imageTags.length; i++ ) {
     imgs.push( img );
   }
 }
+imageGalleryEle.parentNode.removeChild(imageGalleryEle);
 //~ log('imgs', imgs);
 return imgs;
 }
@@ -227,4 +228,6 @@ module.exports = {
     loadNextImage         : loadNextImage
   , loadPreviousImage     : loadPreviousImage
   , loadFirstImage        : loadFirstImage
+  , loadImages            : loadImages
+  , getImagesFromNoscript : getImagesFromNoscript
 };

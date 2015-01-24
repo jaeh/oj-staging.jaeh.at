@@ -11,7 +11,7 @@ html(lang="en")
     block head
 
   block body
-    body.nojs
+    body(class='nojs page-' + page)
       #wrapper
         header.main
           block header

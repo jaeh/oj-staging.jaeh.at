@@ -4,7 +4,7 @@ document.body.className = document.body.className.replace('nojs', 'js');
 
 var utils           = require('./utils')
   , addImageSingleView = require('./addImageSingleview')
-  //~ , addImageGallery = require('./addImageGallery')
+  , addImageGallery = require('./addImageGallery')
   , page            = window.location.pathname
 ;
 
@@ -14,8 +14,12 @@ require('./darkLight');
 require('./slideshow');
 require('./imageGalleryControls');
 
-//~ if ( pathname === '/gallery' ) {
-  //~ addImageGallery();
-//~ } else if ( pathname === '/' || pathname === '' ) {
+if ( page === '/gallery' ) {
+  addImageGallery();
+} else if ( page === '/' || page === '' ) {
   addImageSingleView();
-//~ }
+}
+
+window.setTimeout(function () {
+  document.body.classList.add('animated');
+}, 200);
