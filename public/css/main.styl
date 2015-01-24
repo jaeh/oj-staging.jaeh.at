@@ -37,8 +37,15 @@ body
   
   &.animated
     transition background-color .5s
+
+    header.main
+      transition opacity .5s
+    #content
+      transition color .5s
     #extra-menu-container
       transition background-color .5s
+    a
+      transition color .5s
 
   #extra-menu-container
     background-color body_bg_color
@@ -75,7 +82,6 @@ body
 
   #content
     display block
-    transition color .5s
 
     &.work,
     &.index
@@ -105,7 +111,7 @@ body
 form
   input, 
   textarea
-    transition .5s
+    transition all .5s
     border 0 none
     -webkit-appearance none
     font-size 1em
@@ -115,7 +121,6 @@ header.main
   margin 33px 0 33px
   position relative
   width 100%
-  transition opacity 0.5s
 
   nav#menu
     width 100%
@@ -135,7 +140,6 @@ a
   color a_color
   cursor pointer
   text-decoration none  
-  transition color .5s
 
   &:hover
     color a_color_hover
@@ -258,10 +262,11 @@ body.dark
       transition initial
 
 @media all and (min-width 1400px), all and (min-height 1400px)
-  #gallery
-    img
-      transition height .5s, width .5s, max-height .5s, max-width .5s, opacity .5s, margin .5s
+  body.animated
+    #gallery
+      img
+        transition height .5s, width .5s, max-height .5s, max-width .5s, opacity .5s, margin .5s
 
 @media all and (min-width 1600px)
   body
-    font-size 25px
+    font-size 16px
