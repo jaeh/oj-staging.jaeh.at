@@ -16,11 +16,7 @@ function addImageSingleView() {
   if ( imageLoader.loadFirstImage() ) {
     utils.resizeImages();
   }
-  console.log('addEventListener');
-  window.addEventListener('resize', function () {
-    console.log('resizeimages');
-    utils.resizeImages();
-  } );
+  window.addEventListener('resize', utils.resizeImages, false);
   window.addEventListener('hashchange', utils.hashChange, false);
 }
 
