@@ -38,18 +38,10 @@ function realFullscreen() {
 }
 
 function resizeImages() {
-  var imageGallery = document.querySelector('noscript#single');
-  //make sure the gallery exists and has content
-  if (imageGallery && imageGallery.innerHTML ) {
-    var gallery = addGallery();
-    var images = gallery.getElementsByTagName('img');
+  var gallery = addGallery();
+  var images = gallery.getElementsByTagName('img');
 
-    for ( var k in images ) {
-      if ( images.hasOwnProperty(k) ) {
-        resizeImage(images[k]);
-      }
-    }
-  }
+  each(images, resizeImage);
 }
 
 /*
@@ -86,7 +78,7 @@ function outerWidth(el) {
   return Math.ceil(el.offsetWidth + margin);
 }
 
-function resizeImage (image) {
+function resizeImage(image) {
   if ( image.style ) {
     var w = window
       , d = document
@@ -103,16 +95,12 @@ function resizeImage (image) {
     if ( w.innerHeight < 400 && isLandscape ) {
       imageHeight = window.innerHeight - 33;
     } else if ( d.body.className.indexOf('fullscreen') === -1 ) {
-      //~ console.log('is not fullscreen');
       imageHeight -= height2Sub;
     } else {
       //only footer is shown in fullscreen
       //33px is the real top margin of the image, no easy way to calculate
       imageHeight -= ( footerHeight + 33 );
     }
-
-    //~ console.log('w.innerHeight', w.innerHeight);
-    //~ console.log('w.innerWidth', w.innerWidth);
 
     image.style.width = 'auto';
     image.style.height = 'auto';
@@ -138,7 +126,7 @@ function resizeImage (image) {
 }
 
 function addGallery() {
-  var galleryContainer = document.getElementById('gallery-container');
+  var galleryContainer = document.querySelector('#gallery-container');
   if ( galleryContainer ) { return galleryContainer; }
 
   var contentEle = document.getElementById('content')

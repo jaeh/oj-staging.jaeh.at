@@ -8,18 +8,20 @@ var utils       = require('./utils')
  * renders the image gallery
  * 
 */
-function addImageGallery() {
+function addImageSingleView() {
   var pathName = document.location.pathname
     , imageGallery = document.querySelector('noscript#single')
   ;
-  if ( imageGallery && imageGallery.innerHTML ) {
-    document.location.hash = document.location.hash || '#image-1';
-    if ( imageLoader.loadFirstImage() ) {
-      utils.resizeImages();
-    }
-    window.addEventListener( 'resize', utils.resizeImages );
-    window.addEventListener('hashchange', utils.hashChange, false);
+  document.location.hash = document.location.hash || '#image-1';
+  if ( imageLoader.loadFirstImage() ) {
+    utils.resizeImages();
   }
+  console.log('addEventListener');
+  window.addEventListener('resize', function () {
+    console.log('resizeimages');
+    utils.resizeImages();
+  } );
+  window.addEventListener('hashchange', utils.hashChange, false);
 }
 
-module.exports = addImageGallery;
+module.exports = addImageSingleView;
