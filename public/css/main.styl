@@ -50,7 +50,7 @@ body
       header.main
         opacity 0
 
-      div#gallery
+      #gallery
         margin 1em 0 0
         height 100%
         
@@ -133,7 +133,7 @@ a
   position relative
   width auto
 
-noscript#image-gallery, div#gallery
+noscript#image-gallery, #gallery
   display inline-block
   max-height 85%
   width 100%
@@ -227,7 +227,7 @@ body.dark
   #extra-menu-container
     display none
 
-  div#gallery
+  #gallery
     h2
       display none
       
@@ -235,11 +235,20 @@ body.dark
       transition initial
       margin 17px 0
   body.fullscreen
-    div#gallery
+    #gallery
       img
         margin 17px 0
 
 @media all and (orientation: portrait) and (max-width 400px)
-  div#gallery
+  #gallery
     img
       transition initial
+
+@media all and (min-width 1400px), all and (min-height 1400px)
+  #gallery
+    img
+      transition height .5s, width .5s, max-height .5s, max-width .5s, opacity .5s, margin .5s
+
+@media all and (min-width 1600px)
+  body
+    font-size 25px
