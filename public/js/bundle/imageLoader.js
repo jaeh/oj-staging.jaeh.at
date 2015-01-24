@@ -53,14 +53,20 @@ function addImageEle(image, addEvent, images) {
         , target  = mEvt.target || mEvt.srcElement
         , rect    = target.getBoundingClientRect()
         , offsetX = mEvt.clientX - rect.left
+        , imageX  = ( ( imageWidth - (rect.left * 2 ) ) / 2 )
+        , perc10  = window.innerWidth * .1
       ;
 
-      if ( offsetX > (imageWidth - rect.left - rect.left) / 2 ) {
-        imgCont.classList.add('cursor-right');
-        imgCont.classList.remove('cursor-left');
+      imgCont.classList.remove('left');
+      imgCont.classList.remove('right');
+      imgCont.classList.remove('gallery');
+
+      if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
+        imgCont.classList.add('gallery');
+      } else if ( offsetX > imageX  ) {
+        imgCont.classList.add('right');
       } else {
-        imgCont.classList.add('cursor-left');
-        imgCont.classList.remove('cursor-right');
+        imgCont.classList.add('left');
       }
     });
   //~ });
@@ -180,7 +186,7 @@ function swipe(target) {
   //~ utils.log('target', target);
   var hammertime            = new Hammer(target)
     , swipeOffset           = 50
-    , clickOffsetFromCenter = 30
+    , clickOffsetFromCenter = window.innerWidth * .1
   ;
   
   target.addEventListener('dragstart', utils.disableEvent);
@@ -189,10 +195,15 @@ function swipe(target) {
   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
   hammertime.on('tap', function (evt) {
-    var x = evt.center.x;
+    var x      = evt.center.x
+      , center = window.innerWidth / 2
+    ;
 
     //~ utils.log('center', evt.center);
-    if ( x < window.innerWidth / 2 - clickOffsetFromCenter ) {
+    
+    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
+      window.location = '/gallery';
+    } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
     } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
       loadNextImage();
