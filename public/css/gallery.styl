@@ -1,12 +1,13 @@
 #imageGallery
   ul
     display inline-block
-    margin 0 1%
+    margin 0 5%
+    padding 0 0 2em
 
   li
     float left
-    margin 0 1% 2%
-    max-width 23%
+    margin 0 .5% 1%
+    width 19%
 
   img
     max-width 100%
@@ -37,13 +38,18 @@ body.big-image
   #content 
     opacity .5
 
+@media all and (max-width 555px)
+  #imageGallery
+    li
+      width 24%
+
 @media all and (max-width 400px)
   #imageGallery
     margin 0 2% 50px
 
     li
-      margin 0 2% 4%
-      max-width 46%
+      margin 0 1% 2%
+      width 48%
 
 @media all and (orientation landscape) and (max-height 400px)
   #imageGallery

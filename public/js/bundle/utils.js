@@ -9,8 +9,8 @@ function log() {
 }
 
 function resizeImages() {
-  var gallery = addGallery();
-  var images = gallery.getElementsByTagName('img');
+  var gallery = addGallery()
+    , images = gallery.getElementsByTagName('img');
 
   each(images, resizeImage);
 }
