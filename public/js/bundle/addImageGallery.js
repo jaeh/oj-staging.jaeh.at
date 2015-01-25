@@ -32,7 +32,7 @@ function addImageGallery() {
         , imgEle    = document.createElement('img')
         , tmpSrc    = image.src.split('/')
         , imageName = tmpSrc[tmpSrc.length - 1]
-        , locHash   = location.hash
+        , locHash   = location.hash.replace('#', '')
       ;
 
       if ( ! location.hash ) {
@@ -51,7 +51,6 @@ function addImageGallery() {
       if ( imgEle.id === locHash ) {
         imgEle.classList.add('active');
       }
-
       linkEle.appendChild(imgEle);
       liEle.appendChild(linkEle);
       galleryUl.appendChild(liEle);
@@ -82,8 +81,8 @@ function addImageGallery() {
         sibling = parent.parentNode.lastChild;
       }
     } else if ( kC === 38 ) { //up arrow
-      var imgWidth     = utils.outerWidth(image)
-        , imagesPerRow = Math.floor(window.innerWidth / imgWidth)
+      var imgWidth     = utils.outerWidth(image.parentNode.parentNode)
+        , imagesPerRow = Math.round(window.innerWidth / imgWidth)
       ;
       var sib = parent;
       for ( var i = 0; i < imagesPerRow; i++ ) {
@@ -103,8 +102,8 @@ function addImageGallery() {
         sibling = parent.parentNode.firstChild;
       }
     } else if ( kC === 40 ) { //down arrow
-      var imgWidth     = utils.outerWidth(image)
-        , imagesPerRow = Math.floor(window.innerWidth / imgWidth)
+      var imgWidth     = utils.outerWidth(image.parentNode.parentNode)
+        , imagesPerRow = Math.round(window.innerWidth / imgWidth)
       ;
       var sib = parent;
       for ( var i = 0; i < imagesPerRow; i++ ) {
@@ -118,29 +117,31 @@ function addImageGallery() {
         sibling = sib;
       }
     } else if ( kC === 32 ) { //space
-      var currentImg   = imageLoader.getImageByHash()
-        , bigSrc       = currentImg.src.replace('/thumb', '')
-        , imgCont      = document.querySelector('div#big-image-container')
-      ;
-      if ( imgCont && typeof imgCont.querySelector === 'function') {
-        document.body.classList.remove('big-image');
-        utils.fadeOutAndRemove(imgCont);
-      } else {
-        imgCont = document.createElement('div');
-        var img = document.createElement('img');
-        img.src = bigSrc;
-        imgCont.id = 'big-image-container';
-        imgCont.appendChild(img);
-
-        document.body.classList.add('big-image');
-        document.body.appendChild(imgCont);
+      if ( evt.target.id ) {
+        location.href = '/#' + evt.target.id
       }
-      console.log('kC 32, space key pressed', currentImg);
+      //~ var currentImg   = imageLoader.getImageByHash()
+        //~ , bigSrc       = currentImg.src.replace('/thumb', '')
+        //~ , imgCont      = document.querySelector('div#big-image-container')
+      //~ ;
+      //~ if ( imgCont && typeof imgCont.querySelector === 'function') {
+        //~ document.body.classList.remove('big-image');
+        //~ utils.fadeOutAndRemove(imgCont);
+      //~ } else {
+        //~ imgCont = document.createElement('div');
+        //~ var img = document.createElement('img');
+        //~ img.src = bigSrc;
+        //~ imgCont.id = 'big-image-container';
+        //~ imgCont.appendChild(img);
+//~ 
+        //~ document.body.classList.add('big-image');
+        //~ document.body.appendChild(imgCont);
+      //~ }
+      //~ console.log('kC 32, space key pressed', currentImg);
     }
     if ( sibling ) {
       nextImg = sibling.querySelector('img');
 
-      nextImg.classList.add('active');
       location.hash = '#' + nextImg.id;
 
       utils.each(actives, function (active) {
@@ -148,6 +149,7 @@ function addImageGallery() {
           active.classList.remove('active');
         }
       });
+      nextImg.classList.add('active');
     }
     return false;
   });
