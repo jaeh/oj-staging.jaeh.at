@@ -117,8 +117,8 @@ function addImageGallery() {
         sibling = sib;
       }
     } else if ( kC === 32 ) { //space
-      if ( evt.target.id ) {
-        location.href = '/#' + evt.target.id
+      if ( location.hash ) {
+        location.href = '/' + location.hash
       }
       //~ var currentImg   = imageLoader.getImageByHash()
         //~ , bigSrc       = currentImg.src.replace('/thumb', '')
