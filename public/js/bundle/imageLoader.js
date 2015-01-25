@@ -5,20 +5,21 @@ var utils = require('./utils')
 ;
 
 function loadImages(images) {
-  images.forEach(function (image) {
+  utils.each(images, function (image) {
     addImageEle(image);
   });
 }
 
 function loadFirstImage(selector) {
-  var hashId = getHashId()
+  var hash = getHash()
     , images = getImagesFromNoscript(selector)
-    , image = images[hashId-1]
+    , image = images[hash]
   ;
 
+  console.log('image', image, 'images', images, 'hash', hash);
   if ( image ) {
     var galleryEle = utils.addGallery();
-    delete images[hashId-1];
+    delete images[hash];
     return addImageEle(image, true, images);
   } else {
     return false;
@@ -36,9 +37,10 @@ function addImageEle(image, addEvent, images) {
     return false;
   }
 
-  imgEle.id = image.id;
-  imgEle.src = image.src;
-  imgEle.title = image.title;
+  imgEle.setAttribute('id', image.id);
+  imgEle.setAttribute('src', image.src);
+  imgEle.setAttribute('title', image.title);
+  imgEle.setAttribute('data-i', image.i);
 
   imgTitle.innerHTML = image.title;
   imgEleCont.appendChild(imgEle);
@@ -53,14 +55,20 @@ function addImageEle(image, addEvent, images) {
         , target  = mEvt.target || mEvt.srcElement
         , rect    = target.getBoundingClientRect()
         , offsetX = mEvt.clientX - rect.left
+        , imageX  = ( ( imageWidth - (rect.left * 2 ) ) / 2 )
+        , perc10  = window.innerWidth * .1
       ;
 
-      if ( offsetX > (imageWidth - rect.left - rect.left) / 2 ) {
-        imgCont.classList.add('cursor-right');
-        imgCont.classList.remove('cursor-left');
+      imgCont.classList.remove('left');
+      imgCont.classList.remove('right');
+      imgCont.classList.remove('gallery');
+
+      if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
+        imgCont.classList.add('gallery');
+      } else if ( offsetX > imageX  ) {
+        imgCont.classList.add('right');
       } else {
-        imgCont.classList.add('cursor-left');
-        imgCont.classList.remove('cursor-right');
+        imgCont.classList.add('left');
       }
     });
   //~ });
@@ -72,12 +80,13 @@ function addImageEle(image, addEvent, images) {
   });
 
   var gallery = utils.addGallery()
-    , hashId = getHashId()
-    , imgId = parseInt( imgEle.id.replace('image', '') )
+    , hashId = imgEle.getAttribute('data-i')
+    , imgId = imgEle.getAttribute('data-i')
   ;
 
+  console.log('imgId', imgId, 'hashId', hashId);
   if ( imgId < hashId ) {
-    var imgParent = document.getElementById('image' + hashId).parentNode.parentNode;
+    var imgParent = document.getElementById('image-' + hashId).parentNode.parentNode;
     gallery.insertBefore(imgCont, imgParent);
   } else {
     gallery.appendChild(imgCont);
@@ -97,8 +106,11 @@ function addImageEle(image, addEvent, images) {
 
 
 
-function getHashId() {
-   return parseInt(location.hash.replace('#image-', '') );
+function getHash() {
+   return location.hash.replace('#', '');
+}
+function getImageByHash() {
+  return document.querySelector(location.hash);
 }
 
 function getImages() {
@@ -113,28 +125,43 @@ function countImages() {
 }
 
 function loadNextImage() {
-  var hashId = getHashId()
-    , imageCount = countImages()
+  var image     = getImageByHash()
+    , parent    = image.parentNode.parentNode
+    , nextSib   = parent.nextSibling
+    , nextImage = false
   ;
-  utils.log('hashId', hashId, 'imageCount', imageCount);
-  
-  if ( hashId < imageCount ) {
-    hashId += 1;
-  } else {
-    hashId = 1;
+
+  if ( nextSib ) {
+    nextImage = nextSib.querySelector('img');
   }
-  location.hash = '#image-' + hashId;
+  
+  if ( ! nextImage ) {
+    nextImage = parent.parentNode.firstChild.querySelector('img');
+  }
+  if ( nextImage ) { 
+    console.log(nextImage);
+    location.hash = nextImage.id;
+  }
 }
 
 function loadPreviousImage() {
-  var hashId = getHashId();
+  var image     = getImageByHash()
+    , parent    = image.parentNode.parentNode
+    , prevSib   = parent.previousSibling
+    , prevImage = false
+  ;
 
-  if ( hashId > 1 ) {
-    hashId -= 1;
-  } else {
-    hashId = countImages();
+  if ( prevSib ) {
+    prevImage = prevSib.querySelector('img');
   }
-  location.hash = '#image-' + hashId;
+  
+  if ( ! prevImage ) {
+    prevImage = parent.parentNode.lastChild.querySelector('img');
+  }
+  if ( prevImage ) { 
+    console.log(prevImage);
+    location.hash = prevImage.id;
+  }
 }
 
 
@@ -142,7 +169,7 @@ function getImagesFromNoscript(selector) {
 var imageGalleryEle = document.querySelector(selector || 'noscript')
   , imageHTML = imageGalleryEle.innerHTML
   , imageTags = imageHTML.split('&lt;img')
-  , imgs = []
+  , imgs = {}
 ;
 if ( imageHTML.indexOf('<img') >= 0 ) {
   imageTags = imageHTML.split('<img');
@@ -152,7 +179,8 @@ if ( imageHTML.indexOf('<img') >= 0 ) {
 for (var i = 0; i < imageTags.length; i++ ) {
   var img = parseImgTag(imageTags[i]);
   if ( img ) {
-    imgs.push( img );
+    img.i = i;
+    imgs[img.id] = img;
   }
 }
 imageGalleryEle.parentNode.removeChild(imageGalleryEle);
@@ -180,7 +208,7 @@ function swipe(target) {
   //~ utils.log('target', target);
   var hammertime            = new Hammer(target)
     , swipeOffset           = 50
-    , clickOffsetFromCenter = 30
+    , clickOffsetFromCenter = window.innerWidth * .1
   ;
   
   target.addEventListener('dragstart', utils.disableEvent);
@@ -189,10 +217,16 @@ function swipe(target) {
   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
   hammertime.on('tap', function (evt) {
-    var x = evt.center.x;
+    var x       = evt.center.x
+      , center  = window.innerWidth / 2
+      , imageId = evt.target.id
+    ;
 
     //~ utils.log('center', evt.center);
-    if ( x < window.innerWidth / 2 - clickOffsetFromCenter ) {
+    
+    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
+      window.location = '/gallery#' + imageId;
+    } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
     } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
       loadNextImage();
@@ -230,4 +264,5 @@ module.exports = {
   , loadFirstImage        : loadFirstImage
   , loadImages            : loadImages
   , getImagesFromNoscript : getImagesFromNoscript
+  , getImageByHash        : getImageByHash
 };

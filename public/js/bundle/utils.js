@@ -8,35 +8,6 @@ function log() {
   }
 }
 
-function realFullscreen() {
-  var d = document
-    , elem = d.body
-    , isFullscreen = d.fullscreen
-                  || d.mozFullScreen
-                  || d.webkitIsFullScreen
-                  || d.msFullscreenElement
-                  || false
-  ;
-
-  document.cancelFullscreen = d.cancelFullScreen
-                           || d.exitFullscreen
-                           || d.mozCancelFullScreen
-                           || d.webkitCancelFullScreen
-                           || d.msExitFullscreen
-                           || false
-  ;
-
-  if ( ! isFullscreen ) {
-    elem.requestFullscreen();
-    button.classList.add('icon-compress');
-    button.classList.remove('icon-expand');
-  } else {
-    document.cancelFullscreen();
-    button.classList.add('icon-expand');
-    button.classList.remove('icon-compress');
-  }
-}
-
 function resizeImages() {
   var gallery = addGallery();
   var images = gallery.getElementsByTagName('img');
@@ -212,7 +183,7 @@ function hashChange() {
 }
 
 function showImage(id) {
-  var image = document.getElementById('image' + id)
+  var image = document.getElementById('image-' + id)
     , shownImages = document.getElementsByClassName('displayed')
   ;
 
@@ -226,6 +197,16 @@ function showImage(id) {
     }
     image.parentNode.parentNode.className = 'displayed';
   }
+}
+
+function fadeOutAndRemove(target) {
+  var animDuration = 500;
+
+  target.classList.add('fadeout');
+
+  window.setTimeout(function () {
+    target.parentNode.removeChild(target);
+  }, animDuration);
 }
 
 
@@ -242,4 +223,5 @@ module.exports = {
   , outerWidth            : outerWidth
   , each                  : each
   , forEach               : each
+  , fadeOutAndRemove      : fadeOutAndRemove
 };
