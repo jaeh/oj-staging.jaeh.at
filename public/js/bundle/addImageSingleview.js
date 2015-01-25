@@ -12,7 +12,7 @@ function addImageSingleView() {
   var pathName = document.location.pathname
     , imageGallery = document.querySelector('noscript#single')
   ;
-  document.location.hash = document.location.hash || '#image-1';
+  location.hash = location.hash || '#image-1';
   if ( imageLoader.loadFirstImage() ) {
     utils.resizeImages();
   }

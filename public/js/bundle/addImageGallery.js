@@ -43,7 +43,7 @@ function addImageGallery() {
       //has to be below the delete
       var path = tmpSrc.join('/');
 
-      linkEle.href = '/#' + image.id;
+      linkEle.href = '/slide#' + image.id;
       imgEle.src = path + 'thumb/' + imageName;
       imgEle.id  = image.id;
       imgEle.title = image.title;
@@ -118,26 +118,8 @@ function addImageGallery() {
       }
     } else if ( kC === 32 ) { //space
       if ( location.hash ) {
-        location.href = '/' + location.hash
+        location.href = '/slide' + location.hash
       }
-      //~ var currentImg   = imageLoader.getImageByHash()
-        //~ , bigSrc       = currentImg.src.replace('/thumb', '')
-        //~ , imgCont      = document.querySelector('div#big-image-container')
-      //~ ;
-      //~ if ( imgCont && typeof imgCont.querySelector === 'function') {
-        //~ document.body.classList.remove('big-image');
-        //~ utils.fadeOutAndRemove(imgCont);
-      //~ } else {
-        //~ imgCont = document.createElement('div');
-        //~ var img = document.createElement('img');
-        //~ img.src = bigSrc;
-        //~ imgCont.id = 'big-image-container';
-        //~ imgCont.appendChild(img);
-//~ 
-        //~ document.body.classList.add('big-image');
-        //~ document.body.appendChild(imgCont);
-      //~ }
-      //~ console.log('kC 32, space key pressed', currentImg);
     }
     if ( sibling ) {
       nextImg = sibling.querySelector('img');

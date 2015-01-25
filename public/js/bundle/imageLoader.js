@@ -15,8 +15,6 @@ function loadFirstImage(selector) {
     , images = getImagesFromNoscript(selector)
     , image = images[hash]
   ;
-
-  console.log('image', image, 'images', images, 'hash', hash);
   if ( image ) {
     var galleryEle = utils.addGallery();
     delete images[hash];
@@ -221,11 +219,8 @@ function swipe(target) {
       , center  = window.innerWidth / 2
       , imageId = evt.target.id
     ;
-
-    //~ utils.log('center', evt.center);
-    
     if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      window.location = '/gallery#' + imageId;
+      location = '/work#' + imageId;
     } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
     } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {

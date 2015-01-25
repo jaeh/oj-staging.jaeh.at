@@ -14,9 +14,9 @@ require('./darkLight');
 require('./slideshow');
 require('./imageGalleryControls');
 
-if ( page === '/gallery' ) {
+if ( page === '/work' ) {
   addImageGallery();
-} else if ( page === '/' || page === '' ) {
+} else if ( page === '/slide' ) {
   addImageSingleView();
 }
 
