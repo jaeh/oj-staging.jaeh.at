@@ -66,10 +66,8 @@ function resizeImage(image) {
     if ( w.innerHeight < 400 && isLandscape ) {
       imageHeight = window.innerHeight - 33;
     } else if ( d.body.className.indexOf('fullscreen') === -1 ) {
-      imageHeight -= height2Sub;
+      imageHeight -= height2Sub + (window.innerHeight * 0.03);
     } else {
-      //only footer is shown in fullscreen
-      //33px is the real top margin of the image, no easy way to calculate
       imageHeight -= ( footerHeight + 33 );
     }
 
