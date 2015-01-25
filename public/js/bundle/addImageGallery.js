@@ -70,7 +70,7 @@ function addImageGallery() {
       , parent  = image.parentNode.parentNode
     ;
 
-    if ( kC === 37 || kC === 38 || kC === 39 || kC === 40 ) {
+    if ( kC === 37 || kC === 38 || kC === 39 || kC === 40 || kC === 32 ) {
       evt.preventDefault();
     }
 
