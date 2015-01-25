@@ -8,16 +8,38 @@
     margin 0 1% 2%
     max-width 23%
 
-  a
-    display inline-block
-
   img
     max-width 100%
     max-height 100%
+    &:hover
+      opacity .8
+    &.active
+      opacity .5
+
+#big-image-container
+  height 100%
+  left 0
+  position fixed
+  top 0
+  vertical-align middle
+  width 100%
+  opacity 1
+  transition opacity .5s
+
+  img
+    max-height 100%
+    max-width 100%
+  
+  &.fadeout
+    opacity 0
+
+body.big-image
+  #content 
+    opacity .5
 
 @media all and (max-width 400px)
   #imageGallery
-    margin 0 2%
+    margin 0 2% 50px
 
     li
       margin 0 2% 4%
