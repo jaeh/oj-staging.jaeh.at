@@ -183,7 +183,7 @@ function hashChange() {
 }
 
 function showImage(id) {
-  var image = document.getElementById('image' + id)
+  var image = document.getElementById('image-' + id)
     , shownImages = document.getElementsByClassName('displayed')
   ;
 
@@ -197,6 +197,16 @@ function showImage(id) {
     }
     image.parentNode.parentNode.className = 'displayed';
   }
+}
+
+function fadeOutAndRemove(target) {
+  var animDuration = 500;
+
+  target.classList.add('fadeout');
+
+  window.setTimeout(function () {
+    target.parentNode.removeChild(target);
+  }, animDuration);
 }
 
 
@@ -213,4 +223,5 @@ module.exports = {
   , outerWidth            : outerWidth
   , each                  : each
   , forEach               : each
+  , fadeOutAndRemove      : fadeOutAndRemove
 };
