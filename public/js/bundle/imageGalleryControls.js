@@ -38,8 +38,8 @@ function addGUI() {
     var contentEle  = document.getElementById('content');
     if ( contentEle ) {
       var cN = contentEle.className;
-      //only load gui on work/index page
-      if ( cN.indexOf('work') >= 0 || cN.indexOf('index') >= 0) {
+      //only load gui on gallery page
+      if ( cN.indexOf('gallery') >= 0 ) {
         addGUI();
       }
     }
