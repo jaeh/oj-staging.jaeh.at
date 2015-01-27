@@ -9,7 +9,7 @@ var utils           = require('./utils')
 ;
 
 require('./imageLoader');
-require('./fullscreen');
+//~ require('./fullscreen');
 require('./darkLight');
 require('./slideshow');
 require('./imageGalleryControls');

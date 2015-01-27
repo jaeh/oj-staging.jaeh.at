@@ -47,7 +47,6 @@ function addImageEle(image, addEvent, images) {
   imgCont.appendChild(imgTitle);
   swipe(imgCont);
   imgCont.addEventListener('click', function (evt) {
-    console.log(evt);
     var x       = evt.x
       , center  = window.innerWidth / 2
       , imageId = evt.target.id
@@ -55,7 +54,7 @@ function addImageEle(image, addEvent, images) {
     ;
 
     if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      location = '/gallery#' + imageId;
+      utils.inPageFullscreen();
     } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
     } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
@@ -63,29 +62,27 @@ function addImageEle(image, addEvent, images) {
     }
   });
 
-  //~ imgCont.addEventListener('mouseover', function (evt) {
-    imgCont.addEventListener('mousemove', function (mEvt) {
-      var imageWidth = utils.outerWidth(imgCont)
-        , target  = mEvt.target || mEvt.srcElement
-        , rect    = target.getBoundingClientRect()
-        , offsetX = mEvt.clientX - rect.left
-        , imageX  = ( ( imageWidth - (rect.left * 2 ) ) / 2 )
-        , perc10  = window.innerWidth * .1
-      ;
+  imgCont.addEventListener('mousemove', function (mEvt) {
+    var imageWidth = utils.outerWidth(imgCont)
+      , target  = mEvt.target || mEvt.srcElement
+      , rect    = target.getBoundingClientRect()
+      , offsetX = mEvt.clientX - rect.left
+      , imageX  = ( ( imageWidth - (rect.left * 2 ) ) / 2 )
+      , perc10  = window.innerWidth * .1
+    ;
 
-      imgCont.classList.remove('left');
-      imgCont.classList.remove('right');
-      imgCont.classList.remove('gallery');
+    imgCont.classList.remove('left');
+    imgCont.classList.remove('right');
+    imgCont.classList.remove('gallery');
 
-      if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
-        imgCont.classList.add('gallery');
-      } else if ( offsetX > imageX  ) {
-        imgCont.classList.add('right');
-      } else {
-        imgCont.classList.add('left');
-      }
-    });
-  //~ });
+    if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
+      imgCont.classList.add('gallery');
+    } else if ( offsetX > imageX  ) {
+      imgCont.classList.add('right');
+    } else {
+      imgCont.classList.add('left');
+    }
+  });
 
   imgCont.addEventListener('mouseout', function (evt) {
     //~ imgCont.removeEventListener('mousemove');

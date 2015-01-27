@@ -15,6 +15,23 @@ function resizeImages() {
   each(images, resizeImage);
 }
 
+
+function inPageFullscreen(evt) {
+  if ( document.body.className.indexOf('fullscreen') >= 0 ) {
+    document.body.classList.remove('fullscreen');
+    if ( evt && evt.target.innerHTML === 'menu' ) {
+      evt.target.innerHTML = 'zoom';
+    }
+  } else {
+    document.body.classList.add('fullscreen');
+    if ( evt && evt.target.innerHTML === 'zoom' ) {
+      evt.target.innerHTML = 'menu';
+    }
+  }
+  resizeImages();
+}
+
+
 /*
  * Gets the outer Height of divs, including margin
  */
@@ -222,4 +239,5 @@ module.exports = {
   , each                  : each
   , forEach               : each
   , fadeOutAndRemove      : fadeOutAndRemove
+  , inPageFullscreen      : inPageFullscreen
 };

@@ -7,20 +7,6 @@ var utils = require('./utils');
  */
 
 
-function inPageFullscreen(evt) {
-  var cL = document.body.classList
-    , cN = document.body.className
-  ;
-  if ( cN.indexOf('fullscreen') >= 0 ) {
-    cL.remove('fullscreen');
-    evt.target.innerHTML = 'zoom';
-  } else {
-    cL.add('fullscreen');
-    evt.target.innerHTML = 'menu';
-  }
-  utils.resizeImages();
-}
-
 function addGUI() {
   var menuContainer   = utils.getMenuContainer()
     , menuUl          = menuContainer.querySelector('ul')
@@ -33,7 +19,7 @@ function addGUI() {
 
   button.className = 'btn fullscreen';
   button.innerHTML = 'zoom';
-  button.addEventListener('click', inPageFullscreen);
+  button.addEventListener('click', utils.inPageFullscreen);
 
   buttonContainer.appendChild(button);
   menuUl.appendChild(buttonContainer);

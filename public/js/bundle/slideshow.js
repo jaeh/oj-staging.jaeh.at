@@ -59,7 +59,7 @@ function addGUI() {
   if ( contentEle ) {
     var cN = contentEle.className;
     //only load gui on work/index page
-    if ( cN.indexOf('gallery') >= 0 ) {
+    if ( cN.indexOf('slide') >= 0 ) {
       addGUI();
     }
   }
