@@ -46,6 +46,22 @@ function addImageEle(image, addEvent, images) {
   imgCont.appendChild(imgEleCont);
   imgCont.appendChild(imgTitle);
   swipe(imgCont);
+  imgCont.addEventListener('click', function (evt) {
+    console.log(evt);
+    var x       = evt.x
+      , center  = window.innerWidth / 2
+      , imageId = evt.target.id
+      , clickOffsetFromCenter = window.innerWidth * .1
+    ;
+
+    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
+      location = '/work#' + imageId;
+    } else if ( x < center - clickOffsetFromCenter ) {
+      loadPreviousImage();
+    } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
+      loadNextImage();
+    }
+  });
 
   //~ imgCont.addEventListener('mouseover', function (evt) {
     imgCont.addEventListener('mousemove', function (mEvt) {
@@ -206,27 +222,12 @@ function swipe(target) {
   //~ utils.log('target', target);
   var hammertime            = new Hammer(target)
     , swipeOffset           = 50
-    , clickOffsetFromCenter = window.innerWidth * .1
   ;
   
   target.addEventListener('dragstart', utils.disableEvent);
   target.addEventListener('dragstop', utils.disableEvent);
 
   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-
-  hammertime.on('tap', function (evt) {
-    var x       = evt.center.x
-      , center  = window.innerWidth / 2
-      , imageId = evt.target.id
-    ;
-    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      location = '/work#' + imageId;
-    } else if ( x < center - clickOffsetFromCenter ) {
-      loadPreviousImage();
-    } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
-      loadNextImage();
-    }
-  });
   
   hammertime.on('swipe', function (evt) {
     var deltaX = evt.deltaX
