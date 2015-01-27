@@ -55,7 +55,7 @@ function addImageEle(image, addEvent, images) {
     ;
 
     if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      location = '/work#' + imageId;
+      location = '/gallery#' + imageId;
     } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
     } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
