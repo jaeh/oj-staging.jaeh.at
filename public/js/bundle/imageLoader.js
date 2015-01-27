@@ -94,8 +94,6 @@ function addImageEle(image, addEvent, images) {
     , hashId = imgEle.getAttribute('data-i')
     , imgId = imgEle.getAttribute('data-i')
   ;
-
-  console.log('imgId', imgId, 'hashId', hashId);
   if ( imgId < hashId ) {
     var imgParent = document.getElementById('image-' + hashId).parentNode.parentNode;
     gallery.insertBefore(imgCont, imgParent);
@@ -150,7 +148,6 @@ function loadNextImage() {
     nextImage = parent.parentNode.firstChild.querySelector('img');
   }
   if ( nextImage ) { 
-    console.log(nextImage);
     location.hash = nextImage.id;
   }
 }
@@ -165,38 +162,32 @@ function loadPreviousImage() {
   if ( prevSib ) {
     prevImage = prevSib.querySelector('img');
   }
-  
   if ( ! prevImage ) {
     prevImage = parent.parentNode.lastChild.querySelector('img');
-  }
-  if ( prevImage ) { 
-    console.log(prevImage);
+  } else if ( prevImage ) { 
     location.hash = prevImage.id;
   }
 }
 
 
 function getImagesFromNoscript(selector) {
-var imageGalleryEle = document.querySelector(selector || 'noscript')
-  , imageHTML = imageGalleryEle.innerHTML
-  , imageTags = imageHTML.split('&lt;img')
-  , imgs = {}
-;
-if ( imageHTML.indexOf('<img') >= 0 ) {
-  imageTags = imageHTML.split('<img');
-}
-//~ log('imageTags', imageTags);
-
-for (var i = 0; i < imageTags.length; i++ ) {
-  var img = parseImgTag(imageTags[i]);
-  if ( img ) {
-    img.i = i;
-    imgs[img.id] = img;
+  var imageGalleryEle = document.querySelector(selector || 'noscript')
+    , imageHTML = imageGalleryEle.innerHTML
+    , imageTags = imageHTML.split('&lt;img')
+    , imgs = {}
+  ;
+  if ( imageHTML.indexOf('<img') >= 0 ) {
+    imageTags = imageHTML.split('<img');
   }
-}
-imageGalleryEle.parentNode.removeChild(imageGalleryEle);
-//~ log('imgs', imgs);
-return imgs;
+  for (var i = 0; i < imageTags.length; i++ ) {
+    var img = parseImgTag(imageTags[i]);
+    if ( img ) {
+      img.i = i;
+      imgs[img.id] = img;
+    }
+  }
+  imageGalleryEle.parentNode.removeChild(imageGalleryEle);
+  return imgs;
 }
 
 
@@ -205,7 +196,6 @@ function parseImgTag(img) {
     , title = img.split('title="')[1] || ''
     , id = img.split('id="')[1] || ''
   ;
-
   if ( src ) {
     return {
         id    : id.split('"')[0]
@@ -232,21 +222,16 @@ function swipe(target) {
     ;
     //~ utils.log('delta y/x', deltaY, '/', deltaX);
     if ( deltaY > swipeOffset ) {
-      //~ utils.log('swipe down');
       loadNextImage();
     } else if ( deltaY < - swipeOffset ) {
-      //~ utils.log('swipe up');
       loadPreviousImage();
     }
 
     if ( deltaX > swipeOffset ) {
-      //~ utils.log('swiperight');
       loadPreviousImage();
     } else if ( deltaX < - swipeOffset ) {
       loadNextImage();
-      //~ utils.log('swipeleft');
     }
-    
   });
 }
 
