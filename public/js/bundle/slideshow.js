@@ -58,7 +58,7 @@ function addGUI() {
   var contentEle  = document.getElementById('content');
   if ( contentEle ) {
     var cN = contentEle.className;
-    //only load gui on work/index page
+    //only load gui on slide page
     if ( cN.indexOf('slide') >= 0 ) {
       addGUI();
     }
