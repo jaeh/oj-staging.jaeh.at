@@ -87,7 +87,7 @@ function resizeImage(image) {
     } else { //is fullscreen
       
       //~ imageHeight -= ( footerHeight + 33 );
-      imageHeight -= 60;
+      imageHeight -= 55;
     }
 
     image.style.width = 'auto';
