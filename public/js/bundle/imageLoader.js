@@ -52,8 +52,10 @@ function addImageEle(image, addEvent, images) {
       , imageId = evt.target.id
       , clickOffsetFromCenter = window.innerWidth * .1
     ;
+    console.log('x', x, 'imageId', evt.target.id);
 
     if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
+      console.log('start inpagefullscreen');
       utils.inPageFullscreen();
     } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
