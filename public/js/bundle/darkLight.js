@@ -1,11 +1,11 @@
 'use strict';
+
+var utils = require('./utils');
+
 /*
  * rendering and adds event listeners for the dark/light button
 */
-'use strict';
-
-var utils = require('./utils');
-(function addDarkLightUi () {
+function addGUI () {
   var buttonContainer  = document.createElement('li')
     , menuContainer    = utils.getMenuContainer()
     , menuUl           = menuContainer.querySelector('ul')
@@ -55,5 +55,18 @@ var utils = require('./utils');
     body.classList.remove(oldClass);
     body.classList.add(newClass);
   });
+}
+
+
+(function addDarkLightUi() {
+  var contentEle  = document.getElementById('content');
+  if ( contentEle ) {
+    var cN = contentEle.className;
+    //only load gui on gallery page
+    if ( cN.indexOf('slide') >= 0 ) {
+      addGUI();
+    }
+  }
 })();
+
 
