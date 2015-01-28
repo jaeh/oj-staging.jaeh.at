@@ -45,6 +45,7 @@ function addImageEle(image, addEvent, images) {
 
   imgCont.appendChild(imgEleCont);
   imgCont.appendChild(imgTitle);
+  imgCont.classList.add('cursor');
   swipe(imgCont);
 
   imgCont.addEventListener('click', function (evt) {
@@ -74,10 +75,15 @@ function addImageEle(image, addEvent, images) {
 
     imgCont.classList.remove('left');
     imgCont.classList.remove('right');
-    imgCont.classList.remove('gallery');
+    imgCont.classList.remove('zoom-in');
+    imgCont.classList.remove('zoom-out');
 
     if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
-      imgCont.classList.add('gallery');
+      if ( document.body.className.indexOf('fullscreen') > -1 ) {
+        imgCont.classList.add('zoom-in');
+      } else {
+        imgCont.classList.add('zoom-out');
+      }
     } else if ( offsetX > imageX  ) {
       imgCont.classList.add('right');
     } else {
@@ -106,7 +112,7 @@ function addImageEle(image, addEvent, images) {
 
   if ( addEvent && images ) {
     imgEle.addEventListener('load', function () {
-      imgEle.parentNode.parentNode.className = 'displayed';
+      imgEle.parentNode.parentNode.classList.add('displayed');
       loadImages(images);
     });
   }
