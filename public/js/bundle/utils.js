@@ -82,10 +82,12 @@ function resizeImage(image) {
 
     if ( w.innerHeight < 400 && isLandscape ) {
       imageHeight = window.innerHeight - 33;
-    } else if ( d.body.className.indexOf('fullscreen') === -1 ) {
+    } else if ( d.body.className.indexOf('fullscreen') === -1 ) { //not fullscreen
       imageHeight -= height2Sub + (window.innerHeight * 0.03);
-    } else {
-      imageHeight -= ( footerHeight + 33 );
+    } else { //is fullscreen
+      
+      //~ imageHeight -= ( footerHeight + 33 );
+      imageHeight -= 60;
     }
 
     image.style.width = 'auto';
