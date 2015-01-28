@@ -17,6 +17,10 @@ function resizeImages() {
 
 
 function inPageFullscreen(evt) {
+  if ( window.innerWidth < 400 || window.innerHeight < 400 ) {
+    return;
+  }
+
   if ( document.body.className.indexOf('fullscreen') >= 0 ) {
     document.body.classList.remove('fullscreen');
     if ( evt && evt.target.innerHTML === 'menu' ) {
