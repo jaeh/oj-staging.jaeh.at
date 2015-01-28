@@ -46,16 +46,15 @@ function addImageEle(image, addEvent, images) {
   imgCont.appendChild(imgEleCont);
   imgCont.appendChild(imgTitle);
   swipe(imgCont);
+
   imgCont.addEventListener('click', function (evt) {
-    var x       = evt.x
+    var x       = evt.x || evt.layerX
       , center  = window.innerWidth / 2
       , imageId = evt.target.id
       , clickOffsetFromCenter = window.innerWidth * .1
     ;
-    console.log('x', x, 'imageId', evt.target.id);
 
     if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      console.log('start inpagefullscreen');
       utils.inPageFullscreen();
     } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
