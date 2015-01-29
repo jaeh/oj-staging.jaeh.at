@@ -24,9 +24,8 @@ function slideshow(evt) {
     //~ }
     clearInterval(interval);
   } else {
-    //~ setTimeout(imageLoader.loadNextImage, 1000);
     imageLoader.loadNextImage();
-    interval = setInterval(imageLoader.loadNextImage, 5000);
+    interval = setInterval(imageLoader.loadNextImage, 4000);
     target.innerHTML = 'stop';
     document.body.classList.add('slideshow');
     //~ document.body.classList.add('fullscreen');
