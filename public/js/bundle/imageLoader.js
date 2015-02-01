@@ -56,7 +56,11 @@ function addImageEle(image, addEvent, images) {
     ;
 
     if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      utils.inPageFullscreen();
+      if ( window.innerHeight > 400 && window.innerWidth > 400 ) {
+        utils.inPageFullscreen();
+      } else {
+        location.href = '/gallery' + location.hash;
+      }
     } else if ( x < center - clickOffsetFromCenter ) {
       loadPreviousImage();
     } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
