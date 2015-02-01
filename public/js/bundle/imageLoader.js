@@ -4,9 +4,9 @@ var utils = require('./utils')
   , Hammer = require('./vendor/hammer')
 ;
 
-function loadImages(images) {
+function loadImages(i, images) {
   utils.each(images, function (image) {
-    addImageEle(image);
+    addImageEle(image, false, i);
   });
 }
 
@@ -98,9 +98,13 @@ function addImageEle(image, addEvent, images) {
   });
 
   var gallery = utils.addGallery()
-    , hashId = imgEle.getAttribute('data-i')
+    , hashId = image.i
     , imgId = imgEle.getAttribute('data-i')
   ;
+  if ( ! addEvent && typeof images === 'number' ) {
+    hashId = images;
+  }
+
   if ( imgId < hashId ) {
     var imgParent = document.getElementById('image-' + hashId).parentNode.parentNode;
     gallery.insertBefore(imgCont, imgParent);
@@ -113,7 +117,7 @@ function addImageEle(image, addEvent, images) {
   if ( addEvent && images ) {
     imgEle.addEventListener('load', function () {
       imgEle.parentNode.parentNode.classList.add('displayed');
-      loadImages(images);
+      loadImages(image.i, images);
     });
   }
 
