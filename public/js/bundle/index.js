@@ -23,4 +23,4 @@ if ( page === '/gallery' ) {
 
 window.setTimeout(function () {
   document.body.classList.add('animated');
-}, 200);
+}, 300);
