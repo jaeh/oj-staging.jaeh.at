@@ -256,24 +256,28 @@ body.dark
       li
         img
           transition initial
-  #content
-    margin 0
+  body
+    height 100%
+    max-height 100%
 
-  header.main
-    display none
-  #extra-menu-container
-    display none
+    #content
+      margin 0
 
-  #gallery
-    h2
+    header.main
       display none
-    img
-      margin 17px 0
+    #extra-menu-container
+      display none
 
-  body.fullscreen
     #gallery
+      h2
+        display none
       img
         margin 17px 0
+
+    &.fullscreen
+      #gallery
+        img
+          margin 17px 0
 
 @media all and (orientation: portrait) and (max-width 400px)
   body.animated
