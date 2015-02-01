@@ -28,7 +28,6 @@ body
   background-color body_bg_color
   color body_font_color
   margin 0 auto
-  overflow hidden
   text-align center
   width 100%
   position absolute
@@ -88,25 +87,34 @@ body
     &.gallery
       line-height 0
 
-    &.about
-      max-width 900px
-    &.contact
-      max-width 600px
-
     &.about,
     &.contact
-      margin 93px auto
+      margin-left auto
+      margin-right auto
       width 90%
       min-width inherit
       text-align left
 
-      img
+    &.about
+      max-width 900px
+      .image-container
         max-width 50%
         float left
-        margin 0 1em 0 0
+        margin 2em 1em 1em 0
+        h2
+          margin 0 0 1em 1em
 
-      h2
-        margin 0 0 1em
+      .text-container
+        color #888b90
+        h2
+          color #000
+          margin 0 0 1em
+        div
+          margin 0 0 1.5em
+
+    &.contact
+      max-width 600px
+
 
 
 form
@@ -145,6 +153,10 @@ a
 
   &:hover
     color a_color_hover
+
+img
+  max-height 100%
+  max-width 100%
 
 #content
   display inline-block
