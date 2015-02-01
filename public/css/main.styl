@@ -20,7 +20,7 @@ global-reset()
 @import triangle
 */
 
-html, body
+html
   height 100%
   display block
 
@@ -41,7 +41,7 @@ body
     header.main
       transition opacity .5s
     #content
-      transition color .5s
+      transition color .5s, margin .5s
     #extra-menu-container
       transition background-color .5s, opacity .5s
       li
@@ -71,13 +71,12 @@ body
       header.main
         opacity 0
 
+      #content
+        margin 40px 0
+
       #gallery
-        margin 1em 0 0
         height 100%
-        
-        img
-          margin-top -50px
-          
+
         h2
           opacity 0
   &.page-gallery
@@ -96,7 +95,7 @@ body
 
     &.about,
     &.contact
-      margin 2em auto 0
+      margin 93px auto
       width 90%
       min-width inherit
       text-align left
@@ -121,7 +120,8 @@ form
 header.main
   left 0
   margin 40px 0
-  position relative
+  position absolute
+  top 0
   width 100%
 
   nav#menu
@@ -148,6 +148,7 @@ a
 
 #content
   display inline-block
+  margin 93px 0 0
   max-height 90%
   min-width 95%
   position relative
@@ -242,7 +243,11 @@ body.dark
     .btn-container.fullscreen
       display none
   header.main
-    margin 22px 0
+    margin-bottom 22px
+    margin-top 22px
+  #content
+    margin-bottom 57px
+    margin-top 57px
 
 
 @media all and (orientation:landscape) and (max-height: 400px)
@@ -251,6 +256,8 @@ body.dark
       li
         img
           transition initial
+  #content
+    margin 0
 
   header.main
     display none
