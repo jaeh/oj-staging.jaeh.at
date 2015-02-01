@@ -5,7 +5,7 @@ var utils = require('./utils');
 /*
  * rendering and adds event listeners for the dark/light button
 */
-function addGUI (isSlidePage) {
+function addGUI (notGalleryPage) {
   var menuContainer    = utils.getMenuContainer()
     , menuUl           = menuContainer.querySelector('ul')
     , timeString       = 'dark'
@@ -33,12 +33,12 @@ function addGUI (isSlidePage) {
     localStorage.bodyClass = timeString;
   }
 
-  if ( isSlidePage ) {
+  if ( notGalleryPage ) {
     var buttonContainer  = document.createElement('li')
       , button           = document.createElement('a')
     ;
 
-    buttonContainer.classList.add('darklight');;
+    buttonContainer.classList.add('darklight');
     buttonContainer.classList.add('btn-container');
     buttonContainer.classList.add(timeString);
 
@@ -67,11 +67,11 @@ function addGUI (isSlidePage) {
 (function addDarkLightUi() {
   var contentEle  = document.getElementById('content');
   if ( contentEle ) {
-    var cN          = contentEle.className
-      , isSlidePage = cN.indexOf('slide') >= 0
+    var cN            = contentEle.className
+      , notGalleryPage = cN.indexOf('gallery') < 0
     ;
     //only load gui on gallery page
-    addGUI(isSlidePage);
+    addGUI(notGalleryPage);
   }
 })();
 
