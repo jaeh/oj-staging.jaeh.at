@@ -89,9 +89,7 @@ function resizeImage(image) {
     } else if ( d.body.className.indexOf('fullscreen') === -1 ) { //not fullscreen
       imageHeight -= height2Sub + (window.innerHeight * 0.06);
     } else { //is fullscreen
-      
-      //~ imageHeight -= ( footerHeight + 33 );
-      imageHeight -= 55;
+      imageHeight -= (window.innerHeight - 100);
     }
 
     image.style.width = 'auto';
