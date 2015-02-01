@@ -12,6 +12,7 @@ require('./imageLoader');
 //~ require('./fullscreen');
 require('./darkLight');
 require('./slideshow');
+require('./galleryButton');
 require('./imageGalleryControls');
 
 if ( page === '/gallery' ) {
