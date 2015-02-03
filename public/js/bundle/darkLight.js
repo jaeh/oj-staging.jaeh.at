@@ -1,23 +1,23 @@
 'use strict';
+
+var utils = require('./utils');
+
 /*
  * rendering and adds event listeners for the dark/light button
 */
-'use strict';
-
-var utils = require('./utils');
-(function addDarkLightUi () {
-  var buttonContainer  = document.createElement('li')
-    , menuContainer    = utils.getMenuContainer()
+function addGUI (notGalleryPage) {
+  var menuContainer    = utils.getMenuContainer()
     , menuUl           = menuContainer.querySelector('ul')
-    , button           = document.createElement('a')
     , timeString       = 'dark'
     , timeText         = 'light'
     , hours            = new Date().getHours()
     , body             = document.body
   ;
+
+
+
   if ( utils.localStorage() ) {
     timeString = localStorage.bodyClass;
-    
   }
 
   body.classList.remove('dark');
@@ -33,27 +33,46 @@ var utils = require('./utils');
     localStorage.bodyClass = timeString;
   }
 
-  buttonContainer.classList.add('darklight');;
-  buttonContainer.classList.add('btn-container');
-  buttonContainer.classList.add(timeString);
-
-  //~ button.classList.add('icon-lamp');
-  button.innerHTML = timeText;
-  buttonContainer.appendChild(button);
-  menuUl.appendChild(buttonContainer);
-  //~ body.appendChild(buttonContainer);
-  //~ body.insertBefore(buttonContainer, body.firstChild);
-
-  button.addEventListener('click', function (evt) {
-    var oldClass = ( body.className.indexOf('dark') >= 0 ) ? 'dark' : 'light'
-      , newClass = ( oldClass === 'dark' ) ? 'light' : 'dark'
+  if ( notGalleryPage ) {
+    var buttonContainer  = document.createElement('li')
+      , button           = document.createElement('a')
     ;
-    if ( utils.localStorage() ) {
-      localStorage.bodyClass = newClass;
-    }
-    evt.target.innerHTML = oldClass;
-    body.classList.remove(oldClass);
-    body.classList.add(newClass);
-  });
+
+    buttonContainer.classList.add('darklight');
+    buttonContainer.classList.add('btn-container');
+    buttonContainer.classList.add(timeString);
+
+    //~ button.classList.add('icon-lamp');
+    button.innerHTML = timeText;
+    buttonContainer.appendChild(button);
+    menuUl.appendChild(buttonContainer);
+    //~ body.appendChild(buttonContainer);
+    //~ body.insertBefore(buttonContainer, body.firstChild);
+
+    button.addEventListener('click', function (evt) {
+      var oldClass = ( body.className.indexOf('dark') >= 0 ) ? 'dark' : 'light'
+        , newClass = ( oldClass === 'dark' ) ? 'light' : 'dark'
+      ;
+      if ( utils.localStorage() ) {
+        localStorage.bodyClass = newClass;
+      }
+      evt.target.innerHTML = oldClass;
+      body.classList.remove(oldClass);
+      body.classList.add(newClass);
+    });
+  }
+}
+
+
+(function addDarkLightUi() {
+  var contentEle  = document.getElementById('content');
+  if ( contentEle ) {
+    var cN            = contentEle.className
+      , notGalleryPage = cN.indexOf('gallery') < 0
+    ;
+    //only load gui on gallery page
+    addGUI(notGalleryPage);
+  }
 })();
+
 

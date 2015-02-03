@@ -15,6 +15,27 @@ function resizeImages() {
   each(images, resizeImage);
 }
 
+
+function inPageFullscreen(evt) {
+  if ( window.innerWidth < 400 || window.innerHeight < 400 ) {
+    return;
+  }
+
+  if ( document.body.className.indexOf('fullscreen') >= 0 ) {
+    document.body.classList.remove('fullscreen');
+    if ( evt && evt.target.innerHTML === 'menu' ) {
+      evt.target.innerHTML = 'zoom';
+    }
+  } else {
+    document.body.classList.add('fullscreen');
+    if ( evt && evt.target.innerHTML === 'zoom' ) {
+      evt.target.innerHTML = 'menu';
+    }
+  }
+  resizeImages();
+}
+
+
 /*
  * Gets the outer Height of divs, including margin
  */
@@ -58,17 +79,17 @@ function resizeImage(image) {
       , h2Height     = outerHeight('#gallery-container li h2')
       , height2Sub   = headerHeight + footerHeight + h2Height
       , isFullscreen = ( d.body.className.indexOf('fullscreen') > -1 )
-      , imageWidth   = w.innerWidth * 0.9
+      , imageWidth   = w.innerWidth - 80
       , isLandscape  = w.innerWidth > w.innerHeight
       , imageHeight  = w.innerHeight
     ;
 
     if ( w.innerHeight < 400 && isLandscape ) {
-      imageHeight = window.innerHeight - 33;
-    } else if ( d.body.className.indexOf('fullscreen') === -1 ) {
-      imageHeight -= height2Sub + (window.innerHeight * 0.03);
-    } else {
-      imageHeight -= ( footerHeight + 33 );
+      imageHeight = window.innerHeight - 34;
+    } else if ( d.body.className.indexOf('fullscreen') === -1 ) { //not fullscreen
+      imageHeight -= height2Sub + (window.innerHeight * 0.06);
+    } else { //is fullscreen
+      imageHeight -= 80;
     }
 
     image.style.width = 'auto';
@@ -76,20 +97,20 @@ function resizeImage(image) {
 
     if ( w.innerHeight > 1400 || w.innerWidth > 1400 ) {
       if ( (w.innerWidth - w.innerHeight) > 300 ) {
-        image.style.height = imageHeight + 'px';
+        image.style.height = parseInt(imageHeight) + 'px';
       } else {
-        image.style.width = imageWidth + 'px';
+        image.style.width = parseInt(imageWidth) + 'px';
       }
       image.style.maxHeight = 'inherit';
       image.style.maxWidth = 'inherit';
     } else if ( w.innerHeight < 400 && isLandscape ) {
       image.style.maxHeight = 'inherit';
-      image.style.maxWidth = imageWidth + 'px';
-      image.style.height = imageHeight + 'px';
+      image.style.maxWidth = parseInt(imageWidth) + 'px';
+      image.style.height = parseInt(imageHeight) + 'px';
       image.style.width = 'auto';
     } else {
-      image.style.maxHeight = imageHeight + 'px';
-      image.style.maxWidth = imageWidth + 'px';
+      image.style.maxHeight = parseInt(imageHeight) + 'px';
+      image.style.maxWidth = parseInt(imageWidth) + 'px';
     }
   }
 }
@@ -222,4 +243,5 @@ module.exports = {
   , each                  : each
   , forEach               : each
   , fadeOutAndRemove      : fadeOutAndRemove
+  , inPageFullscreen      : inPageFullscreen
 };

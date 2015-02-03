@@ -25,7 +25,10 @@
   vertical-align middle
   width 100%
   opacity 1
-  transition opacity .5s
+  
+body.animated
+  #big-image-container
+    transition opacity .5s
 
   img
     max-height 100%
@@ -58,4 +61,11 @@ body.big-image
 @media all and (min-width 1300px)
   #imageGallery
     li
-      width 15.667%
+      width 15.66%
+
+
+@media all and (min-width 1600px)
+  #imageGallery
+    li
+      width 11.5%
+

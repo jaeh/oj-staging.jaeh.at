@@ -9,12 +9,13 @@ var utils           = require('./utils')
 ;
 
 require('./imageLoader');
-require('./fullscreen');
+//~ require('./fullscreen');
 require('./darkLight');
 require('./slideshow');
+require('./galleryButton');
 require('./imageGalleryControls');
 
-if ( page === '/work' ) {
+if ( page === '/gallery' ) {
   addImageGallery();
 } else if ( page === '/slide' ) {
   addImageSingleView();
@@ -22,4 +23,4 @@ if ( page === '/work' ) {
 
 window.setTimeout(function () {
   document.body.classList.add('animated');
-}, 200);
+}, 300);

@@ -24,9 +24,8 @@ function slideshow(evt) {
     //~ }
     clearInterval(interval);
   } else {
-    //~ setTimeout(imageLoader.loadNextImage, 1000);
     imageLoader.loadNextImage();
-    interval = setInterval(imageLoader.loadNextImage, 3000);
+    interval = setInterval(imageLoader.loadNextImage, 4000);
     target.innerHTML = 'stop';
     document.body.classList.add('slideshow');
     //~ document.body.classList.add('fullscreen');
@@ -58,8 +57,8 @@ function addGUI() {
   var contentEle  = document.getElementById('content');
   if ( contentEle ) {
     var cN = contentEle.className;
-    //only load gui on work/index page
-    if ( cN.indexOf('work') >= 0 || cN.indexOf('index') >= 0) {
+    //only load gui on slide page
+    if ( cN.indexOf('slide') >= 0 ) {
       addGUI();
     }
   }

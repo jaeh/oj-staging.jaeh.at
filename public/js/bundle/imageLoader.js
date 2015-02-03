@@ -4,9 +4,9 @@ var utils = require('./utils')
   , Hammer = require('./vendor/hammer')
 ;
 
-function loadImages(images) {
+function loadImages(i, images) {
   utils.each(images, function (image) {
-    addImageEle(image);
+    addImageEle(image, false, i);
   });
 }
 
@@ -45,31 +45,55 @@ function addImageEle(image, addEvent, images) {
 
   imgCont.appendChild(imgEleCont);
   imgCont.appendChild(imgTitle);
+  imgCont.classList.add('cursor');
   swipe(imgCont);
 
-  //~ imgCont.addEventListener('mouseover', function (evt) {
-    imgCont.addEventListener('mousemove', function (mEvt) {
-      var imageWidth = utils.outerWidth(imgCont)
-        , target  = mEvt.target || mEvt.srcElement
-        , rect    = target.getBoundingClientRect()
-        , offsetX = mEvt.clientX - rect.left
-        , imageX  = ( ( imageWidth - (rect.left * 2 ) ) / 2 )
-        , perc10  = window.innerWidth * .1
-      ;
+  imgCont.addEventListener('click', function (evt) {
+    var x       = evt.x || evt.layerX
+      , center  = window.innerWidth / 2
+      , imageId = evt.target.id
+      , clickOffsetFromCenter = window.innerWidth * .1
+    ;
 
-      imgCont.classList.remove('left');
-      imgCont.classList.remove('right');
-      imgCont.classList.remove('gallery');
-
-      if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
-        imgCont.classList.add('gallery');
-      } else if ( offsetX > imageX  ) {
-        imgCont.classList.add('right');
+    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
+      if ( window.innerHeight > 400 && window.innerWidth > 400 ) {
+        utils.inPageFullscreen();
       } else {
-        imgCont.classList.add('left');
+        location.href = '/gallery' + location.hash;
       }
-    });
-  //~ });
+    } else if ( x < center - clickOffsetFromCenter ) {
+      loadPreviousImage();
+    } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
+      loadNextImage();
+    }
+  });
+
+  imgCont.addEventListener('mousemove', function (mEvt) {
+    var imageWidth = utils.outerWidth(imgCont)
+      , target  = mEvt.target || mEvt.srcElement
+      , rect    = target.getBoundingClientRect()
+      , offsetX = mEvt.clientX - rect.left
+      , imageX  = ( ( imageWidth - (rect.left * 2 ) ) / 2 )
+      , perc10  = window.innerWidth * .1
+    ;
+
+    imgCont.classList.remove('left');
+    imgCont.classList.remove('right');
+    imgCont.classList.remove('zoom-in');
+    imgCont.classList.remove('zoom-out');
+
+    if ( offsetX > imageX - perc10 && offsetX < imageX + perc10 ) {
+      if ( document.body.className.indexOf('fullscreen') > -1 ) {
+        imgCont.classList.add('zoom-in');
+      } else {
+        imgCont.classList.add('zoom-out');
+      }
+    } else if ( offsetX > imageX  ) {
+      imgCont.classList.add('right');
+    } else {
+      imgCont.classList.add('left');
+    }
+  });
 
   imgCont.addEventListener('mouseout', function (evt) {
     //~ imgCont.removeEventListener('mousemove');
@@ -78,11 +102,13 @@ function addImageEle(image, addEvent, images) {
   });
 
   var gallery = utils.addGallery()
-    , hashId = imgEle.getAttribute('data-i')
+    , hashId = image.i
     , imgId = imgEle.getAttribute('data-i')
   ;
+  if ( ! addEvent && typeof images === 'number' ) {
+    hashId = images;
+  }
 
-  console.log('imgId', imgId, 'hashId', hashId);
   if ( imgId < hashId ) {
     var imgParent = document.getElementById('image-' + hashId).parentNode.parentNode;
     gallery.insertBefore(imgCont, imgParent);
@@ -94,8 +120,8 @@ function addImageEle(image, addEvent, images) {
 
   if ( addEvent && images ) {
     imgEle.addEventListener('load', function () {
-      imgEle.parentNode.parentNode.className = 'displayed';
-      loadImages(images);
+      imgEle.parentNode.parentNode.classList.add('displayed');
+      loadImages(image.i, images);
     });
   }
 
@@ -137,7 +163,6 @@ function loadNextImage() {
     nextImage = parent.parentNode.firstChild.querySelector('img');
   }
   if ( nextImage ) { 
-    console.log(nextImage);
     location.hash = nextImage.id;
   }
 }
@@ -152,38 +177,32 @@ function loadPreviousImage() {
   if ( prevSib ) {
     prevImage = prevSib.querySelector('img');
   }
-  
   if ( ! prevImage ) {
     prevImage = parent.parentNode.lastChild.querySelector('img');
-  }
-  if ( prevImage ) { 
-    console.log(prevImage);
+  } else if ( prevImage ) { 
     location.hash = prevImage.id;
   }
 }
 
 
 function getImagesFromNoscript(selector) {
-var imageGalleryEle = document.querySelector(selector || 'noscript')
-  , imageHTML = imageGalleryEle.innerHTML
-  , imageTags = imageHTML.split('&lt;img')
-  , imgs = {}
-;
-if ( imageHTML.indexOf('<img') >= 0 ) {
-  imageTags = imageHTML.split('<img');
-}
-//~ log('imageTags', imageTags);
-
-for (var i = 0; i < imageTags.length; i++ ) {
-  var img = parseImgTag(imageTags[i]);
-  if ( img ) {
-    img.i = i;
-    imgs[img.id] = img;
+  var imageGalleryEle = document.querySelector(selector || 'noscript')
+    , imageHTML = imageGalleryEle.innerHTML
+    , imageTags = imageHTML.split('&lt;img')
+    , imgs = {}
+  ;
+  if ( imageHTML.indexOf('<img') >= 0 ) {
+    imageTags = imageHTML.split('<img');
   }
-}
-imageGalleryEle.parentNode.removeChild(imageGalleryEle);
-//~ log('imgs', imgs);
-return imgs;
+  for (var i = 0; i < imageTags.length; i++ ) {
+    var img = parseImgTag(imageTags[i]);
+    if ( img ) {
+      img.i = i;
+      imgs[img.id] = img;
+    }
+  }
+  imageGalleryEle.parentNode.removeChild(imageGalleryEle);
+  return imgs;
 }
 
 
@@ -192,7 +211,6 @@ function parseImgTag(img) {
     , title = img.split('title="')[1] || ''
     , id = img.split('id="')[1] || ''
   ;
-
   if ( src ) {
     return {
         id    : id.split('"')[0]
@@ -206,27 +224,12 @@ function swipe(target) {
   //~ utils.log('target', target);
   var hammertime            = new Hammer(target)
     , swipeOffset           = 50
-    , clickOffsetFromCenter = window.innerWidth * .1
   ;
   
   target.addEventListener('dragstart', utils.disableEvent);
   target.addEventListener('dragstop', utils.disableEvent);
 
   hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-
-  hammertime.on('tap', function (evt) {
-    var x       = evt.center.x
-      , center  = window.innerWidth / 2
-      , imageId = evt.target.id
-    ;
-    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      location = '/work#' + imageId;
-    } else if ( x < center - clickOffsetFromCenter ) {
-      loadPreviousImage();
-    } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
-      loadNextImage();
-    }
-  });
   
   hammertime.on('swipe', function (evt) {
     var deltaX = evt.deltaX
@@ -234,21 +237,16 @@ function swipe(target) {
     ;
     //~ utils.log('delta y/x', deltaY, '/', deltaX);
     if ( deltaY > swipeOffset ) {
-      //~ utils.log('swipe down');
       loadNextImage();
     } else if ( deltaY < - swipeOffset ) {
-      //~ utils.log('swipe up');
       loadPreviousImage();
     }
 
     if ( deltaX > swipeOffset ) {
-      //~ utils.log('swiperight');
       loadPreviousImage();
     } else if ( deltaX < - swipeOffset ) {
       loadNextImage();
-      //~ utils.log('swipeleft');
     }
-    
   });
 }
 
