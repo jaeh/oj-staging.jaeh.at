@@ -86,6 +86,7 @@ function resizeImage(image) {
 
     if ( w.innerHeight < 400 && isLandscape ) {
       imageHeight = window.innerHeight - 34;
+      imageWidth  = window.innerWidth * .9;
     } else if ( d.body.className.indexOf('fullscreen') === -1 ) { //not fullscreen
       imageHeight -= height2Sub + (window.innerHeight * 0.06);
     } else { //is fullscreen
