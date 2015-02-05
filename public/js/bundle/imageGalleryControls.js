@@ -12,6 +12,7 @@ function addGUI() {
     , buttonRight     = document.createElement('a')
     , buttonLeft      = document.createElement('a')
   ;
+
   buttonLeftCont.className = 'gallery-left btn-container';
   buttonRightCont.className = 'gallery-right btn-container';
   buttonRight.className = 'btn gallery-right icon-caret-right icon';
@@ -34,14 +35,12 @@ function addGUI() {
 }
 
 (function addImageGalleryControls() {
-  (function addImageGalleryUi() {
-    var contentEle  = document.getElementById('content');
-    if ( contentEle ) {
-      var cN = contentEle.className;
-      //only load gui on gallery page
-      if ( cN.indexOf('slide') >= 0 ) {
-        addGUI();
-      }
+  var contentEle  = document.getElementById('content');
+  if ( contentEle ) {
+    var cN = contentEle.className;
+    //only load gui on gallery page
+    if ( cN.indexOf('slide') >= 0 ) {
+      addGUI();
     }
-  })();
+  }
 })();
