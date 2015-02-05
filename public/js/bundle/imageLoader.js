@@ -177,9 +177,12 @@ function loadPreviousImage() {
   if ( prevSib ) {
     prevImage = prevSib.querySelector('img');
   }
+
   if ( ! prevImage ) {
     prevImage = parent.parentNode.lastChild.querySelector('img');
-  } else if ( prevImage ) { 
+  }
+
+  if ( prevImage ) {
     location.hash = prevImage.id;
   }
 }
