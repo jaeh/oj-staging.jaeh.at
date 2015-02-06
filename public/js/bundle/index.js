@@ -13,7 +13,7 @@ require('./imageLoader');
 require('./darkLight');
 require('./slideshow');
 require('./galleryButton');
-require('./imageGalleryControls');
+//~ require('./imageGalleryControls');
 
 if ( page === '/gallery' ) {
   addImageGallery();

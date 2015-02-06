@@ -1,16 +1,18 @@
 body_font_color = #222
 body_bg_color = #fefefe
+body_bg_color_trans = #fefefe
 a_color = #444
 a_color_hover = #111
 
 body_font_color_dark = #777
 body_bg_color_dark = #222
+body_bg_color_dark_trans = #222
 a_color_dark = #666
 a_color_hover_dark = #fefefe
 
 /* nib gives us reset.css */
 global-reset()
-/*@import reset*/
+
 @import icomoon
 @import font
 @import nojs
@@ -56,10 +58,7 @@ body
       img
         transition max-height .5s, max-width .5s, margin .5s
       h2
-        transition opacity .5s
-
-  #extra-menu-container
-    background-color body_bg_color
+        transition all .5s
 
   &.dark
     background-color body_bg_color_dark
@@ -72,7 +71,10 @@ body
         color a_color_hover_dark
 
     #extra-menu-container
-      background-color body_bg_color_dark
+      background-color body_bg_color_dark_trans
+
+  &.page-slide
+    overflow hidden
 
   &.js
     &.fullscreen
@@ -87,6 +89,10 @@ body
 
         h2
           opacity 0
+          font-size 0
+          height 0
+          margin 0
+
   &.page-gallery
     overflow-y scroll
 
@@ -127,6 +133,8 @@ body
 
     &.contact
       max-width 600px
+  #extra-menu-container
+    background-color body_bg_color_trans
 
 form
   input, 
