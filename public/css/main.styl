@@ -73,8 +73,12 @@ body
     #extra-menu-container
       background-color body_bg_color_dark_trans
 
-  &.page-slide
+  &.page-slide,
+  &.page-gallery
     overflow hidden
+
+  &.page-gallery
+    overflow-y scroll
 
   &.js
     &.fullscreen
