@@ -21,6 +21,7 @@ function addGUI () {
   button.innerHTML = 'gallery';
   button.href      = '/gallery' + location.hash;
   buttonContainer.classList.add('btn-container');
+  buttonContainer.classList.add('gallery');
   buttonContainer.appendChild(button);
   menuUl.appendChild(buttonContainer);
 

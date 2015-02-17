@@ -77,8 +77,8 @@ function resizeImage(image) {
       , headerHeight = outerHeight('header.main')
       , footerHeight = outerHeight('#extra-menu-container')
       , h2Height     = outerHeight('#gallery-container li h2')
-      , offsetHeight = w.innerHeight * .05
-      , height2Sub   = headerHeight + footerHeight + h2Height + offsetHeight
+      , offsetHeight = w.innerHeight * .05 + h2Height
+      , height2Sub   = headerHeight + footerHeight
       , isFullscreen = ( d.body.className.indexOf('fullscreen') > -1 )
       , imageWidth   = w.innerWidth * .9
       , isLandscape  = w.innerWidth > w.innerHeight
@@ -91,6 +91,9 @@ function resizeImage(image) {
     } else if ( isFullscreen ) {
       imageHeight -= 40;
     } else {
+      if ( w.innerHeight > 400 && w.innerWidth > 400 ) {
+        height2Sub += offsetHeight;
+      }
       imageHeight -= height2Sub;
     }
 
