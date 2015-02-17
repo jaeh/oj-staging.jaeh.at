@@ -2,14 +2,15 @@ extends ../layout
 
 block content
   div#content.contact
-    form(method='post' action='')
-      fieldset
-        if errors && errors.from
-          label.error(for='from') Please input your email:
-        input#from(name='from' placeHolder='your email' value=from)
-
-        if errors && errors.msg
-          label.error(for='msg') Please input a message:
-
-        textarea#msg(name='msg' placeHolder='your message')= msg
-        input(type='submit' value='submit')
+    div JISZDA & PARTNER
+    br
+    p Plankengasse 4
+    p 1010 Wien
+    p Austria
+    br
+    p.phone
+      | phone 
+      span +4315124898
+    p.mail
+      | mail 
+      a(href="jiszda@gmail.com") jiszda@gmail.com
