@@ -40,20 +40,15 @@ function addImageSingleView() {
   document.addEventListener('keyup', function (evt) {
     var keyCode = evt.keyCode
       , body    = document.body
+      , isFullscreen = body.className.indexOf('fullscreen') > -1
     ;
 
     if ( keyCode === 37 || keyCode === 38 ) { //left or up arrow keyboard keys
       imageLoader.loadPreviousImage();
     } else if ( keyCode === 39 || keyCode === 40 ) { //right or down arrow 
       imageLoader.loadNextImage();
-    } else if ( body.className.indexOf('fullscreen') > -1 ) { //is fullscreen
-      if ( keyCode === 27 || keyCode === 32 ) {
-        utils.inPageFullscreen();
-      }
-    } else { //not in fullscreen
-      if ( keyCode === 32 ) {
-        utils.inPageFullscreen();
-      }
+    } else if ( keyCode === 32 || ( isFullscreen && keyCode === 27 ) ) {
+      utils.inPageFullscreen();
     }
   });
 }
