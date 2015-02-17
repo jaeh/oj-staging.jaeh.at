@@ -34,9 +34,9 @@ body
   margin 0 auto
   position absolute
   text-align center
-  user-select none
   width 100%
-  
+  user-select none
+
   &.animated
     transition background-color .5s
 
@@ -46,13 +46,17 @@ body
 
     header.main
       transition opacity .5s
+
     #content
       transition color .5s, margin .5s
+
     #extra-menu-container
       transition background-color .5s, opacity .5s
+
       li
         a
           transition color .5s, background-color .5s
+
     a
       transition color .5s
 
@@ -136,26 +140,24 @@ body
       text-align left
 
     &.about
-      max-width 750px
-      margin-bottom 60px
       display inline-block
-
-      #content
-        font-size 12px
+      font-size 12px
+      margin-bottom 60px
+      max-width 750px
 
       .image-container
-        max-width 40%
         float left
         margin 0 5% 1em 0
+        max-width 40%
 
         h2
-          margin 0 0 2em 1em
           font-size .7em
+          margin 0 0 2em 1em
 
       .text-container
         color #888
-        max-width 55%
         float right
+        max-width 55%
 
         h2
           margin 0 0 1em
@@ -164,12 +166,12 @@ body
 
           ul
             li
-              margin 0 .6em 0 0
               display inline-block
+              margin 0 .6em 0 0
 
     &.contact
-      max-width 255px
       color #666
+      max-width 255px
 
       p.phone 
         a
@@ -188,8 +190,8 @@ form
   input, 
   textarea
     border 0 none
-    -webkit-appearance none
     font-size 1em
+    -webkit-appearance none
 
 header.main
   left 0
