@@ -96,6 +96,10 @@ body
     #extra-menu-container
       background-color body_bg_color_dark_trans
 
+  &.page-index,
+  &.page-contact
+    user-select initial
+
   &.page-slide,
   &.page-gallery
     overflow hidden
@@ -199,6 +203,7 @@ header.main
   position absolute
   top 0
   width 100%
+  user-select none
 
   nav#menu
     width 100%
