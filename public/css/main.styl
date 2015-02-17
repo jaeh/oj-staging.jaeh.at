@@ -60,7 +60,7 @@ body
       img
         transition max-height .5s, max-width .5s, margin .5s
       h2
-        transition all .5s
+        transition opacity .5s
 
   &.dark
     background-color body_bg_color_dark
@@ -71,6 +71,15 @@ body
 
       &:hover
         color a_color_hover_dark
+
+    .text-container 
+      h2
+        color #fff
+    &.contact
+      color #666
+
+      a 
+        color #aaa
 
     #extra-menu-container
       background-color body_bg_color_dark_trans
@@ -138,7 +147,6 @@ body
         float right
 
         h2
-          color #000
           margin 0 0 1em
         div
           margin 0 0 1.5em
@@ -153,7 +161,7 @@ body
       color #666
 
       p.phone 
-        span
+        a
           margin 0 0 0 1em
       p.mail
         a
