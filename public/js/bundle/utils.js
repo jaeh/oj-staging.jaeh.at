@@ -72,16 +72,17 @@ function outerWidth(el) {
 
 function resizeImage(image) {
   if ( image.style ) {
-    var w = window
-      , d = document
+    var w            = window
+      , d            = document
       , headerHeight = outerHeight('header.main')
       , footerHeight = outerHeight('#extra-menu-container')
       , h2Height     = outerHeight('#gallery-container li h2')
-      , height2Sub   = headerHeight + footerHeight + h2Height
+      , offsetHeight = w.innerHeight * .95
+      , height2Sub   = headerHeight + footerHeight + h2Height + offsetHeight
       , isFullscreen = ( d.body.className.indexOf('fullscreen') > -1 )
       , imageWidth   = w.innerWidth * .9
       , isLandscape  = w.innerWidth > w.innerHeight
-      , imageHeight  = w.innerHeight * .95
+      , imageHeight  = w.innerHeight
     ;
 
     if ( w.innerHeight < 400 && isLandscape ) {
