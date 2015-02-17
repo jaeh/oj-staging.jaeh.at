@@ -81,16 +81,16 @@ function resizeImage(image) {
       , isFullscreen = ( d.body.className.indexOf('fullscreen') > -1 )
       , imageWidth   = w.innerWidth * .9
       , isLandscape  = w.innerWidth > w.innerHeight
-      , imageHeight  = w.innerHeight
+      , imageHeight  = w.innerHeight * .95
     ;
 
     if ( w.innerHeight < 400 && isLandscape ) {
       imageHeight = w.innerHeight - 34;
       imageWidth  = w.innerWidth * .9;
-    } else if ( d.body.className.indexOf('fullscreen') === -1 ) { //not fullscreen
-      imageHeight -= height2Sub;
-    } else { //is fullscreen
+    } else if ( isFullscreen ) {
       imageHeight -= 40;
+    } else {
+      imageHeight -= height2Sub;
     }
 
     image.style.width = 'auto';
