@@ -69,9 +69,10 @@ function addGUI (notGalleryPage) {
   if ( contentEle ) {
     var cN            = contentEle.className
       , notGalleryPage = cN.indexOf('gallery') < 0
+      , notAboutPage   = cN.indexOf('about') < 0
     ;
     //only load gui on gallery page
-    addGUI(notGalleryPage);
+    addGUI(notGalleryPage && notAboutPage);
   }
 })();
 
