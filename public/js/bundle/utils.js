@@ -77,7 +77,7 @@ function resizeImage(image) {
       , headerHeight = outerHeight('header.main')
       , footerHeight = outerHeight('#extra-menu-container')
       , h2Height     = outerHeight('#gallery-container li h2')
-      , offsetHeight = w.innerHeight * .95
+      , offsetHeight = w.innerHeight * .05
       , height2Sub   = headerHeight + footerHeight + h2Height + offsetHeight
       , isFullscreen = ( d.body.className.indexOf('fullscreen') > -1 )
       , imageWidth   = w.innerWidth * .9
