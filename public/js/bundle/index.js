@@ -8,6 +8,10 @@ var utils           = require('./utils')
   , page            = window.location.pathname
 ;
 
+if ( page !== '/gallery' ) {
+  window.top.scrollTo(0, 1);
+}
+
 require('./imageLoader');
 //~ require('./fullscreen');
 require('./darkLight');
