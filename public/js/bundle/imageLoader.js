@@ -55,16 +55,20 @@ function addImageEle(image, addEvent, images) {
       , clickOffsetFromCenter = window.innerWidth * .1
     ;
 
-    if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
-      if ( window.innerHeight > 400 && window.innerWidth > 400 ) {
-        utils.inPageFullscreen();
+    if ( window.innerHeight < 400 || window.innerWidth < 400 ) {
+      if ( x > center ) {
+        loadNextImage();
       } else {
-        location.href = '/gallery' + location.hash;
+        loadPreviousImage();
       }
-    } else if ( x < center - clickOffsetFromCenter ) {
-      loadPreviousImage();
-    } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
-      loadNextImage();
+    } else {
+      if ( x > center - clickOffsetFromCenter && x < center + clickOffsetFromCenter ) {
+        utils.inPageFullscreen();
+      } else if ( x < center - clickOffsetFromCenter ) {
+        loadPreviousImage();
+      } else if ( x > window.innerWidth / 2 + clickOffsetFromCenter ) {
+        loadNextImage();
+      }
     }
   });
 
