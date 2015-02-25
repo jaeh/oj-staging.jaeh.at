@@ -1,31 +1,13 @@
 'use strict';
-//tell the body that we have javascript support as early as possible
-document.body.className = document.body.className.replace('nojs', 'js');
+window.log = true;
 
-var utils           = require('./utils')
-  , addImageSingleView = require('./addImageSingleview')
-  , addImageGallery = require('./addImageGallery')
-  , page            = window.location.pathname
-;
+import Gallery from './gallery';
+import UserInterface from './userInterface';
 
-if ( page !== '/gallery' ) {
-  window.top.scrollTo(0, 1);
+var nEle = document.querySelector('noscript.gallery');
+
+if ( nEle && nEle.innerHTML && typeof nEle.innerHTML === 'string' ) {
+  let gallery = new Gallery(nEle)
+    , ui      = new UserInterface(gallery)
+  ;
 }
-
-require('./imageLoader');
-//~ require('./fullscreen');
-require('./darkLight');
-require('./slideshow');
-require('./galleryButton');
-require('./vendor/iosOrientationfix');
-//~ require('./imageGalleryControls');
-
-if ( page === '/gallery' ) {
-  addImageGallery();
-} else if ( page === '/slide' ) {
-  addImageSingleView();
-}
-
-window.setTimeout(function () {
-  document.body.classList.add('animated');
-}, 300);

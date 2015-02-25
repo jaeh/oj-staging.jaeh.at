@@ -6,5 +6,8 @@
   "dependencies": {
     "magic-log": "git://github.com/express-magic/magic-log",
     "magic-mail": "git://github.com/express-magic/magic-mail"
+  },
+  "devDependencies": {
+    "babelify": "^5.0.3"
   }
 }
