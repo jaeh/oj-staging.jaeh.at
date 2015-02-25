@@ -1,11 +1,10 @@
 module.exports = {
   hosts: {
     development: [
-      'oj-staging'
+      'ojs'
     ]
   , production: [
-      'staging.oliverjiszda.com'
-    , 'oliverjiszda.jaeh.at'
+      's.oliverjiszda.com'
     ]
   , staging: [
       'sstaging.oliverjiszda.com'
