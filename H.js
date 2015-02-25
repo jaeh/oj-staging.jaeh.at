@@ -1,14 +1,9 @@
 'use strict';
 var express = require('express')
   , H       = express()
-  , router  = require('./router');
 ;
 
 H.set('404redirect', '/');
-
-H.enable('bodyParser');
-
-H.set('routes', router);
 
 H.use(function(req, res, next){
   res.locals.menu = [
