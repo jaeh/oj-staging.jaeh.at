@@ -1,70 +1,50 @@
 body_font_color = #222
 body_bg_color = #fefefe
-body_bg_color_trans = #fefefe
 a_color = #444
 a_color_hover = #111
 
-body_font_color_dark = #777
+body_font_color_dark = #666
 body_bg_color_dark = #222
-body_bg_color_dark_trans = #222
-a_color_dark = #666
+a_color_dark = #777
 a_color_hover_dark = #fefefe
 
 /* nib gives us reset.css */
 global-reset()
 
-@import icomoon
-@import font
-@import nojs
-@import gallery
-@import extraMenu
-/*
-@import triangle
-*/
+/* sanity */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video
+  box-sizing border-box
 
 html
-  height 100%
   display block
 
 body
   background-color body_bg_color
   color body_font_color
+  font-family avenir, arial, sans-serif
   font-size 13px
   line-height 1.3em
-  margin 0 auto
-  position absolute
-  text-align center
-  width 100%
-  user-select none
 
-  &.animated
-    transition background-color .5s
+  a
+    color a_color
 
-    form
-      input, textarea
-        transition all .5s
+    &:hover
+      color a_color_hover
 
-    header.main
-      transition opacity .5s
-
-    #content
-      transition color .5s, margin .5s
-
-    #extra-menu-container
-      transition background-color .5s, opacity .5s
-
-      li
-        a
-          transition color .5s, background-color .5s
-
-    a
-      transition color .5s
-
-    #gallery-container
-      img
-        transition max-height .5s, max-width .5s, margin .5s
-      h2
-        transition opacity .5s
+  #extra-menu-container
+    background-color body_bg_color
 
   &.dark
     background-color body_bg_color_dark
@@ -76,329 +56,193 @@ body
       &:hover
         color a_color_hover_dark
 
-    .text-container 
-      h2
-        color #fff
-
-    &.about
-      .text-container
-        color #777
-
-        h2
-          color #aaa
-
-    &.contact
-      color #888
-
-      a 
-        color #aaa
-
     #extra-menu-container
-      background-color body_bg_color_dark_trans
-
-  &.page-index,
-  &.page-contact
-    user-select initial
-
-  &.page-slide,
-  &.page-gallery
-    overflow hidden
-
-  &.page-gallery
-    overflow-y scroll
-
-  &.js
-    &.fullscreen
-      header.main
-        opacity 0
-
-      #content
-        margin 20px 0
-
-      #gallery
-        height 100%
-
-        h2
-          opacity 0
-          font-size 0
-          height 0
-          margin 0
-
-  &.page-gallery
-    overflow-y scroll
-
-  #content
-    display block
-
-    &.gallery
-      line-height 0
-
-    &.about,
-    &.contact
-      margin-top 120px
-      margin-bottom 60px
-      margin-left auto
-      margin-right auto
-      width 90%
-      min-width inherit
-      text-align left
-
-    &.about
-      display inline-block
-      font-size 12px
-      margin-bottom 60px
-      max-width 750px
-
-      .image-container
-        float left
-        margin 0 5% 1em 0
-        max-width 40%
-
-        h2
-          font-size .7em
-          margin 0 0 2em 1em
-
-      .text-container
-        color #888
-        float right
-        max-width 55%
-
-        h2
-          margin 0 0 1em
-        div
-          margin 0 0 1.5em
-
-          ul
-            li
-              display inline-block
-              margin 0 .6em 0 0
-
-    &.contact
-      color #666
-      max-width 255px
-
-      p.phone 
-        a
-          margin 0 0 0 1em
-      p.mail
-        a
-          margin 0 0 0 2.2em
-
-  #extra-menu-container
-    background-color body_bg_color_trans
-    ul
-      li
-        line-height 1
-
-form
-  input, 
-  textarea
-    border 0 none
-    font-size 1em
-    -webkit-appearance none
+      background-color body_bg_color_dark
 
 header.main
-  left 0
   margin 40px 0
-  position absolute
-  top 0
-  width 100%
-  user-select none
+  text-align center
 
-  nav#menu
-    width 100%
-
+  nav
     ul
       li
         display inline
         margin 0 1em
 
-        a
-          &:hover
-            text-decoration underline
-          &.active
-            text-decoration underline
+#content
+  margin 0 5%
+  width 90%
+  position relative
+
+  noscript#gallery
+    display block
+    text-align center
+
+    img
+      margin 0 0 2em
+
+  &.slide
+    margin 0
+    width 100%
+
+  &.contact
+    width 250px
+    margin 0 auto
+    
+    .phone a
+      margin 0 0 0 1.2em
+    .mail a
+      margin 0 0 0 2.2em
 
 a
-  color a_color
-  cursor pointer
-  text-decoration none  
+  text-decoration none
 
-  &:hover
-    color a_color_hover
+  &.active
+    text-decoration underline
 
 img
   max-height 100%
   max-width 100%
 
-#content
-  display inline-block
-  margin 93px 0 0
-  max-height 90%
-  min-width 95%
-  position relative
-  width auto
-
-noscript#single
-  display inline-block
-  max-height 85%
-  width 100%
-
-  img
-    max-width 90%
-    width auto
-
-#gallery-container
-  li
-    left 0
-    opacity 0
-    position absolute
-    top 0
-    transition opacity 1s
-    width 100%
-    z-index 0
-
-    img
-      z-index 3
-
-    h2
-      font-size .8em
-      letter-spacing .02em
-      line-height 1.5em
-      margin 15px 0 0
-      opacity 0
-      position relative
+.image-gallery
+  ul
+    li
       width 100%
+      padding 0 5%
+      text-align center
 
-    &.displayed
-      opacity 1
-      z-index 1
+  &.multi
+    ul
+      li
+        img
+          float left
+          margin 0 3% 3% 0
+          max-height 100%
+          max-width 100%
+          width 46%
 
-      h2
-        opacity 1
-        user-select initial
+  &.single
+    ul
+      li
+        opacity 0
+        position absolute
+        z-index 0
 
-    &.right
-      cursor url(/img/cursor-right.png), auto;
-    &.left
-      cursor url(/img/cursor-left.png), auto;
-    &.zoom-in
-      cursor url(/img/cursor-zoom-out.png), auto;
-    &.zoom-out
-      cursor url(/img/cursor-zoom-in.png), auto;
+        &.active
+          opacity 1
+          z-index 1
 
-form
-  max-width 800px
-  margin 0 auto
+        img
+          clear both
+          height auto
+          margin 0
+          width auto
 
-  input, textarea
-    color body_font_color
-    background-color darken(body_bg_color, 5%)
-    border-radius 2px
-    display block
-    width 100%
-    margin 1em 0
-    padding 1em
-    box-sizing border-box
-    
-    &[type="submit"]
-      color #aaa
-      cursor pointer
+.parent.container
+  display inline-block
+  clear both
+  margin 2em 0 0
+  
+  &:first-child
+    margin 0
 
-      &:hover
-        text-decoration underline
+  .container
+    &.float
+      &.image
+        width 35%
 
-  textarea
-    height 150px
+        &.left
+          float left
+          margin 0 2em 0 0
+        &.right
+          float right
+          margin 0 0 0 2em
 
-body.dark
-  form
-    input, textarea
-      color body_font_color_dark
-      background-color lighten(body_bg_color_dark, 5%)
+      &.text
+        width 60%
+        
+        &.right
+          float right
+        &.left
+          float left
 
-      &[type="submit"]
-        color #aaa
-.error
-  color #f00
+ul
+  &.inline-block
+    li
+      display inline-block
+      margin 0 1em 0 0
 
-@media (max-width: 400px)
-  #extra-menu-container
-    .btn-container.fullscreen,
-    .btn-container.gallery
-      display none
+
+
+body.js
+  .image-gallery
+    ul
+      li
+        transition opacity .5s
+
+        img
+          transition max-height .5s, max-width .5s, margin .5s
+  &.fullscreen
+    header.main
+      opacity 0
+      height 0
+      font-size 0
+      margin 0
+      padding 0
+    .image-gallery
+      ul
+        li
+          footer
+            height 0
+            font-size 0
+            margin 0
+            padding 0
+
+
+@media all and (orientation portrait) and (max-width 480px)
+  .parent.container
+    .text.container
+      margin 3em 0 0
+
+      &:first-child
+        margin 0
+
+    .container
+      &.float
+        &.image,
+        &.text
+          width 100%
+
+          &.left,
+          &.right
+            float none
+            margin 3em 0 0
+            
+            &:first-child
+              margin 0 0 3em
+
+@media all and (orientation landscape) and (max-height 400px)
   header.main
-    margin-bottom 22px
-    margin-top 22px
-  #content
-    margin-bottom 57px
-    margin-top 57px
+      opacity 0
+      height 0
+      font-size 0
+      margin 0
+      padding 0
 
-    &.slide
-      h2
-        display none
+    .image-gallery
+      ul
+        li
+          margin 3% 0 0
 
-@media all and (orientation:landscape) and (max-height: 400px)
-  body.animated
-    #gallery-container
-      li
-        position fixed
+          footer
+            height 0
+            font-size 0
+            margin 0
+            padding 0
 
-        img
-          transition initial
-  body
-    height 100%
-    max-height 100%
-
-    &.page-slide
-      #content
-        margin 0
-
-      header.main
-        display none
-      #extra-menu-container
-        display none
-
-    #gallery
-      h2
-        display none
-        font-size 0
-        height 0
-        margin 0
-        opacity 0
-      img
-        margin 17px 0
-
-    &.fullscreen
-      #gallery
-        img
-          margin 17px 0
-
-@media all and (orientation: portrait) and (max-width 400px)
-  body.animated
-    #gallery-container
-      li
-        img
-          transition initial
-  body
-    #gallery
-      h2
-        display none
-        font-size 0
-        height 0
-        margin 0
-        opacity 0
-
-@media all and (min-width 1400px), all and (min-height 1400px)
-  body.animated
-    #gallery-container
-      li
-        img
-          transition height .5s, width .5s, max-height .5s, max-width .5s, opacity .5s, margin .5s
-
-@media all and (min-width 1600px)
-  body
-    font-size 14px
-  #gallery
-    h2
-      font-size 13px
+  footer.main
+    opacity 0
+    height 0
+    font-size 0
+    margin 0
+    padding 0
